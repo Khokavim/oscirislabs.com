@@ -25,7 +25,7 @@
 - [x] Find latest OSCIRIS whitepaper in the `ConsultingApp` workspace
 - [x] Attach latest whitepaper to the landing page CTA/link
 - [x] Build and locally verify the latest whitepaper link
-- [ ] Commit, push, and verify the updated deployment
+- [x] Commit, push, and verify the updated deployment
 
 ## Review
 
@@ -70,3 +70,5 @@ New request: locate the latest OSCIRIS/OscirisLabs whitepaper in the `Consulting
 Whitepaper lookup result: the local workspace is named `ConsultApp`; no OSCIRIS/OscirisLabs whitepaper file or content reference was found there. The newest actual OSCIRIS whitepaper found locally is `/Users/meshachishaya/CascadeProjects/windsurf-project/OSCIRIS/docs/osciris_whitepaper.pdf`, created/modified on June 1, 2026 at 00:10:56 WAT. Copied it into the site as `public/osciris-protocol-whitepaper.pdf` and linked the landing-page hero CTA directly to the PDF.
 
 Local verification: `npm run build` passed. The static export includes `out/osciris-protocol-whitepaper.pdf`; checksum matches the source PDF. Local HTTP checks on `http://localhost:4173/` show the homepage, Whitepaper page, and Resources page all link to `/osciris-protocol-whitepaper.pdf`. Browser-level checks at 1440x900 and 390x900 found no horizontal overflow and confirmed the PDF URL returns `200` with `application/pdf`.
+
+Deployment verification: pushed commit `dfee258` to `main`; GitHub Actions run `26727874935` completed successfully with build and deploy jobs passing. The GitHub Pages artifact serves `/osciris-protocol-whitepaper.pdf` with `200` and `application/pdf`. The live domain `https://oscirislabs.com` now contains the `Download whitepaper` CTA and `https://oscirislabs.com/osciris-protocol-whitepaper.pdf` returns `200` with `application/pdf`.
