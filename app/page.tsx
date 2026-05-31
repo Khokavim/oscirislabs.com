@@ -2,6 +2,8 @@ import { ButtonLink } from "@/components/ButtonLink";
 import { FeatureCard } from "@/components/FeatureCard";
 import { PageShell } from "@/components/PageShell";
 
+const whitepaperPdf = "/osciris-protocol-whitepaper.pdf";
+
 const proofMetrics = [
   { label: "Privacy layer", value: "DSP", detail: "Data Shadow Protocol" },
   { label: "Proof layer", value: "ZK", detail: "Horizen smart contracts" },
@@ -24,7 +26,7 @@ export default function Home() {
               for ZK proof coordination, policy enforcement, and decentralized economics.
             </p>
             <div className="hero-actions">
-              <ButtonLink href="/whitepaper">Read protocol whitepaper</ButtonLink>
+              <ButtonLink href={whitepaperPdf}>Download whitepaper</ButtonLink>
               <ButtonLink href="/resources" variant="secondary">
                 View proof resources
               </ButtonLink>
@@ -61,7 +63,7 @@ export default function Home() {
               contracts for ZK/privacy proof coordination.
             </p>
             <ButtonLink href="/whitepaper" variant="secondary">
-              Open whitepaper
+              Open whitepaper overview
             </ButtonLink>
           </div>
           <div className="feature-grid">
@@ -69,8 +71,8 @@ export default function Home() {
               tone="cyan"
               title="Data Shadow Protocol"
               body="Convert enterprise data into controlled training artifacts that preserve useful signal while reducing raw exposure."
-              href="/whitepaper"
-              linkLabel="Read thesis"
+              href={whitepaperPdf}
+              linkLabel="Download whitepaper"
             />
             <FeatureCard
               tone="green"

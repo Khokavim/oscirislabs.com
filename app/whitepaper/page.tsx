@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import { ButtonLink } from "@/components/ButtonLink";
 import { PageHero } from "@/components/PageHero";
 import { PageShell } from "@/components/PageShell";
+
+const whitepaperPdf = "/osciris-protocol-whitepaper.pdf";
 
 export const metadata: Metadata = {
   title: "Whitepaper",
@@ -51,6 +54,9 @@ export default function WhitepaperPage() {
             training, Horizen smart-contract proof coordination, cost-efficient compute
             strategy, and evidence gates behind OSCIRIS.
           </p>
+          <div className="page-hero-actions">
+            <ButtonLink href={whitepaperPdf}>Download full PDF</ButtonLink>
+          </div>
         </PageHero>
 
         <section className="paper-layout">

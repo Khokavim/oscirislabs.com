@@ -14,7 +14,13 @@ export function FeatureCard({ tone, title, body, href, linkLabel }: FeatureCardP
       <span className={`glyph ${tone}`} aria-hidden="true" />
       <h3>{title}</h3>
       <p>{body}</p>
-      {href && linkLabel ? <Link href={href}>{linkLabel}</Link> : null}
+      {href && linkLabel ? (
+        href.endsWith(".pdf") ? (
+          <a href={href}>{linkLabel}</a>
+        ) : (
+          <Link href={href}>{linkLabel}</Link>
+        )
+      ) : null}
     </article>
   );
 }

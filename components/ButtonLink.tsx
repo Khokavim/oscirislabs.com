@@ -10,7 +10,7 @@ type ButtonLinkProps = {
 export function ButtonLink({ children, href, variant = "primary" }: ButtonLinkProps) {
   const className = `button ${variant}`;
 
-  if (href.startsWith("mailto:")) {
+  if (href.startsWith("mailto:") || href.endsWith(".pdf")) {
     return (
       <a className={className} href={href}>
         {children}

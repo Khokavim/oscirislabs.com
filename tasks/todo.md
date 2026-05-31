@@ -22,6 +22,10 @@
 - [x] Commit and push the website to `main`
 - [x] Verify GitHub Pages deployment
 - [ ] Fix Cloudflare/Namecheap DNS so `oscirislabs.com` reaches GitHub Pages directly
+- [x] Find latest OSCIRIS whitepaper in the `ConsultingApp` workspace
+- [x] Attach latest whitepaper to the landing page CTA/link
+- [x] Build and locally verify the latest whitepaper link
+- [ ] Commit, push, and verify the updated deployment
 
 ## Review
 
@@ -60,3 +64,9 @@ Final background correction: moved the secure-compute visual from a contained he
 Publish plan: add a GitHub Pages workflow that builds the Next.js static export from `main`, includes `public/CNAME` for `oscirislabs.com`, and deploys the `out/` artifact. Keep the cloned `awesome-design-md/` inspiration repository out of the website commit. GitHub Pages has been enabled for workflow deployments and configured with the `oscirislabs.com` custom domain; HTTPS enforcement is pending certificate availability.
 
 Deployment result: pushed commit `d7ca048` to `main`; GitHub Actions run `26700940151` completed successfully with both build and deploy jobs passing. The Pages artifact serves the new OSCIRIS HTML when `oscirislabs.com` is resolved directly to GitHub Pages. The public DNS path is still blocked outside the repository: `http://oscirislabs.com` redirects to `http://www.oscirislabs.com/`, but `www.oscirislabs.com` has no DNS record, and `https://oscirislabs.com` returns Cloudflare `522`. DNS currently resolves through Cloudflare nameservers (`theo.ns.cloudflare.com`, `venus.ns.cloudflare.com`) and Cloudflare proxy IPs, so the remaining fix must be made in Cloudflare/Namecheap DNS or forwarding settings.
+
+New request: locate the latest OSCIRIS/OscirisLabs whitepaper in the `ConsultingApp` workspace and attach it to the website landing page.
+
+Whitepaper lookup result: the local workspace is named `ConsultApp`; no OSCIRIS/OscirisLabs whitepaper file or content reference was found there. The newest actual OSCIRIS whitepaper found locally is `/Users/meshachishaya/CascadeProjects/windsurf-project/OSCIRIS/docs/osciris_whitepaper.pdf`, created/modified on June 1, 2026 at 00:10:56 WAT. Copied it into the site as `public/osciris-protocol-whitepaper.pdf` and linked the landing-page hero CTA directly to the PDF.
+
+Local verification: `npm run build` passed. The static export includes `out/osciris-protocol-whitepaper.pdf`; checksum matches the source PDF. Local HTTP checks on `http://localhost:4173/` show the homepage, Whitepaper page, and Resources page all link to `/osciris-protocol-whitepaper.pdf`. Browser-level checks at 1440x900 and 390x900 found no horizontal overflow and confirmed the PDF URL returns `200` with `application/pdf`.

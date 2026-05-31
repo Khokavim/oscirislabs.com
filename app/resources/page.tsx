@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { PageShell } from "@/components/PageShell";
 
+const whitepaperPdf = "/osciris-protocol-whitepaper.pdf";
+
 export const metadata: Metadata = {
   title: "Resources",
   description:
@@ -26,10 +28,10 @@ const resources = [
   },
   {
     number: "04",
-    title: "Review packet",
-    body: "Request the protocol whitepaper, validation notes, and commercial proof roadmap for deeper evaluation.",
-    href: "mailto:hello@oscirislabs.com",
-    linkLabel: "Request packet",
+    title: "Protocol whitepaper",
+    body: "Download the latest OSCIRIS Protocol whitepaper for the full DSP, proof-layer, and decentralized compute thesis.",
+    href: whitepaperPdf,
+    linkLabel: "Download PDF",
   },
 ];
 

@@ -467,6 +467,13 @@ h3 {
   font-size: clamp(46px, 6.5vw, 92px);
 }
 
+.page-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
 .paper-layout {
   display: grid;
   grid-template-columns: 260px 1fr;
