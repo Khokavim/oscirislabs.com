@@ -1,0 +1,8 @@
+node_modules/
+.next/
+out/
+awesome-design-md/
+.env*
+!.env.example
+*.log
+.DS_Store
