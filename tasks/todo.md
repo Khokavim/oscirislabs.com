@@ -19,8 +19,9 @@
 - [x] Extend the secure-compute image treatment across the landing background
 - [x] Re-check desktop and mobile rendering after the full-background pass
 - [x] Add deployment workflow for `oscirislabs.com`
-- [ ] Commit and push the website to `main`
-- [ ] Verify GitHub Pages deployment and live domain response
+- [x] Commit and push the website to `main`
+- [x] Verify GitHub Pages deployment
+- [ ] Fix Cloudflare/Namecheap DNS so `oscirislabs.com` reaches GitHub Pages directly
 
 ## Review
 
@@ -57,3 +58,5 @@ Refined the Horizen/ZEN positioning to avoid framing ZEN primarily as settlement
 Final background correction: moved the secure-compute visual from a contained hero treatment into a fixed homepage background layer, with gradient and grid overlays behind the full landing experience. The hero now has clean copy and CTAs over the atmospheric image without a bordered media panel. Verification passed with `npm run build` and Playwright route checks at 1440x900 and 390x900 with no horizontal overflow. Updated screenshots are `/tmp/osciris-full-landing-bg-desktop.png` and `/tmp/osciris-full-landing-bg-mobile.png`.
 
 Publish plan: add a GitHub Pages workflow that builds the Next.js static export from `main`, includes `public/CNAME` for `oscirislabs.com`, and deploys the `out/` artifact. Keep the cloned `awesome-design-md/` inspiration repository out of the website commit. GitHub Pages has been enabled for workflow deployments and configured with the `oscirislabs.com` custom domain; HTTPS enforcement is pending certificate availability.
+
+Deployment result: pushed commit `d7ca048` to `main`; GitHub Actions run `26700940151` completed successfully with both build and deploy jobs passing. The Pages artifact serves the new OSCIRIS HTML when `oscirislabs.com` is resolved directly to GitHub Pages. The public DNS path is still blocked outside the repository: `http://oscirislabs.com` redirects to `http://www.oscirislabs.com/`, but `www.oscirislabs.com` has no DNS record, and `https://oscirislabs.com` returns Cloudflare `522`. DNS currently resolves through Cloudflare nameservers (`theo.ns.cloudflare.com`, `venus.ns.cloudflare.com`) and Cloudflare proxy IPs, so the remaining fix must be made in Cloudflare/Namecheap DNS or forwarding settings.
