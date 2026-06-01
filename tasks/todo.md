@@ -26,6 +26,7 @@
 - [x] Attach latest whitepaper to the landing page CTA/link
 - [x] Build and locally verify the latest whitepaper link
 - [x] Commit, push, and verify the updated deployment
+- [x] Update footer contact email and copyright text
 
 ## Review
 
@@ -72,3 +73,5 @@ Whitepaper lookup result: the local workspace is named `ConsultApp`; no OSCIRIS/
 Local verification: `npm run build` passed. The static export includes `out/osciris-protocol-whitepaper.pdf`; checksum matches the source PDF. Local HTTP checks on `http://localhost:4173/` show the homepage, Whitepaper page, and Resources page all link to `/osciris-protocol-whitepaper.pdf`. Browser-level checks at 1440x900 and 390x900 found no horizontal overflow and confirmed the PDF URL returns `200` with `application/pdf`.
 
 Deployment verification: pushed commit `dfee258` to `main`; GitHub Actions run `26727874935` completed successfully with build and deploy jobs passing. The GitHub Pages artifact serves `/osciris-protocol-whitepaper.pdf` with `200` and `application/pdf`. The live domain `https://oscirislabs.com` now contains the `Download whitepaper` CTA and `https://oscirislabs.com/osciris-protocol-whitepaper.pdf` returns `200` with `application/pdf`.
+
+Footer update: changed the footer contact email to `info@oscirislabs.com` and added `Copyright 2026 OSCIRIS Labs. All rights reserved.`

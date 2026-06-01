@@ -8,8 +8,9 @@ export function Footer() {
           OS
         </Link>
         <p>oscirislabs.com</p>
+        <p>Copyright 2026 OSCIRIS Labs. All rights reserved.</p>
       </div>
-      <a href="mailto:hello@oscirislabs.com">hello@oscirislabs.com</a>
+      <a href="mailto:info@oscirislabs.com">info@oscirislabs.com</a>
     </footer>
   );
 }
