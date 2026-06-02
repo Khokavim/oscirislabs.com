@@ -8,3 +8,4 @@
 - For AWS access, never use or restate credentials pasted into chat. Guide the user to configure a local named profile, validate only masked identity/profile output, and stop before provisioning when quota or access checks block the agreed plan.
 - Current OSCIRIS public-site visual direction is a white technical theme with the cyan OSCIRIS wordmark. Do not revert to the earlier dark theme unless the user explicitly asks.
 - Keep OSCIRIS landing typography light and spacious: medium-weight headlines, restrained section heading sizes, pill-shaped cyan CTAs, and softer card treatments. Avoid heavy display weights unless explicitly requested.
+- Keep grant/application-specific language out of public website copy. Use neutral enterprise, protocol, review, and smart-contract coordination language unless the user explicitly asks for a grant-facing page.

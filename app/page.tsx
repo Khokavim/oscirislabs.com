@@ -90,7 +90,7 @@ export default function Home() {
 
         <section className="blockchain-layer" aria-label="Horizen smart-contract proof layer">
           <div>
-            <p className="eyebrow">Horizen Thrive alignment</p>
+            <p className="eyebrow">Smart-contract coordination</p>
             <h2>Why the blockchain layer matters.</h2>
           </div>
           <div className="chain-grid">
@@ -114,11 +114,11 @@ export default function Home() {
 
         <section className="cta-panel">
           <div>
-            <p className="eyebrow">Review access</p>
-            <h2>Evaluate OSCIRIS for Horizen Thrive.</h2>
+            <p className="eyebrow">Private review</p>
+            <h2>Evaluate OSCIRIS for enterprise AI workloads.</h2>
             <p>
-              Review DSP privacy, enterprise training economics, and Horizen smart-contract
-              design for ZK/privacy proof management.
+              Review DSP privacy controls, decentralized compute coordination,
+              verifier-backed execution, and audit records for sensitive AI workloads.
             </p>
           </div>
           <ButtonLink href="mailto:info@oscirislabs.com">Contact OSCIRIS</ButtonLink>
