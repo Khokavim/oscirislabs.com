@@ -7,7 +7,7 @@ const whitepaperPdf = "/osciris-protocol-whitepaper.pdf";
 export const metadata: Metadata = {
   title: "Resources",
   description:
-    "OSCIRIS resources: Data Shadow Protocol thesis, privacy threat model, benchmark areas, Horizen smart contracts for ZK/privacy proofs, production proof program, and contact.",
+    "OSCIRIS resources: Data Shadow Protocol thesis, privacy threat model, benchmark areas, Horizen smart contracts for verification coordination, validation program, and contact.",
 };
 
 const resources = [
@@ -23,13 +23,13 @@ const resources = [
   },
   {
     number: "03",
-    title: "ZK proof contracts",
-    body: "Horizen smart-contract design for proof receipts, verification checkpoints, provider accountability, and proof-aware economics.",
+    title: "Proof-aware contracts",
+    body: "Horizen smart-contract design for proof receipts, verification checkpoints, escrow, provider accountability, and cost-to-quality validation.",
   },
   {
     number: "04",
     title: "Protocol whitepaper",
-    body: "Download the latest OSCIRIS Protocol whitepaper for the full DSP, proof-layer, and decentralized compute thesis.",
+    body: "Download the latest OSCIRIS Protocol whitepaper for the full DSP, verification-layer, and decentralized compute thesis.",
     href: whitepaperPdf,
     linkLabel: "Download PDF",
   },
@@ -39,10 +39,10 @@ export default function ResourcesPage() {
   return (
     <PageShell>
       <main className="page-main">
-        <PageHero eyebrow="Resources" title="Protocol evidence and enterprise proof.">
+        <PageHero eyebrow="Resources" title="Protocol evidence and enterprise validation.">
           <p>
             Start with the materials that define how DSP protects data, preserves model
-            utility, and connects cheaper enterprise training to smart-contract proof
+            utility, and connects cost-to-quality validation to smart-contract verification
             coordination.
           </p>
         </PageHero>

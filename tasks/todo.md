@@ -14,7 +14,7 @@
 - [x] Reposition OSCIRIS as a commercial DSP protocol, not pure research
 - [x] Make the secure-compute image the hero background layer
 - [x] Re-verify build and browser rendering
-- [x] Refine Horizen/ZEN language around ZK/privacy proof smart contracts
+- [x] Refine Horizen/ZEN language around smart-contract verification coordination
 - [x] Remove foreground hero proof card so the image is background-only
 - [x] Extend the secure-compute image treatment across the landing background
 - [x] Re-check desktop and mobile rendering after the full-background pass
@@ -38,6 +38,8 @@
 - [x] Refine homepage typography and spacing toward lighter Obscura-style proportions
 - [x] Replace public whitepaper with latest OSCIRIS source PDF
 - [x] Verify latest whitepaper PDF link locally before publishing
+- [x] Remove overly strong ZK/proof wording from public site copy
+- [x] Replace unproven cost-saving language with cost-to-quality validation
 
 ## Review
 
@@ -65,11 +67,13 @@ Verification passed:
 
 Known audit note: `npm audit --omit=dev` reports two moderate PostCSS advisories through Next.js. The only npm-suggested fix is `npm audit fix --force`, which would install a breaking/downgrade path, so it was not applied.
 
-New correction: OSCIRIS should be positioned as a commercially viable protocol. Privacy remains the primary selling point, but cheap and efficient enterprise model training should be elevated as a core value. The generated secure-compute image should also be used as the hero section background, not only as a foreground media card.
+New correction: OSCIRIS should be positioned as a commercially viable protocol. Privacy remains the primary selling point, and enterprise model-training efficiency should be framed through cost-to-quality validation until AWS GPU evidence is complete. The generated secure-compute image should also be used as the hero section background, not only as a foreground media card.
 
 Completed the commercial positioning pass. The homepage now leads with `Private, efficient model training for enterprise`, uses the secure-compute image as the hero background layer, and frames OSCIRIS as a commercial DSP layer with privacy-first training, lower infrastructure waste, and auditable privacy evidence. Supporting pages were updated to use commercial DSP/protocol language and enterprise proof/economics framing. Verification passed with `npm run build`, Browser reload at `http://localhost:4173/`, and Playwright route checks at 1440x1000 and 390x900 with no horizontal overflow. Updated screenshots are `/tmp/osciris-commercial-desktop.png` and `/tmp/osciris-commercial-mobile.png`.
 
-Refined the Horizen/ZEN positioning to avoid framing ZEN primarily as settlement. The current language emphasizes Horizen smart contracts for ZK/privacy proof coordination, verification checkpoints, policy enforcement, provider accountability, and proof-aware decentralized economics. Removed the bordered foreground hero card entirely so the generated image functions only as the hero background. Verification passed with `npm run build`, Browser reload at `http://localhost:4173/`, and Playwright route checks at 1440x900 and 390x900 with no horizontal overflow. Updated screenshots are `/tmp/osciris-no-card-desktop.png` and `/tmp/osciris-no-card-mobile.png`.
+Refined the Horizen/ZEN positioning to avoid framing ZEN primarily as settlement. The current language emphasizes Horizen smart contracts for verification coordination, proof receipts, policy checkpoints, escrow, provider accountability, and decentralized economics. Removed the bordered foreground hero card entirely so the generated image functions only as the hero background. Verification passed with `npm run build`, Browser reload at `http://localhost:4173/`, and Playwright route checks at 1440x900 and 390x900 with no horizontal overflow. Updated screenshots are `/tmp/osciris-no-card-desktop.png` and `/tmp/osciris-no-card-mobile.png`.
+
+Latest public-copy correction: removed ZK-specific wording that could imply implemented circuits/proofs, replaced stronger proof-system language with verification layer, proof receipts, proof-aware contracts, and validation gates, and kept training economics framed as cost-to-quality validation pending AWS GPU benchmark evidence.
 
 Final background correction: moved the secure-compute visual from a contained hero treatment into a fixed homepage background layer, with gradient and grid overlays behind the full landing experience. The hero now has clean copy and CTAs over the atmospheric image without a bordered media panel. Verification passed with `npm run build` and Playwright route checks at 1440x900 and 390x900 with no horizontal overflow. Updated screenshots are `/tmp/osciris-full-landing-bg-desktop.png` and `/tmp/osciris-full-landing-bg-mobile.png`.
 

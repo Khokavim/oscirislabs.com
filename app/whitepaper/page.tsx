@@ -8,7 +8,7 @@ const whitepaperPdf = "/osciris-protocol-whitepaper.pdf";
 export const metadata: Metadata = {
   title: "Whitepaper",
   description:
-    "Read the OSCIRIS whitepaper overview: Data Shadow Protocol, private enterprise model training, Horizen smart contracts for ZK/privacy proofs, cost efficiency, and deployment evidence.",
+    "Read the OSCIRIS whitepaper overview: Data Shadow Protocol, private enterprise model training, Horizen smart contracts for verification coordination, cost-to-quality validation, and deployment evidence.",
 };
 
 const sections = [
@@ -32,15 +32,15 @@ const sections = [
   },
   {
     id: "economics",
-    title: "Horizen proof layer",
+    title: "Horizen verification layer",
     body:
-      "OSCIRIS treats ZK/privacy proof coordination as a required protocol layer. Horizen smart contracts can record proof commitments, verify policy checkpoints, coordinate release conditions, and make decentralized economics accountable to proof outcomes.",
+      "OSCIRIS treats verification coordination as a required protocol layer. Horizen smart contracts can record proof receipts, track policy checkpoints, coordinate release conditions, and make decentralized economics accountable to verification outcomes.",
   },
   {
     id: "proof",
-    title: "Commercial proof gates",
+    title: "Commercial validation gates",
     body:
-      "Commercial viability depends on privacy, training efficiency, and proof discipline. OSCIRIS uses proof gates for CUDA performance, distributed reliability, decentralized GPU cost, smart-contract verification controls, and large-model training advantage so efficient training claims can be verified before scale-out.",
+      "Commercial viability depends on privacy, training utility, and validation discipline. OSCIRIS uses validation gates for CUDA performance, distributed reliability, cost-to-quality validation, smart-contract verification controls, and large-model training assumptions so efficiency claims can be tested before scale-out.",
   },
 ];
 
@@ -51,7 +51,7 @@ export default function WhitepaperPage() {
         <PageHero eyebrow="Whitepaper" title="The DSP commercial thesis.">
           <p>
             A public overview of the Data Shadow Protocol, private enterprise model
-            training, Horizen smart-contract proof coordination, cost-efficient compute
+            training, Horizen smart-contract verification coordination, cost-to-quality validation
             strategy, and evidence gates behind OSCIRIS.
           </p>
           <div className="page-hero-actions">

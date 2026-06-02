@@ -5,14 +5,14 @@ import { PageShell } from "@/components/PageShell";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "About OSCIRIS, a commercial Data Shadow Protocol for privacy-preserving enterprise model training with Horizen smart-contract proof coordination.",
+    "About OSCIRIS, a commercial Data Shadow Protocol for privacy-preserving enterprise model training with smart-contract verification coordination.",
 };
 
 const aboutCards = [
   {
     title: "Mission",
     body:
-      "Make private enterprise AI training commercially practical: less raw-data exposure, auditable release objects, and compute spend tied to model quality.",
+      "Make private enterprise AI training commercially practical: less raw-data exposure, auditable release objects, and cost-to-quality validation tied to model outcomes.",
   },
   {
     title: "Protocol",
@@ -22,7 +22,7 @@ const aboutCards = [
   {
     title: "Commercial path",
     body:
-      "OSCIRIS is built for commercial deployment while keeping proof gates explicit for GPU economics, Horizen smart-contract verification, distributed reliability, and independent privacy review.",
+      "OSCIRIS is built for commercial deployment while keeping validation gates explicit for GPU economics, Horizen smart-contract verification, distributed reliability, and independent privacy review.",
   },
 ];
 
@@ -33,7 +33,7 @@ export default function AboutPage() {
         <PageHero eyebrow="About" title="A commercial protocol for private AI training.">
           <p>
             OSCIRIS brings the Data Shadow Protocol to enterprise teams that need privacy,
-            lower training cost, and smart-contract proof coordination before moving
+            cost-to-quality validation, and smart-contract verification coordination before moving
             sensitive data into AI pipelines.
           </p>
         </PageHero>

@@ -6,8 +6,8 @@ const whitepaperPdf = "/osciris-protocol-whitepaper.pdf";
 
 const proofMetrics = [
   { label: "Privacy layer", value: "DSP", detail: "Data Shadow Protocol" },
-  { label: "Proof layer", value: "ZK", detail: "Horizen smart contracts" },
-  { label: "Enterprise value", value: "Lower", detail: "data exposure and training waste" },
+  { label: "Verification layer", value: "Receipts", detail: "receipt-backed job records" },
+  { label: "Enterprise value", value: "Validate", detail: "cost-to-quality before scale" },
 ];
 
 export default function Home() {
@@ -25,7 +25,7 @@ export default function Home() {
             <div className="hero-actions">
               <ButtonLink href={whitepaperPdf}>Download whitepaper</ButtonLink>
               <ButtonLink href="/resources" variant="secondary">
-                View proof resources
+                View verification resources
               </ButtonLink>
             </div>
           </div>
@@ -46,7 +46,7 @@ export default function Home() {
         <section className="statement-band">
           <p>
             DSP protects the training layer. Smart contracts manage the decentralized
-            proof and economics layer.
+            verification and economics layer.
           </p>
         </section>
 
@@ -57,7 +57,8 @@ export default function Home() {
             <p>
               The OSCIRIS thesis connects three layers: DSP transforms for privacy,
               efficient model training for enterprise adoption, and Horizen smart
-              contracts for ZK/privacy proof coordination.
+              contracts for verification coordination, policy checkpoints, escrow,
+              and provider accountability.
             </p>
             <ButtonLink href="/whitepaper" variant="secondary">
               Open whitepaper overview
@@ -80,15 +81,15 @@ export default function Home() {
             />
             <FeatureCard
               tone="amber"
-              title="ZK proof contracts"
-              body="Use Horizen smart contracts to coordinate proof receipts, policy checks, provider accountability, and decentralized cost management."
+              title="Proof-aware contracts"
+              body="Use Horizen smart contracts to coordinate proof receipts, policy checks, escrow, provider accountability, and cost-to-quality validation."
               href="/resources"
-              linkLabel="View proof layer"
+              linkLabel="View verification layer"
             />
           </div>
         </section>
 
-        <section className="blockchain-layer" aria-label="Horizen smart-contract proof layer">
+        <section className="blockchain-layer" aria-label="Horizen smart-contract verification layer">
           <div>
             <p className="eyebrow">Smart-contract coordination</p>
             <h2>Why the blockchain layer matters.</h2>
@@ -96,17 +97,17 @@ export default function Home() {
           <div className="chain-grid">
             <article>
               <span>01</span>
-              <h3>ZK proof registry</h3>
-              <p>Record privacy proof commitments, verification status, and policy checkpoints onchain.</p>
+              <h3>Proof receipt registry</h3>
+              <p>Record job receipts, verification status, policy checkpoints, and provider accountability onchain.</p>
             </article>
             <article>
               <span>02</span>
               <h3>Smart-contract controls</h3>
-              <p>Contracts define proof requirements, job terms, provider accountability, and release conditions.</p>
+              <p>Contracts define verification requirements, job terms, provider accountability, and release conditions.</p>
             </article>
             <article>
               <span>03</span>
-              <h3>Proof-aware economics</h3>
+              <h3>Cost-to-quality controls</h3>
               <p>Cost-to-quality, retry overhead, and worker reputation become measurable protocol state.</p>
             </article>
           </div>
