@@ -16,14 +16,11 @@ export default function Home() {
       <main className="home-main">
         <section className="hero">
           <div className="hero-copy">
-            <p className="eyebrow">
-              <span className="status-light" />
-              dsp protocol / zk proof contracts
-            </p>
-            <h1>Private AI training. Verifiable by design.</h1>
+            <h1>Private, Efficient AI Training on Decentralized Infrastructure</h1>
             <p className="hero-text">
-              OSCIRIS combines Data Shadow Protocol privacy with Horizen smart contracts
-              for ZK proof coordination, policy enforcement, and decentralized economics.
+              OSCIRIS coordinates privacy-preserving AI workloads across distributed GPU
+              providers, using DSP privacy controls, verifier-backed execution, staking,
+              escrow, and audit records to make decentralized compute usable for enterprise AI.
             </p>
             <div className="hero-actions">
               <ButtonLink href={whitepaperPdf}>Download whitepaper</ButtonLink>
@@ -56,7 +53,7 @@ export default function Home() {
         <section className="split-section">
           <div className="section-copy">
             <p className="eyebrow">Protocol stack</p>
-            <h2>Privacy, efficient training, and onchain economics in one system.</h2>
+            <h2>A protected compute layer for enterprise AI workloads.</h2>
             <p>
               The OSCIRIS thesis connects three layers: DSP transforms for privacy,
               efficient model training for enterprise adoption, and Horizen smart
@@ -124,7 +121,7 @@ export default function Home() {
               design for ZK/privacy proof management.
             </p>
           </div>
-          <ButtonLink href="mailto:hello@oscirislabs.com">Contact OSCIRIS</ButtonLink>
+          <ButtonLink href="mailto:info@oscirislabs.com">Contact OSCIRIS</ButtonLink>
         </section>
       </main>
     </PageShell>

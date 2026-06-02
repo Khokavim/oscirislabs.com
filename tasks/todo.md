@@ -27,6 +27,17 @@
 - [x] Build and locally verify the latest whitepaper link
 - [x] Commit, push, and verify the updated deployment
 - [x] Update footer contact email and copyright text
+- [x] Run AWS preflight for OSCIRIS 3-node production-evidence sprint
+- [x] Stop before provisioning because `g5.xlarge` quota is blocked
+- [x] Verify no tagged benchmark EC2 instances or volumes were launched
+- [x] Request `48` G/VT vCPU EC2 quota for a stronger `g5.12xlarge` evidence run
+- [x] Attempt smaller `4` G/VT vCPU request after user reported `48` rejection
+- [x] Add OSCIRIS logo asset to the website
+- [x] Convert public website from dark theme to white theme
+- [x] Verify light-theme render on desktop and mobile
+- [x] Refine homepage typography and spacing toward lighter Obscura-style proportions
+- [x] Replace public whitepaper with latest OSCIRIS source PDF
+- [x] Verify latest whitepaper PDF link locally before publishing
 
 ## Review
 
@@ -75,3 +86,15 @@ Local verification: `npm run build` passed. The static export includes `out/osci
 Deployment verification: pushed commit `dfee258` to `main`; GitHub Actions run `26727874935` completed successfully with build and deploy jobs passing. The GitHub Pages artifact serves `/osciris-protocol-whitepaper.pdf` with `200` and `application/pdf`. The live domain `https://oscirislabs.com` now contains the `Download whitepaper` CTA and `https://oscirislabs.com/osciris-protocol-whitepaper.pdf` returns `200` with `application/pdf`.
 
 Footer update: changed the footer contact email to `info@oscirislabs.com` and added `Copyright 2026 OSCIRIS Labs. All rights reserved.`
+
+AWS benchmark sprint preflight result: the local `osciris-benchmark` AWS profile authenticates in `us-east-1`, and local `uv run osciris doctor` is healthy. The planned GPU worker cannot launch because EC2 Service Quota `L-DB2E81BA` (`Running On-Demand G and VT instances`) is `0.0`, so even one `g5.xlarge` is blocked. Per the sprint plan, stopped before provisioning or switching hardware. Cleanup checks found no `Project=OSCIRISBenchmark` EC2 instances or volumes.
+
+Quota escalation update: requested `48` vCPUs for EC2 quota `L-DB2E81BA`; AWS returned request status `PENDING`. Current AWS Pricing API rates for `us-east-1` are `$5.672/hr` for Linux `g5.12xlarge` and `$0.08925/hr` for Linux `c7i.large`.
+
+Smaller quota request update: AWS still reports the `48` vCPU request as `CASE_OPENED`, so a new `4` vCPU request fails with `ResourceAlreadyExistsException` because only one open request is allowed per quota. AWS Support case access is unavailable on the account without Premium Support, so the open request must be closed/updated from the AWS console or allowed to resolve before retrying `4`.
+
+White-theme update: added the provided OSCIRIS logo as `public/osciris-logo.png`, cropped it to a readable wordmark, replaced the header/footer text mark, converted the site tokens and surfaces from dark to white, and aligned contact CTAs to `info@oscirislabs.com`. Verification passed with `npm run build`; Playwright checked `/`, `/whitepaper/`, `/about/`, and `/resources/` at 1440x900 and 390x900 with logo loading, white body background, all mail links using `info@oscirislabs.com`, and no horizontal overflow. Screenshots: `/tmp/osciris-light-desktop-v2.png` and `/tmp/osciris-light-mobile-v2.png`.
+
+Typography correction: reduced heavy display weights and oversized headings, switched primary/secondary CTAs to pill-shaped OSCIRIS cyan treatments, softened card shadows/radius, and reduced grid density to better match the lighter spacing reference from Obscura. Verification passed with `npm run build`; desktop hero renders at `60px` / `520` weight, mobile at `34.32px` / `520` weight, CTA radius is `999px`, cards are `8px`, and no horizontal overflow was detected. Screenshots: `/tmp/osciris-obscura-spacing-desktop.png` and `/tmp/osciris-obscura-spacing-mobile.png`.
+
+Latest whitepaper update: replaced `public/osciris-protocol-whitepaper.pdf` with `/Users/meshachishaya/CascadeProjects/windsurf-project/OSCIRIS/docs/osciris_whitepaper.pdf`. Source, public, and exported checksums match: `5214807cf8d9d62c5598fd6a4febf690f1a1e3d3dd56e7955676ea6bbde56279`. Local verification passed with `npm run build`; `/`, `/whitepaper/`, and `/resources/` link to `/osciris-protocol-whitepaper.pdf`, and the local PDF URL returns `200` with `Content-Type: application/pdf`.

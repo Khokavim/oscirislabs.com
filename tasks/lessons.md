@@ -5,3 +5,6 @@
 - For OSCIRIS positioning, do not describe it as pure research. Position DSP as a commercially viable protocol with privacy as the lead value and efficient, lower-cost enterprise model training as a core business value, while keeping proof-gate language precise.
 - For Horizen/ZEN positioning, do not frame ZEN primarily as settlement. Emphasize smart contracts for ZK/privacy proof coordination, verification, policy enforcement, and proof-aware decentralized economics.
 - When using the OSCIRIS secure-compute image on the homepage, treat it as an integrated landing-page background atmosphere. Avoid bordered image cards that make the visual look pasted onto the hero.
+- For AWS access, never use or restate credentials pasted into chat. Guide the user to configure a local named profile, validate only masked identity/profile output, and stop before provisioning when quota or access checks block the agreed plan.
+- Current OSCIRIS public-site visual direction is a white technical theme with the cyan OSCIRIS wordmark. Do not revert to the earlier dark theme unless the user explicitly asks.
+- Keep OSCIRIS landing typography light and spacious: medium-weight headlines, restrained section heading sizes, pill-shaped cyan CTAs, and softer card treatments. Avoid heavy display weights unless explicitly requested.

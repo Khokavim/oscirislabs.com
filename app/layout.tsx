@@ -3,11 +3,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "OSCIRIS | Private enterprise model training",
+    default: "OSCIRIS | Secure AI compute",
     template: "%s | OSCIRIS",
   },
   description:
-    "OSCIRIS is a commercially viable Data Shadow Protocol for privacy-preserving, cost-efficient enterprise model training and resilient intelligent sovereignty.",
+    "OSCIRIS is a secure AI compute protocol for privacy-preserving RAG, inference, evaluation, and fine-tuning with DSP controls, verifier-backed execution, and accountable settlement.",
 };
 
 export default function RootLayout({

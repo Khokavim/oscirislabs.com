@@ -4,8 +4,8 @@ export function Footer() {
   return (
     <footer className="site-footer">
       <div>
-        <Link className="brand-mark" href="/" aria-label="OSCIRIS home">
-          OS
+        <Link className="footer-logo-link" href="/" aria-label="OSCIRIS home">
+          <img src="/osciris-logo.png" alt="" className="footer-logo" />
         </Link>
         <p>oscirislabs.com</p>
         <p>Copyright 2026 OSCIRIS Labs. All rights reserved.</p>

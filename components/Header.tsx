@@ -10,8 +10,7 @@ export function Header() {
   return (
     <header className="site-header">
       <Link className="brand" href="/" aria-label="OSCIRIS home">
-        <span className="brand-mark">OS</span>
-        <span>OSCIRIS</span>
+        <img src="/osciris-logo.png" alt="" className="brand-logo" />
       </Link>
       <nav className="nav-links" aria-label="Site">
         {navItems.map((item) => (
@@ -20,7 +19,7 @@ export function Header() {
           </Link>
         ))}
       </nav>
-      <a className="header-action" href="mailto:hello@oscirislabs.com">
+      <a className="header-action" href="mailto:info@oscirislabs.com">
         Contact
       </a>
     </header>
