@@ -32,6 +32,10 @@
 - [x] Verify no tagged benchmark EC2 instances or volumes were launched
 - [x] Request `48` G/VT vCPU EC2 quota for a stronger `g5.12xlarge` evidence run
 - [x] Attempt smaller `4` G/VT vCPU request after user reported `48` rejection
+- [x] Re-run AWS preflight after `8` G/VT vCPU approval in `us-east-1`
+- [x] Launch controlled 3-node AWS sprint: `1x g5.xlarge` plus `2x c7i.large`
+- [x] Run OSCIRIS evidence commands and collect private S3 artifact bundle
+- [x] Tear down all tagged AWS resources and verify cleanup
 - [x] Add OSCIRIS logo asset to the website
 - [x] Convert public website from dark theme to white theme
 - [x] Verify light-theme render on desktop and mobile
@@ -40,6 +44,10 @@
 - [x] Verify latest whitepaper PDF link locally before publishing
 - [x] Remove overly strong ZK/proof wording from public site copy
 - [x] Replace unproven cost-saving language with cost-to-quality validation
+- [x] Inspect official `Osciris.zip` brand assets from `~/Downloads`
+- [x] Import official logo variants into the website and replace the current mark usage
+- [x] Fix mobile navigation and small-screen layout issues
+- [x] Verify desktop and mobile rendering with a local build and browser checks
 
 ## Review
 
@@ -97,8 +105,18 @@ Quota escalation update: requested `48` vCPUs for EC2 quota `L-DB2E81BA`; AWS re
 
 Smaller quota request update: AWS still reports the `48` vCPU request as `CASE_OPENED`, so a new `4` vCPU request fails with `ResourceAlreadyExistsException` because only one open request is allowed per quota. AWS Support case access is unavailable on the account without Premium Support, so the open request must be closed/updated from the AWS console or allowed to resolve before retrying `4`.
 
+AWS sprint resumed after user reported G/VT quota approval at `8` vCPUs in North Virginia. This supports the original controlled topology (`1x g5.xlarge` GPU worker = 4 G/VT vCPUs, plus `2x c7i.large` CPU nodes outside the G/VT quota). It does not support `g5.12xlarge` or larger GPU proofs. Proceed with the 3-node evidence sprint only after identity, budget, quota, SSM, S3, AMI, and cleanup guardrails pass.
+
+AWS evidence sprint result: completed run `osciris-aws-proof-20260603-1059` in `us-east-1b` with `1x g5.xlarge` NVIDIA A10G GPU worker and `2x c7i.large` CPU verifier/readiness nodes. All three nodes passed `pytest` and `osciris doctor`; GPU node reported `torch_cuda_available=True` on NVIDIA A10G. Benchmark commands returned status `0`: `production-proof`, `matrix --quick`, `seed-sweep`, and `dp-model-sweep`. Final private evidence bundle uploaded to S3 with SHA256 `93a100a82e658fa9954c348b1a1aa9b154d9a79937328ac7f60fc5dd0508032c`. Cleanup verified zero active tagged EC2 instances, zero tagged EBS volumes, and zero tagged Elastic IPs; temporary security group and IAM instance role/profile were deleted. Evidence bucket retained with 7-day lifecycle expiration.
+
 White-theme update: added the provided OSCIRIS logo as `public/osciris-logo.png`, cropped it to a readable wordmark, replaced the header/footer text mark, converted the site tokens and surfaces from dark to white, and aligned contact CTAs to `info@oscirislabs.com`. Verification passed with `npm run build`; Playwright checked `/`, `/whitepaper/`, `/about/`, and `/resources/` at 1440x900 and 390x900 with logo loading, white body background, all mail links using `info@oscirislabs.com`, and no horizontal overflow. Screenshots: `/tmp/osciris-light-desktop-v2.png` and `/tmp/osciris-light-mobile-v2.png`.
 
 Typography correction: reduced heavy display weights and oversized headings, switched primary/secondary CTAs to pill-shaped OSCIRIS cyan treatments, softened card shadows/radius, and reduced grid density to better match the lighter spacing reference from Obscura. Verification passed with `npm run build`; desktop hero renders at `60px` / `520` weight, mobile at `34.32px` / `520` weight, CTA radius is `999px`, cards are `8px`, and no horizontal overflow was detected. Screenshots: `/tmp/osciris-obscura-spacing-desktop.png` and `/tmp/osciris-obscura-spacing-mobile.png`.
 
 Latest whitepaper update: replaced `public/osciris-protocol-whitepaper.pdf` with `/Users/meshachishaya/CascadeProjects/windsurf-project/OSCIRIS/docs/osciris_whitepaper.pdf`. Source, public, and exported checksums match: `5214807cf8d9d62c5598fd6a4febf690f1a1e3d3dd56e7955676ea6bbde56279`. Local verification passed with `npm run build`; `/`, `/whitepaper/`, and `/resources/` link to `/osciris-protocol-whitepaper.pdf`, and the local PDF URL returns `200` with `Content-Type: application/pdf`.
+
+Brand asset refresh: imported the official `Osciris.zip` package into `public/brand/osciris/`, switched the site header/footer to the official wide blue SVG wordmark, and added the official blue `O` mark as `app/icon.svg`.
+
+Mobile-view correction: replaced the collapsing header row with a dedicated mobile menu control and panel, reduced small-screen header/hero spacing, and strengthened the mobile homepage overlay so the background image stays atmospheric without hurting text contrast.
+
+Verification passed with `npm run build`, Browser reload of `http://localhost:4173/` for the updated desktop render, and a Playwright WebKit iPhone 12 screenshot at `/tmp/osciris-mobile-20260603.png` confirming the small-screen layout and stacked CTAs.
