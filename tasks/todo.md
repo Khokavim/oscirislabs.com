@@ -1,5 +1,9 @@
 # Task Plan
 
+- [x] Audit sibling project folders to determine which already have git metadata and which do not.
+- [x] Initialize the missing project folders as independent git repos on `main`.
+- [x] Verify repo state for all three relevant folders and document the result.
+
 - [x] Inspect reference Global Threat Map visual theme
 - [x] Clone and sample `awesome-design-md` inspiration repository
 - [x] Check `/Users/meshachishaya/CascadeProjects/windsurf-project/OSCIRIS` for actual project context
@@ -50,6 +54,15 @@
 - [x] Verify desktop and mobile rendering with a local build and browser checks
 
 ## Review
+
+Git repo setup target: treat the three related folders as three independent repos, not as worktrees of one parent repo. Current state before changes: `OSCIRISLABS` already had a `.git` directory; `OSCIRIS` and `ConsultApp` had no git metadata. The correct implementation is therefore to leave `OSCIRISLABS` unchanged and initialize `OSCIRIS` plus `ConsultApp` as standalone repos with `main` as the initial branch, then verify the resulting branch/status state in each folder.
+
+Git repo setup result: `git init -b main` was applied to `/Users/meshachishaya/CascadeProjects/windsurf-project/OSCIRIS` and `/Users/meshachishaya/CascadeProjects/windsurf-project/ConsultApp`. Verification after initialization:
+- `OSCIRISLABS`: existing repo on `main`, tracking `origin/main`
+- `OSCIRIS`: new independent repo on `main`, no commits yet
+- `ConsultApp`: new independent repo on `main`, no commits yet
+
+Follow-up note: `ConsultApp` has no root `.gitignore`, so `.DS_Store` is currently untracked at the repo root. That is not a setup failure, but it should be cleaned before the first commit.
 
 Built a static OSCIRIS landing page in `index.html` and `styles.css`. The theme adapts the Global Threat Map reference with a black intelligence-console canvas, mono operational labels, hairline panel borders, live-status accents, and a map/radar hero visual. The design references sampled from `awesome-design-md` were `x.ai`, `linear.app`, `spacex`, and `sentry`; the final direction uses the restrained black technical systems from x.ai/Linear, the mission tone from SpaceX, and the operational panel density from the reference threat map.
 
