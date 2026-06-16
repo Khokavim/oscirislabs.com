@@ -7,7 +7,7 @@
 - [x] Introduce Filecoin as an evidence availability/storage roadmap layer
 - [x] Keep Horizen/Filecoin responsibilities separate in public copy
 - [x] Build and verify the updated website locally
-- [ ] Commit, push, and verify production deployment
+- [x] Commit, push, and verify production deployment
 
 - [x] Audit sibling project folders to determine which already have git metadata and which do not.
 - [x] Initialize the missing project folders as independent git repos on `main`.
@@ -63,6 +63,31 @@
 - [x] Verify desktop and mobile rendering with a local build and browser checks
 
 ## Review
+
+Latest website evidence update: refreshed the public site with current OSCIRIS
+training and inference evidence, including bounded AWS QLoRA adaptation,
+AWS L40S inference telemetry, and AWS Bedrock managed-inference baselines.
+Homepage now includes a stronger commercial potential section, latest Qwen3-Coder
+480B and 30B 100-case Bedrock inference metrics, and a Filecoin evidence
+availability roadmap section. Whitepaper overview now includes an AWS evidence
+status section and introduces Filecoin as a candidate encrypted,
+content-addressed evidence persistence layer while keeping Horizen responsible
+for receipt coordination, escrow, challenges, and provider accountability.
+
+Verification passed:
+- `npm run build`
+- local Browser checks at `http://localhost:4173/`, `/whitepaper/`, and
+  `/resources/` with no horizontal overflow at desktop and 390px mobile width
+- GitHub Pages deployment run `27648265269` completed successfully
+- live `curl` checks on `https://oscirislabs.com/`,
+  `https://oscirislabs.com/whitepaper/`, and
+  `https://oscirislabs.com/resources/` confirmed the new evidence and Filecoin
+  copy is deployed
+
+Claim boundary: Filecoin is presented as a storage/evidence availability
+roadmap layer, not as completed OSCIRIS integration. AWS inference and training
+metrics are presented as bounded benchmark/procurement evidence, not as broad
+production or decentralized-market guarantees.
 
 Git repo setup target: treat the three related folders as three independent repos, not as worktrees of one parent repo. Current state before changes: `OSCIRISLABS` already had a `.git` directory; `OSCIRIS` and `ConsultApp` had no git metadata. The correct implementation is therefore to leave `OSCIRISLABS` unchanged and initialize `OSCIRIS` plus `ConsultApp` as standalone repos with `main` as the initial branch, then verify the resulting branch/status state in each folder.
 
