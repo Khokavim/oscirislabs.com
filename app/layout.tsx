@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     template: "%s | OSCIRIS",
   },
   description:
-    "OSCIRIS is a secure AI compute protocol for privacy-preserving RAG, inference, evaluation, and fine-tuning with DSP controls, verifier-backed execution, and accountable coordination.",
+    "OSCIRIS is a secure AI compute protocol for privacy-preserving training and inference with DSP controls, verifier-backed execution, Horizen coordination, and Filecoin evidence availability.",
 };
 
 export default function RootLayout({

@@ -1,5 +1,14 @@
 # Task Plan
 
+- [x] Update public website with latest training and inference evidence
+- [x] Add Bedrock 100-case inference metrics to homepage positioning
+- [x] Add AWS evidence status to the whitepaper overview
+- [x] Add a stronger commercial potential section to the homepage
+- [x] Introduce Filecoin as an evidence availability/storage roadmap layer
+- [x] Keep Horizen/Filecoin responsibilities separate in public copy
+- [x] Build and verify the updated website locally
+- [ ] Commit, push, and verify production deployment
+
 - [x] Audit sibling project folders to determine which already have git metadata and which do not.
 - [x] Initialize the missing project folders as independent git repos on `main`.
 - [x] Verify repo state for all three relevant folders and document the result.

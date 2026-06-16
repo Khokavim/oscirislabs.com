@@ -8,7 +8,7 @@ const whitepaperPdf = "/osciris-protocol-whitepaper.pdf";
 export const metadata: Metadata = {
   title: "Whitepaper",
   description:
-    "Read the OSCIRIS whitepaper overview: Data Shadow Protocol, private enterprise model training, Horizen smart contracts for verification coordination, cost-to-quality validation, and deployment evidence.",
+    "Read the OSCIRIS whitepaper overview: Data Shadow Protocol, private enterprise training and inference, Horizen smart contracts for verification coordination, cost-to-quality validation, and deployment evidence.",
 };
 
 const sections = [
@@ -16,7 +16,7 @@ const sections = [
     id: "abstract",
     title: "Abstract",
     body:
-      "OSCIRIS defines a commercial Data Shadow Protocol for training useful enterprise models while reducing raw-data exposure. The thesis combines privacy controls, utility measurement, and cost-to-quality validation for deployable secure compute.",
+      "OSCIRIS defines a commercial Data Shadow Protocol for useful enterprise AI workloads while reducing raw-data exposure. The thesis combines privacy controls, utility measurement, training economics, inference economics, and cost-to-quality validation for deployable secure compute.",
   },
   {
     id: "protocol",
@@ -32,15 +32,33 @@ const sections = [
   },
   {
     id: "economics",
+    title: "Training and inference economics",
+    body:
+      "OSCIRIS measures cost-to-quality rather than raw speed alone. Current evidence includes bounded AWS 7B QLoRA adaptation, AWS L40S inference telemetry, and AWS Bedrock managed-inference procurement baselines for DSP-projected enterprise prompts.",
+  },
+  {
+    id: "aws",
+    title: "AWS evidence status",
+    body:
+      "The latest AWS evidence supports the commercial direction: bounded 7B QLoRA adaptation showed positive cost-to-quality for Qwen and Mistral training workloads, AWS L40S tests showed Qwen-family DSP-projected inference can improve quality-adjusted economics, and AWS Bedrock managed inference produced positive 100-case procurement baselines for Qwen3-Coder 480B and 30B. These are benchmark-backed claims for controlled workloads, not broad production or decentralized-market guarantees.",
+  },
+  {
+    id: "verification",
     title: "Horizen verification layer",
     body:
       "OSCIRIS treats verification coordination as a required protocol layer. Horizen smart contracts can record proof receipts, track policy checkpoints, coordinate release conditions, and make decentralized economics accountable to verification outcomes.",
   },
   {
+    id: "storage",
+    title: "Filecoin evidence availability",
+    body:
+      "The OSCIRIS storage roadmap separates receipt coordination from evidence persistence. Horizen coordinates proof receipts and settlement state, while Filecoin is a candidate decentralized storage layer for encrypted, content-addressed evidence bundles such as manifests, logs, benchmark outputs, verifier receipts, and audit packs.",
+  },
+  {
     id: "proof",
     title: "Commercial validation gates",
     body:
-      "Commercial viability depends on privacy, training utility, and validation discipline. OSCIRIS uses validation gates for CUDA performance, distributed reliability, cost-to-quality validation, smart-contract verification controls, and large-model training assumptions so efficiency claims can be tested before scale-out.",
+      "Commercial viability depends on privacy, training utility, inference quality, storage availability, and validation discipline. OSCIRIS uses validation gates for CUDA performance, distributed reliability, cost-to-quality validation, smart-contract verification controls, evidence persistence, and large-model assumptions so efficiency claims can be tested before scale-out.",
   },
 ];
 
@@ -51,8 +69,9 @@ export default function WhitepaperPage() {
         <PageHero eyebrow="Whitepaper" title="The DSP commercial thesis.">
           <p>
             A public overview of the Data Shadow Protocol, private enterprise model
-            training, Horizen smart-contract verification coordination, cost-to-quality validation
-            strategy, and evidence gates behind OSCIRIS.
+            training and inference, Horizen smart-contract verification coordination,
+            Filecoin evidence availability path, cost-to-quality validation strategy,
+            and evidence gates behind OSCIRIS.
           </p>
           <div className="page-hero-actions">
             <ButtonLink href={whitepaperPdf}>Download full PDF</ButtonLink>
