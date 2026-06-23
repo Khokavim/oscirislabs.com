@@ -40,7 +40,7 @@ const sections = [
     id: "aws",
     title: "AWS evidence status",
     body:
-      "The latest AWS evidence supports the commercial direction: bounded 7B QLoRA adaptation showed positive cost-to-quality for Qwen and Mistral training workloads, AWS L40S tests showed Qwen-family DSP-projected inference can improve quality-adjusted economics, and AWS Bedrock managed inference produced positive 100-case procurement baselines for Qwen3-Coder 480B and 30B. These are benchmark-backed claims for controlled workloads, not broad production or decentralized-market guarantees.",
+      "The latest AWS evidence supports the commercial direction: bounded 7B QLoRA adaptation showed positive cost-to-quality for Qwen and Mistral training workloads, AWS L40S tests showed Qwen-family DSP-projected inference can improve quality-adjusted economics, AWS Bedrock managed inference produced positive 100-case procurement baselines for Qwen3-Coder 480B and 30B, and a four-host AWS protocol proof reached settlement-ready after verifier acceptance and challenge resolution. These are controlled workload and off-chain protocol claims, not broad production, mainnet, or decentralized-market guarantees.",
   },
   {
     id: "verification",

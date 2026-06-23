@@ -5,12 +5,66 @@ import { PageShell } from "@/components/PageShell";
 const whitepaperPdf = "/osciris-protocol-whitepaper.pdf";
 
 const proofMetrics = [
-  { label: "Privacy layer", value: "DSP", detail: "Data Shadow Protocol" },
-  { label: "Training evidence", value: "7B QLoRA", detail: "bounded enterprise adaptation" },
-  { label: "Inference evidence", value: "100 cases", detail: "Bedrock managed baseline" },
+  { label: "Category", value: "Sovereign AI", detail: "Infrastructure-as-a-Service" },
+  { label: "Protocol proof", value: "4 hosts", detail: "AWS settlement-ready run" },
+  { label: "Training evidence", value: "7B", detail: "bounded QLoRA adaptation" },
+  { label: "Inference evidence", value: "100 cases", detail: "Bedrock procurement baseline" },
+];
+
+const sovereigntyControls = [
+  {
+    title: "Data sovereignty",
+    body:
+      "Reduce raw-data exposure before workloads reach external compute through DSP-controlled training and inference surfaces.",
+  },
+  {
+    title: "Compute sovereignty",
+    body:
+      "Route workloads by jurisdiction, privacy tier, provider class, evidence requirement, and operating policy.",
+  },
+  {
+    title: "Model sovereignty",
+    body:
+      "Track checkpoints, adapters, outputs, manifests, hashes, and release objects across the AI workload lifecycle.",
+  },
+  {
+    title: "Operational sovereignty",
+    body:
+      "Export audit receipts, retention records, challenge status, incident evidence, and provider accountability data.",
+  },
+  {
+    title: "Economic sovereignty",
+    body:
+      "Use stable-value customer billing while providers post economic collateral for accountable participation.",
+  },
+];
+
+const businessOffers = [
+  {
+    title: "Private AI workload execution",
+    body:
+      "Package enterprise training, inference, evaluation, and synthetic-data workloads with DSP privacy controls and measurable quality gates.",
+  },
+  {
+    title: "Verified provider coordination",
+    body:
+      "Turn distributed GPU supply into assignable capacity with signed capabilities, job receipts, verifier checks, challenges, and settlement readiness.",
+  },
+  {
+    title: "Audit-ready evidence layer",
+    body:
+      "Give buyers a proof trail: manifests, hashes, logs, receipts, benchmark outputs, challenge records, and policy checkpoints.",
+  },
 ];
 
 const evidenceCards = [
+  {
+    label: "Protocol proof",
+    value: "Accepted",
+    title: "AWS multi-host settlement-ready run",
+    body:
+      "Four separate AWS hosts proved provider claims, enterprise assignment, assigned-provider execution, P2P evidence transfer, verifier acceptance/rejection, quorum, and challenge-gated settlement readiness.",
+  },
   {
     label: "Private training",
     value: "16.08%",
@@ -41,58 +95,23 @@ const evidenceCards = [
   },
 ];
 
-const storageCards = [
-  {
-    title: "Content-addressed evidence",
-    body:
-      "OSCIRIS evidence bundles are designed to be hash-addressable so reviewers can verify that receipts, manifests, logs, and benchmark outputs have not changed.",
-  },
-  {
-    title: "Filecoin availability path",
-    body:
-      "Filecoin is a candidate persistence layer for private or encrypted evidence bundles, adding decentralized storage incentives and storage-proof checks to the OSCIRIS evidence workflow.",
-  },
-  {
-    title: "Chain roles stay separate",
-    body:
-      "Horizen remains the proof-receipt, escrow, challenge, and provider-accountability layer. Filecoin is positioned for evidence storage and retrieval, not AI execution.",
-  },
-];
-
-const unlockCards = [
-  {
-    title: "Enterprise AI without raw-data sprawl",
-    body:
-      "DSP turns sensitive context into controlled training and inference surfaces so teams can measure utility without distributing raw enterprise data everywhere compute exists.",
-  },
-  {
-    title: "GPU supply becomes auditable capacity",
-    body:
-      "OSCIRIS is designed to convert fragmented GPU providers into assignable, receipt-backed compute capacity with verifier checks and provider accountability.",
-  },
-  {
-    title: "Cost-to-quality becomes a protocol metric",
-    body:
-      "Instead of buying opaque acceleration, customers can compare quality, token load, runtime, retries, and evidence availability before scaling workloads.",
-  },
-];
-
 export default function Home() {
   return (
     <PageShell>
       <main className="home-main">
         <section className="hero">
           <div className="hero-copy">
-            <h1>Private, Efficient AI Workloads on Decentralized Infrastructure</h1>
+            <p className="hero-kicker">Sovereignty-enabling AI infrastructure</p>
+            <h1>Sovereign AI Infrastructure-as-a-Service.</h1>
             <p className="hero-text">
-              OSCIRIS applies the Data Shadow Protocol to enterprise training and
-              inference, then wraps execution with verifier-backed receipts,
-              provider accountability, and settlement-ready audit records.
+              OSCIRIS helps regulated enterprises, public institutions, and emerging-market
+              AI ecosystems run private AI workloads without surrendering data,
+              jurisdiction, auditability, or compute control.
             </p>
             <div className="hero-actions">
-              <ButtonLink href={whitepaperPdf}>Download whitepaper</ButtonLink>
-              <ButtonLink href="/resources" variant="secondary">
-                View verification resources
+              <ButtonLink href="mailto:info@oscirislabs.com">Request private review</ButtonLink>
+              <ButtonLink href={whitepaperPdf} variant="secondary">
+                Download whitepaper
               </ButtonLink>
             </div>
           </div>
@@ -112,28 +131,54 @@ export default function Home() {
 
         <section className="statement-band">
           <p>
-            DSP protects the data surface. Receipts, verifiers, and smart contracts make
-            training and inference outcomes measurable before decentralized scale-out.
+            The next AI infrastructure market is not only cheaper compute. It is private,
+            jurisdiction-aware, auditable compute that serious buyers can govern.
           </p>
         </section>
 
-        <section className="unlock-section" aria-label="OSCIRIS commercial potential">
+        <section className="sovereignty-section" aria-label="OSCIRIS sovereignty controls">
           <div className="section-copy">
-            <p className="eyebrow">What OSCIRIS unlocks</p>
-            <h2>A market for private AI compute that can be inspected, priced, and challenged.</h2>
+            <p className="eyebrow">Sovereign AI controls</p>
+            <h2>Cloud-like access to AI compute with institutional control retained.</h2>
             <p>
-              The opportunity is not just cheaper GPUs. It is a new operating layer for
-              enterprise AI: private data handling, measurable model quality, auditable
-              execution, persistent evidence, and settlement logic that can make open
-              compute usable by serious buyers.
+              Sovereign AI infrastructure means institutions keep control over data
+              location, privacy policy, execution jurisdiction, audit evidence, provider
+              accountability, and model governance while using distributed compute.
             </p>
           </div>
-          <div className="unlock-grid">
-            {unlockCards.map((card) => (
-              <article key={card.title}>
-                <h3>{card.title}</h3>
-                <p>{card.body}</p>
+          <div className="sovereignty-grid">
+            {sovereigntyControls.map((control) => (
+              <article key={control.title}>
+                <h3>{control.title}</h3>
+                <p>{control.body}</p>
               </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="split-section business-stack">
+          <div className="section-copy">
+            <p className="eyebrow">The business</p>
+            <h2>Private, auditable, jurisdiction-aware AI compute for buyers who cannot use blind infrastructure.</h2>
+            <p>
+              OSCIRIS is not another raw GPU marketplace. It is the orchestration,
+              privacy, verification, and accountability layer that can make distributed
+              GPU supply usable for sensitive enterprise and sovereign workloads.
+            </p>
+            <ButtonLink href="/resources" variant="secondary">
+              View proof resources
+            </ButtonLink>
+          </div>
+          <div className="feature-grid">
+            {businessOffers.map((offer, index) => (
+              <FeatureCard
+                key={offer.title}
+                tone={index === 0 ? "cyan" : index === 1 ? "green" : "amber"}
+                title={offer.title}
+                body={offer.body}
+                href="/resources"
+                linkLabel="See evidence"
+              />
             ))}
           </div>
         </section>
@@ -141,50 +186,41 @@ export default function Home() {
         <section className="split-section">
           <div className="section-copy">
             <p className="eyebrow">Protocol stack</p>
-            <h2>A protected compute layer for enterprise AI workloads.</h2>
+            <h2>DSP privacy controls, verified execution, and stable-value procurement.</h2>
             <p>
-              OSCIRIS connects three layers: DSP transforms for privacy, measured
-              cost-to-quality for training and inference, and Horizen smart contracts
-              for verification coordination, policy checkpoints, escrow, and provider
-              accountability.
+              DSP reduces raw-data exposure before execution. Verifier receipts and
+              challenge windows make outcomes inspectable. Horizen coordinates proof
+              receipts, escrow, provider accountability, and settlement state.
             </p>
-            <ButtonLink href="/whitepaper" variant="secondary">
-              Open whitepaper overview
-            </ButtonLink>
           </div>
-          <div className="feature-grid">
-            <FeatureCard
-              tone="cyan"
-              title="Data Shadow Protocol"
-              body="Convert enterprise data into controlled training artifacts that preserve useful signal while reducing raw exposure."
-              href={whitepaperPdf}
-              linkLabel="Download whitepaper"
-            />
-            <FeatureCard
-              tone="green"
-              title="Training and inference"
-              body="Run bounded adaptation and inference workloads through measurable privacy, quality, token, runtime, and cost controls."
-              href="/resources"
-              linkLabel="View resources"
-            />
-            <FeatureCard
-              tone="amber"
-              title="Proof-aware contracts"
-              body="Use Horizen smart contracts to coordinate proof receipts, policy checks, escrow, provider accountability, and cost-to-quality validation."
-              href="/resources"
-              linkLabel="View verification layer"
-            />
+          <div className="proof-strip" aria-label="OSCIRIS operating model">
+            <article>
+              <span>01</span>
+              <h3>Prepare</h3>
+              <p>Transform sensitive data into controlled training or inference surfaces.</p>
+            </article>
+            <article>
+              <span>02</span>
+              <h3>Route</h3>
+              <p>Assign work by provider capability, jurisdiction, policy, and evidence tier.</p>
+            </article>
+            <article>
+              <span>03</span>
+              <h3>Verify</h3>
+              <p>Generate receipts, verify artifacts, resolve challenges, and export audit trails.</p>
+            </article>
           </div>
         </section>
 
         <section className="evidence-section" aria-label="Latest OSCIRIS validation evidence">
           <div className="section-copy">
-            <p className="eyebrow">Latest evidence</p>
-            <h2>Training and inference are now both in the validation track.</h2>
+            <p className="eyebrow">Proof-backed credibility</p>
+            <h2>Built from measured evidence, not narrative alone.</h2>
             <p>
-              Current results support bounded enterprise AI workloads, not a public
-              production network claim. The strongest inference evidence compares DSP
-              projected prompts against AWS Bedrock managed inference pricing.
+              Current results support bounded enterprise AI workloads and a working
+              multi-host protocol proof. The evidence is intentionally scoped: it proves
+              specific workloads and off-chain protocol behavior, not broad public
+              production network economics.
             </p>
           </div>
           <div className="evidence-grid">
@@ -199,15 +235,16 @@ export default function Home() {
           </div>
           <p className="evidence-boundary">
             Boundary: proven evidence covers bounded AWS training adaptation, AWS L40S
-            single-host inference, and AWS Bedrock managed-inference procurement baselines.
-            Decentralized inference market execution is the next protocol proof.
+            single-host inference, AWS Bedrock managed-inference procurement baselines,
+            and an off-chain AWS multi-host settlement-ready protocol run. Horizen
+            testnet anchoring and decentralized market pricing remain next-step evidence.
           </p>
         </section>
 
         <section className="blockchain-layer" aria-label="Horizen smart-contract verification layer">
           <div>
-            <p className="eyebrow">Smart-contract coordination</p>
-            <h2>Why the blockchain layer matters.</h2>
+            <p className="eyebrow">Why blockchain fits</p>
+            <h2>Open compute networks need neutral economic state.</h2>
           </div>
           <div className="chain-grid">
             <article>
@@ -217,45 +254,24 @@ export default function Home() {
             </article>
             <article>
               <span>02</span>
-              <h3>Smart-contract controls</h3>
-              <p>Contracts define verification requirements, job terms, provider accountability, and release conditions.</p>
+              <h3>Accountable providers</h3>
+              <p>Providers stake collateral for participation while customers use stable-value procurement rails.</p>
             </article>
             <article>
               <span>03</span>
-              <h3>Cost-to-quality controls</h3>
-              <p>Cost-to-quality, retry overhead, and worker reputation become measurable protocol state.</p>
+              <h3>Challengeable settlement</h3>
+              <p>Escrow, verifier status, challenge windows, and reputation become shared protocol state.</p>
             </article>
-          </div>
-        </section>
-
-        <section className="storage-layer" aria-label="Filecoin evidence storage layer">
-          <div className="section-copy">
-            <p className="eyebrow">Evidence availability</p>
-            <h2>Filecoin can extend the audit trail beyond the job receipt.</h2>
-            <p>
-              OSCIRIS uses signed receipts to prove what happened. The next storage
-              layer is persistent availability for encrypted evidence bundles: manifests,
-              logs, verifier outputs, model metrics, and procurement baselines that
-              reviewers can retrieve by hash.
-            </p>
-          </div>
-          <div className="storage-grid">
-            {storageCards.map((card) => (
-              <article key={card.title}>
-                <h3>{card.title}</h3>
-                <p>{card.body}</p>
-              </article>
-            ))}
           </div>
         </section>
 
         <section className="cta-panel">
           <div>
             <p className="eyebrow">Private review</p>
-            <h2>Evaluate OSCIRIS for enterprise AI workloads.</h2>
+            <h2>Evaluate OSCIRIS for regulated AI workloads.</h2>
             <p>
-              Review DSP privacy controls, decentralized compute coordination,
-              verifier-backed execution, and audit records for sensitive AI workloads.
+              Review DSP privacy controls, jurisdiction-aware routing, verified execution,
+              stable-value procurement, and audit receipts for sensitive AI operations.
             </p>
           </div>
           <ButtonLink href="mailto:info@oscirislabs.com">Contact OSCIRIS</ButtonLink>

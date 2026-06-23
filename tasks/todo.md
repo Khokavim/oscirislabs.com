@@ -1,5 +1,15 @@
 # Task Plan
 
+## Sovereign AI Business Website Refresh
+
+- [x] Review current landing page, footer, resources, and public proof links
+- [x] Apply business-first "Sovereign AI Infrastructure-as-a-Service" positioning
+- [x] Add buyer-facing sections for sovereignty controls, business offer, and proof-backed credibility
+- [x] Move proof/resource links into an advanced footer proof library
+- [x] Run focused Codex Security review and dependency/static-site checks
+- [x] Build and verify rendering and static export
+- [x] Document results and residual risks
+
 - [x] Update public website with latest training and inference evidence
 - [x] Add Bedrock 100-case inference metrics to homepage positioning
 - [x] Add AWS evidence status to the whitepaper overview
@@ -63,6 +73,57 @@
 - [x] Verify desktop and mobile rendering with a local build and browser checks
 
 ## Review
+
+Sovereign AI business refresh result: the homepage now sells OSCIRIS as
+Sovereign AI Infrastructure-as-a-Service for regulated enterprises, public
+institutions, and emerging-market AI ecosystems. The new structure leads with
+business value, then explains sovereignty controls across data, compute, model
+artifacts, operations, and economics. It also separates the business offer from
+the protocol stack: DSP prepares controlled artifacts, OSCIRIS routes and
+coordinates work, receipts/checks create accountability, and stable billing plus
+ZEN-backed provider collateral keep enterprise procurement separate from
+speculative-token payment.
+
+Footer/resource update: the footer now behaves like an advanced proof library,
+with direct links to the whitepaper, resources, training evidence, privacy threat
+model, protocol proof, evidence availability, GitHub, and contact paths. The
+Resources page includes stable anchors so footer proof links land on specific
+evidence sections.
+
+Focused security assessment result: no direct frontend XSS/injection sink was
+found in the website source scan. `npm audit --omit=dev` reports zero production
+dependency vulnerabilities after pinning the PostCSS override. Static export
+build succeeds. Added static security headers in `public/_headers` for hosts
+that honor that file. Deployment risk remains if the final host ignores
+`_headers`; the same CSP and hardening headers should then be configured at the
+CDN/platform layer.
+
+OSCIRIS protocol hardening result: the evidence packer now stages sanitized
+archives, redacts credential-like values in text evidence, writes a redaction
+manifest, and fails closed if common secret markers remain. The Rust CLI now
+supports provider signing seeds via a private seed file path, reducing shell
+history and process-list exposure from base64 seed arguments. Rust formatting
+and workspace tests pass.
+
+Verification passed:
+- `npm audit --omit=dev`
+- `npm run build`
+- frontend static sink scan for `dangerouslySetInnerHTML`, `eval`, `new Function`,
+  `innerHTML`, public env leakage, and unsafe external blank targets
+- `cargo fmt --check`
+- `cargo test --workspace`
+
+Residual risks:
+- `public/_headers` is not universal; GitHub Pages may ignore it, while
+  Cloudflare Pages/Netlify-style hosts honor it. If the production host ignores
+  it, configure equivalent headers in the CDN.
+- The focused security assessment was not a full exhaustive six-worker Codex
+  Security scan because the scan preflight could not confirm the requested
+  worker capacity. Treat this as a focused delegated assessment, not a complete
+  security audit.
+- Some historical/private OSCIRIS raw artifacts and internal planning docs may
+  still contain local paths or infrastructure identifiers. Keep public evidence
+  exports limited to sanitized docs and generated review packages.
 
 Latest website evidence update: refreshed the public site with current OSCIRIS
 training and inference evidence, including bounded AWS QLoRA adaptation,
