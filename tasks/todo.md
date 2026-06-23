@@ -10,6 +10,16 @@
 - [x] Verify static export and production audit
 - [x] Push website update and document result
 
+## Production Routing Follow-Up
+
+- [x] Confirm GitHub Pages deployment status
+- [x] Confirm current live-domain routing behavior
+- [x] Add Railway runtime config for repo-root static export
+- [x] Build and verify Railway-compatible start command locally
+- [x] Push routing config update
+- [ ] Re-check live domain after deployment
+- [ ] Define next MVP implementation steps
+
 ## MVP Execution 1-6
 
 - [x] Verify and document live deployment routing state for `oscirislabs.com`
@@ -110,6 +120,7 @@ Verification passed:
 - `npm run build`
 - `npm audit --omit=dev`
 - local static export served `/` and `/app/` with expected content markers
+- Railway-style start command served `out/` correctly with `PORT=4181`
 
 Verification limitation: Playwright is not installed in this website repo, so the
 interactive click-through was not browser-automated in this pass. The flow is
@@ -121,11 +132,13 @@ execute and capture evidence, verify result, and export receipt state. The page
 also exposes readiness status across protocol state, privacy layer, buyer
 surface, and Horizen testnet path.
 
-Deployment routing result: git and GitHub Actions deploy correctly, but
-`oscirislabs.com` currently serves through Cloudflare to Railway, so the public
-domain will not reflect GitHub Pages artifacts until DNS/hosting routing is
-fixed. The exact routing options are documented in
-`docs/deployment_routing_fix.md`.
+Deployment routing result: git and GitHub Actions deploy correctly. The live
+domain currently serves through Cloudflare to Railway. A repo-side Railway config
+has been added so Railway builds from the repo root and serves the static export
+from `out` on Railway's `$PORT`. If the live domain still serves the wrong root
+after deployment, the remaining fix is in Railway/Cloudflare settings: connected
+repository, service root directory, pinned deployment, or DNS target. The exact
+routing options are documented in `docs/deployment_routing_fix.md`.
 
 MVP implementation support result: protocol docs now include provider-node,
 verifier/receipt, evidence packaging, and Horizen testnet integration runbooks.

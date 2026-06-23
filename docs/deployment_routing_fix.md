@@ -8,7 +8,7 @@ The repository is pushed and the GitHub Pages workflow deploys successfully.
 
 - Repo: `https://github.com/Khokavim/oscirislabs.com.git`
 - Branch: `main`
-- Latest verified commit: `16d8292`
+- Latest verified commit: `34622d4`
 - Workflow: `.github/workflows/deploy.yml`
 - GitHub Actions result: success
 
@@ -66,13 +66,26 @@ Railway must serve the static export from `out/`. If it is serving an older
 artifact, trigger a Railway redeploy from commit `16d8292` or reconnect the
 service to the correct GitHub repository.
 
+The repo now includes `railway.json` so a Railway deployment from this repo uses:
+
+```text
+Build command: npm ci && npm run build
+Start command: npm run start
+Runtime output: out
+Port binding: Railway $PORT via serve
+```
+
+If the live domain still serves the wrong page after this config is deployed,
+the remaining issue is external Railway service configuration: root directory,
+connected repository, pinned deployment, or custom publish/static root.
+
 ## Verification Command
 
 After the fix, this command must return the current positioning text:
 
 ```bash
 curl -L https://oscirislabs.com/ | rg \
-  "Sovereign AI Infrastructure-as-a-Service|Sovereignty-enabling AI infrastructure"
+  "Sovereign AI Infrastructure-as-a-Service|Keep sensitive data under institutional control"
 ```
 
 This header check should no longer show Railway if GitHub Pages is production:
