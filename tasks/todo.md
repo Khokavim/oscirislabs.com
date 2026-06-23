@@ -18,7 +18,7 @@
 - [x] Build and verify Railway-compatible start command locally
 - [x] Push routing config update
 - [ ] Re-check live domain after deployment
-- [ ] Define next MVP implementation steps
+- [x] Define next MVP implementation steps
 
 ## MVP Execution 1-6
 
@@ -121,6 +121,11 @@ Verification passed:
 - `npm audit --omit=dev`
 - local static export served `/` and `/app/` with expected content markers
 - Railway-style start command served `out/` correctly with `PORT=4181`
+
+Next MVP build order is documented in `docs/mvp_next_steps.md`: production
+routing, authentication, persisted jobs, receipt API, verifier API, and protocol
+integration. The intended scope is one controlled buyer job, one provider path,
+one verifier path, and one exportable receipt before marketplace expansion.
 
 Verification limitation: Playwright is not installed in this website repo, so the
 interactive click-through was not browser-automated in this pass. The flow is
