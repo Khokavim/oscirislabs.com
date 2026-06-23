@@ -4,16 +4,16 @@ Date: 2026-06-23
 
 ## Current State
 
-The website now has a server-backed buyer pilot flow:
+The website now has a blockchain-published proof surface:
 
 ```text
-Submit Job -> Job Status -> Evidence Receipt -> Verifier Result
+Published contract event -> receipt snapshot -> verifier state -> reviewer proof view
 ```
 
-It includes pilot access, persisted job records, evidence receipts, verifier
-results, and protocol status stubs. It proves product shape and buyer journey.
-It does not yet prove production authentication, live provider execution, durable
-managed database storage, or onchain settlement.
+It includes published receipt snapshots, verifier decisions, contract hashes,
+block references, and proof-detail views. It proves product shape and public
+reviewability. It does not yet prove live provider execution, fully automated
+testnet syncing, or production settlement.
 
 ## Build Order
 
@@ -22,57 +22,46 @@ managed database storage, or onchain settlement.
 Fix production routing before inviting reviewers.
 
 - Make `https://oscirislabs.com/` serve the homepage.
-- Make `https://oscirislabs.com/app/` serve the pilot app.
+- Make `https://oscirislabs.com/app/` serve the proof console.
 - Preferred path: point Cloudflare DNS to GitHub Pages.
 - Current code path: Railway should build this repo and run `npm run start`.
 
-### 2. Authentication
+### 2. Published Proof Feed
 
-Current MVP status: implemented as a signed pilot session token.
-
-Production hardening:
-
-- Add passwordless email login or allowlisted wallet login.
-- Store buyer organization profiles.
-- Gate `/app` behind authenticated sessions.
-- Set `OSCIRIS_PILOT_ACCESS_CODE` and `OSCIRIS_APP_SECRET` in Railway.
-
-### 3. Job Persistence
-
-Current MVP status: implemented as file-backed server records.
+Current MVP status: implemented as a read-only published proof console.
 
 Production hardening:
 
-- `jobs`: organization, workload, model target, policy, jurisdiction, status.
-- `job_events`: submitted, prepared, assigned, running, completed, challenged.
-- `artifacts`: manifest hash, evidence root, receipt bundle URL, verifier result.
-- Move from file-backed storage to Postgres before real pilots.
-- Railway variables required: `DATABASE_URL`, `OSCIRIS_PILOT_ACCESS_CODE`, and
-  `OSCIRIS_APP_SECRET`.
-- Verify `/api/health` reports `store.mode=postgres` and
-  `databaseReachable=true` after Railway Postgres is attached.
-- Verify persistence by creating a pilot job, restarting or redeploying the app,
-  signing in again, and confirming the same job appears in the recent-jobs list.
-- If the database is miswired, verify authenticated job endpoints return `503
-  Storage unavailable` instead of a generic `500`.
-- Run `npm run verify:mvp` locally or against a deployed environment with
-  `OSCIRIS_BASE_URL` to confirm health, auth, job creation, recent-job ordering,
-  receipt retrieval, verifier retrieval, and protocol retrieval in one pass.
+- Replace static receipt snapshots with published testnet event ingestion.
+- Publish contract address, tx hash, block number, receipt hash, and verifier decision.
+- Add last-sync metadata for daily or weekly publication windows.
+- Keep private reviewer workflows off the public path until needed.
 
-### 4. Receipt API
+### 3. Optional Private Operations
 
-Current MVP status: implemented as authenticated JSON receipt export.
+Current MVP status: deferred from the public MVP surface.
 
 Production hardening:
 
-- Create job receipt IDs.
-- Store manifest and evidence hashes.
-- Export JSON receipt.
-- Export buyer-readable PDF receipt later.
+- Only reintroduce a private operational store if OSCIRIS needs drafts, private
+  reviewer state, or non-public orchestration controls.
+- If that happens later, keep it separate from the published proof surface.
+- Postgres is optional infrastructure, not part of the current blockchain-first
+  website MVP.
+
+### 4. Receipt Publication
+
+Current MVP status: implemented as published receipt detail rendering.
+
+Production hardening:
+
+- Read reviewed receipt bundles from testnet publication output.
+- Export buyer-readable JSON and PDF views later if needed.
+- Preserve hash fidelity between contract publication and website rendering.
 
 ### 5. Verifier API
 
-Current MVP status: implemented as verifier-result endpoint attached to each job.
+Current MVP status: implemented as published verifier-state presentation.
 
 Production hardening:
 
@@ -82,35 +71,32 @@ Production hardening:
 
 ### 6. Protocol Integration
 
-Current MVP status: implemented as protocol-status stubs on each job.
+Current MVP status: implemented as static published protocol references.
 
 Production hardening:
 
-- Submit job from web app.
-- Trigger DSP preparation.
-- Assign provider.
-- Ingest provider receipt.
-- Ingest verifier result.
-- Anchor receipt state to Horizen testnet when ready.
+- Replace static snapshot data with asynchronous ingestion from published
+  Horizen testnet events.
+- Render the latest reviewed contract state on the website.
+- Link verifier decisions and contract anchors into the same proof view.
 
 ## Immediate Engineering Decision
 
-Use a small backend next. The fastest practical stack is:
+Use a small publishing layer next. The fastest practical stack is:
 
 ```text
-Next.js app + Postgres + object storage + receipt JSON exports
+Next.js app + published testnet event snapshots + receipt JSON exports
 ```
 
-Do not build a full marketplace yet. The MVP should prove one controlled buyer
-job, one provider path, one verifier path, and one exportable evidence receipt.
+Do not build a full marketplace yet. The MVP should prove that one reviewed
+receipt path can be published from testnet state into a credible buyer-facing
+proof console.
 
 ## Done Criteria
 
-- Buyer can log in with pilot access.
-- Buyer can submit a job.
-- Job status is stored server-side.
-- Evidence receipt is persisted and downloadable.
-- Verifier result is attached to the same job.
-- Protocol status is visible for DSP, provider, verifier, and Horizen anchor.
-- The receipt contains enough data for a technical reviewer to inspect the claim
-  boundary.
+- The proof console shows published testnet receipts.
+- Verifier state, contract address, tx hash, and block number are visible.
+- Receipt hashes and evidence roots are shown consistently.
+- Publication cadence and last-sync context are visible.
+- The proof view contains enough data for a technical reviewer to inspect the
+  claim boundary.

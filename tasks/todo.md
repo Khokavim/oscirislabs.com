@@ -58,6 +58,12 @@
 - [x] Wire the script into package scripts
 - [x] Verify the smoke check locally against the running app
 
+## Blockchain-Published App MVP
+
+- [x] Reframe `/app` as a blockchain-published proof console
+- [x] Remove private job-console framing from the user-facing `/app`
+- [x] Verify the new read-only proof surface locally
+
 ## MVP Execution 1-6
 
 - [x] Verify and document live deployment routing state for `oscirislabs.com`
@@ -238,6 +244,13 @@ API path in one command: health, session creation, job listing, job creation,
 recent-job ordering, receipt retrieval, verifier retrieval, and protocol
 retrieval. Local verification passed against the running app and produced a new
 job record in the expected first position of the recent-jobs list.
+
+Blockchain-published app result: `/app` is now a read-only proof console rather
+than a private operational dashboard. It presents published receipt snapshots,
+contract addresses, transaction hashes, block references, verifier decisions,
+and publication cadence as the MVP proof surface. The current user-facing app
+no longer depends on Postgres framing or private session flow to explain the
+product.
 
 Sovereign AI business refresh result: the homepage now sells OSCIRIS as
 Sovereign AI Infrastructure-as-a-Service for regulated enterprises, public

@@ -1,460 +1,174 @@
-"use client";
-
-import { FormEvent, useEffect, useState } from "react";
+import type { Metadata } from "next";
 import { PageShell } from "@/components/PageShell";
-import type { StoredJob } from "@/lib/mvp-store";
+import {
+  publishedProofOverview,
+  publishedReceipts,
+  publishingModel,
+} from "@/lib/published-proof-feed";
 
-const steps = ["Submit Job", "Job Status", "Evidence Receipt", "Verifier Result"];
-
-type RuntimeHealth = {
-  ok: boolean;
-  runtime: string;
-  store: {
-    mode: "postgres" | "file";
-    databaseConfigured: boolean;
-    databaseReachable: boolean;
-  };
+export const metadata: Metadata = {
+  title: "Proof Console",
+  description:
+    "OSCIRIS published proof console for Horizen testnet receipts, verifier decisions, and asynchronous evidence publication.",
 };
 
-type JobForm = {
-  organization: string;
-  workload: string;
-  dataPolicy: string;
-  jurisdiction: string;
-  model: string;
-};
-
-const initialJob: JobForm = {
-  organization: "Tier-1 Bank Pilot",
-  workload: "Private compliance assistant evaluation",
-  dataPolicy: "DSP prepared artifacts only",
-  jurisdiction: "Nigeria / controlled cloud region",
-  model: "Qwen 7B policy QA baseline",
-};
-
-export default function PilotAppPage() {
-  const [authenticated, setAuthenticated] = useState(false);
-  const [accessCode, setAccessCode] = useState("");
-  const [step, setStep] = useState(0);
-  const [job, setJob] = useState<JobForm>(initialJob);
-  const [submittedJob, setSubmittedJob] = useState<StoredJob | null>(null);
-  const [recentJobs, setRecentJobs] = useState<StoredJob[]>([]);
-  const [token, setToken] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [runtimeHealth, setRuntimeHealth] = useState<RuntimeHealth | null>(null);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    async function loadHealth() {
-      try {
-        const response = await fetch("/api/health", { cache: "no-store" });
-        if (!response.ok) return;
-        const data = (await response.json()) as RuntimeHealth;
-        if (!cancelled) {
-          setRuntimeHealth(data);
-        }
-      } catch {
-        // Keep the app usable even if health introspection fails.
-      }
-    }
-
-    loadHealth();
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  async function loadJobs(sessionToken: string) {
-    const response = await fetch("/api/jobs", {
-      headers: { Authorization: `Bearer ${sessionToken}` },
-      cache: "no-store",
-    });
-
-    if (!response.ok) {
-      const payload = (await response.json().catch(() => null)) as
-        | { error?: string; detail?: string }
-        | null;
-      throw new Error(payload?.detail || payload?.error || "Could not load jobs.");
-    }
-
-    const data = (await response.json()) as { jobs: StoredJob[] };
-    setRecentJobs(data.jobs);
-  }
-
-  async function handleAuth(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setLoading(true);
-    setError("");
-
-    const response = await fetch("/api/session", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ accessCode }),
-    });
-
-    if (response.ok) {
-      const data = (await response.json()) as { token: string };
-      setToken(data.token);
-      setAuthenticated(true);
-      try {
-        await loadJobs(data.token);
-      } catch (authError) {
-        setError(authError instanceof Error ? authError.message : "Could not load jobs.");
-      }
-    } else {
-      setError("Access code rejected.");
-    }
-
-    setLoading(false);
-  }
-
-  async function submitJob(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setLoading(true);
-    setError("");
-
-    const response = await fetch("/api/jobs", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(job),
-    });
-
-    if (response.ok) {
-      const data = (await response.json()) as { job: StoredJob };
-      setSubmittedJob(data.job);
-      try {
-        await loadJobs(token);
-      } catch (jobError) {
-        setError(jobError instanceof Error ? jobError.message : "Could not load jobs.");
-      }
-      setStep(1);
-    } else {
-      const payload = (await response.json().catch(() => null)) as
-        | { error?: string; detail?: string }
-        | null;
-      setError(payload?.detail || payload?.error || "Job submission failed.");
-    }
-
-    setLoading(false);
-  }
-
-  async function downloadReceipt() {
-    if (!submittedJob) return;
-    setLoading(true);
-    setError("");
-
-    const response = await fetch(`/api/jobs/${submittedJob.id}/receipt`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    if (!response.ok) {
-      setError("Receipt export failed.");
-      setLoading(false);
-      return;
-    }
-
-    const data = await response.json();
-    const blob = new Blob([JSON.stringify(data.receipt, null, 2)], {
-      type: "application/json",
-    });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `${submittedJob.id.toLowerCase()}-receipt.json`;
-    link.click();
-    URL.revokeObjectURL(url);
-    setLoading(false);
-  }
+export default function ProofConsolePage() {
+  const leadReceipt = publishedReceipts[0];
 
   return (
     <PageShell>
       <main className="app-shell">
-        {!authenticated ? (
-          <section className="auth-panel">
-            <p className="eyebrow">Private pilot</p>
-            <h1>Access the OSCIRIS workflow.</h1>
+        <section className="app-header">
+          <div>
+            <p className="eyebrow">Published testnet feed</p>
+            <h1>Horizen testnet proof console.</h1>
             <p>
-              Demo access shows the buyer journey: submit a private AI workload,
-              track status, inspect evidence, and review verifier output.
+              The OSCIRIS MVP app is a blockchain-backed proof surface. It publishes
+              asynchronous receipt snapshots from smart-contract state rather than
+              exposing a live operational dashboard.
             </p>
-            <form onSubmit={handleAuth}>
-              <label htmlFor="access-code">Access code</label>
-              <input
-                id="access-code"
-                value={accessCode}
-                onChange={(event) => setAccessCode(event.target.value)}
-                placeholder="pilot"
-              />
-              <button className="button primary" type="submit" disabled={loading}>
-                {loading ? "Checking..." : "Enter pilot app"}
-              </button>
-            </form>
-            {error ? <span className="demo-note">{error}</span> : null}
-            <span className="demo-note">Private pilot access enabled.</span>
-            {runtimeHealth ? (
-              <div className="receipt-preview">
-                <span>Runtime storage</span>
-                <strong>{runtimeHealth.store.mode === "postgres" ? "Postgres" : "File fallback"}</strong>
+            <p className="demo-note">
+              Current source of truth: contract receipts, verifier decisions, and
+              published testnet anchors.
+            </p>
+          </div>
+          <div className="header-actions">
+            <a className="button primary" href="#published-receipts">
+              View receipts
+            </a>
+            <a className="button secondary" href="#proof-detail">
+              Inspect proof detail
+            </a>
+          </div>
+        </section>
+
+        <section className="app-note-band">
+          <strong>Publishing mode</strong>
+          <p>
+            Public state is published daily or weekly from reviewed testnet contract
+            events. The website does not represent live private job orchestration.
+          </p>
+        </section>
+
+        <section className="status-grid" aria-label="Proof console overview">
+          {publishedProofOverview.map((item) => (
+            <article key={item.label}>
+              <span>{item.label}</span>
+              <strong>{item.value}</strong>
+              <p>{item.detail}</p>
+            </article>
+          ))}
+        </section>
+
+        <section className="app-card" id="published-receipts">
+          <div className="jobs-header">
+            <div>
+              <p className="eyebrow">Published receipts</p>
+              <h2>Recent blockchain-backed updates.</h2>
+            </div>
+            <p className="demo-note">
+              This view is intentionally read-only. Each row is a published receipt
+              snapshot, not an in-browser job session.
+            </p>
+          </div>
+
+          <div className="jobs-grid">
+            {publishedReceipts.map((receipt) => (
+              <article key={receipt.id} className="job-summary">
+                <span>{receipt.id}</span>
+                <strong>{receipt.modelTarget}</strong>
+                <p>{receipt.jurisdiction}</p>
+                <div className="job-summary-meta">
+                  <small>{receipt.verifierDecision}</small>
+                  <small>{receipt.publicationWindow}</small>
+                </div>
+                <div className="proof-link-list">
+                  <small>tx: {truncate(receipt.transactionHash)}</small>
+                  <small>block: {receipt.blockNumber}</small>
+                </div>
+                <a className="button secondary" href={`#${receipt.id}`}>
+                  Open proof
+                </a>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="app-card" id="proof-detail">
+          <div>
+            <p className="eyebrow">Proof detail</p>
+            <h2>{leadReceipt.modelTarget}</h2>
+            <p className="demo-note">
+              Lead published receipt. Reviewer-facing fields are surfaced directly
+              from the testnet publication bundle.
+            </p>
+          </div>
+
+          <div className="receipt-ledger">
+            <ReceiptRow label="Network" value={leadReceipt.network} />
+            <ReceiptRow label="Contract" value={leadReceipt.contract} />
+            <ReceiptRow label="Transaction hash" value={leadReceipt.transactionHash} />
+            <ReceiptRow label="Block number" value={leadReceipt.blockNumber} />
+            <ReceiptRow label="Receipt hash" value={leadReceipt.receiptHash} />
+            <ReceiptRow label="Job hash" value={leadReceipt.jobHash} />
+            <ReceiptRow label="Evidence root" value={leadReceipt.evidenceRoot} />
+            <ReceiptRow label="Published at" value={leadReceipt.lastPublishedAt} />
+          </div>
+
+          <div className="status-grid">
+            <Status label="Verifier decision" value={leadReceipt.verifierDecision} />
+            <Status label="Quorum" value={leadReceipt.verifierQuorum} />
+            <Status label="Jurisdiction" value={leadReceipt.jurisdiction} />
+            <Status label="Cadence" value={leadReceipt.publicationWindow} />
+          </div>
+        </section>
+
+        <section className="app-card">
+          <div className="jobs-header">
+            <div>
+              <p className="eyebrow">Publishing model</p>
+              <h2>What this MVP surface is, and what it is not.</h2>
+            </div>
+          </div>
+
+          <div className="jobs-grid">
+            {publishingModel.map((item) => (
+              <article key={item.title} className="job-summary">
+                <strong>{item.title}</strong>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="app-card">
+          <div className="jobs-header">
+            <div>
+              <p className="eyebrow">Published anchors</p>
+              <h2>Receipt references by snapshot.</h2>
+            </div>
+          </div>
+
+          <div className="proof-feed-grid">
+            {publishedReceipts.map((receipt) => (
+              <article key={receipt.id} id={receipt.id} className="receipt-preview">
+                <span>{receipt.id}</span>
+                <strong>{truncate(receipt.receiptHash)}</strong>
                 <p>
-                  {runtimeHealth.store.mode === "postgres"
-                    ? runtimeHealth.store.databaseReachable
-                      ? "Database configured and reachable."
-                      : "Database configured but not reachable."
-                    : "No database configured yet. Jobs persist in local runtime storage."}
+                  {receipt.verifierQuorum}. Published {receipt.lastPublishedAt}. Contract{" "}
+                  {truncate(receipt.contract)}.
                 </p>
-              </div>
-            ) : null}
-          </section>
-        ) : (
-          <>
-            <section className="app-header">
-              <div>
-                <p className="eyebrow">Authenticated demo</p>
-                <h1>Private workload control room.</h1>
-                <p>
-                  One buyer flow. Four screens. Clear proof state.
-                </p>
-                {runtimeHealth ? (
-                  <p className="demo-note">
-                    Storage:{" "}
-                    {runtimeHealth.store.mode === "postgres"
-                      ? runtimeHealth.store.databaseReachable
-                        ? "Postgres live"
-                        : "Postgres configured, connection pending"
-                      : "file fallback"}
-                  </p>
-                ) : null}
-              </div>
-              <div className="header-actions">
-                <button
-                  className="button secondary"
-                  type="button"
-                  onClick={() => {
-                    setError("");
-                    void loadJobs(token).catch((refreshError) => {
-                      setError(
-                        refreshError instanceof Error
-                          ? refreshError.message
-                          : "Could not load jobs."
-                      );
-                    });
-                  }}
-                >
-                  Refresh jobs
-                </button>
-                <button
-                  className="button secondary"
-                  type="button"
-                  onClick={() => {
-                    setAuthenticated(false);
-                    setStep(0);
-                    setToken("");
-                    setSubmittedJob(null);
-                    setRecentJobs([]);
-                  }}
-                >
-                  Sign out
-                </button>
-              </div>
-            </section>
-
-            <section className="app-card">
-              <div className="jobs-header">
-                <div>
-                  <p className="eyebrow">Persisted jobs</p>
-                  <h2>Recent pilot records.</h2>
-                </div>
-                <p className="demo-note">
-                  Use this list to confirm whether jobs survive redeploys and restarts.
-                </p>
-              </div>
-              {recentJobs.length ? (
-                <div className="jobs-grid">
-                  {recentJobs.map((item) => (
-                    <article key={item.id} className="job-summary">
-                      <span>{item.id}</span>
-                      <strong>{item.organization}</strong>
-                      <p>{item.workload}</p>
-                      <div className="job-summary-meta">
-                        <small>{item.model}</small>
-                        <small>{item.status}</small>
-                      </div>
-                      <button
-                        className="button secondary"
-                        type="button"
-                        onClick={() => {
-                          setSubmittedJob(item);
-                          setStep(1);
-                        }}
-                      >
-                        Open job
-                      </button>
-                    </article>
-                  ))}
-                </div>
-              ) : (
-                <div className="receipt-preview">
-                  <span>Persistence check</span>
-                  <strong>No jobs stored yet.</strong>
-                  <p>Create one pilot job, then refresh after a restart or redeploy.</p>
-                </div>
-              )}
-            </section>
-
-            <nav className="app-steps" aria-label="Pilot workflow">
-              {steps.map((label, index) => (
-                <button
-                  key={label}
-                  className={index === step ? "active" : ""}
-                  type="button"
-                  onClick={() => setStep(index)}
-                  disabled={index > 0 && !submittedJob}
-                >
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  {label}
-                </button>
-              ))}
-            </nav>
-
-            {step === 0 ? (
-              <section className="app-card">
-                <div>
-                  <p className="eyebrow">Submit job</p>
-                  <h2>Define the workload and policy.</h2>
-                </div>
-                <form className="job-form" onSubmit={submitJob}>
-                  <Field label="Organization">
-                    <input
-                      value={job.organization}
-                      onChange={(event) => setJob({ ...job, organization: event.target.value })}
-                    />
-                  </Field>
-                  <Field label="Workload">
-                    <input
-                      value={job.workload}
-                      onChange={(event) => setJob({ ...job, workload: event.target.value })}
-                    />
-                  </Field>
-                  <Field label="Data policy">
-                    <select
-                      value={job.dataPolicy}
-                      onChange={(event) => setJob({ ...job, dataPolicy: event.target.value })}
-                    >
-                      <option>DSP prepared artifacts only</option>
-                      <option>Permissioned raw-data enclave</option>
-                      <option>Synthetic-data benchmark only</option>
-                    </select>
-                  </Field>
-                  <Field label="Jurisdiction">
-                    <input
-                      value={job.jurisdiction}
-                      onChange={(event) => setJob({ ...job, jurisdiction: event.target.value })}
-                    />
-                  </Field>
-                  <Field label="Model target">
-                    <select
-                      value={job.model}
-                      onChange={(event) => setJob({ ...job, model: event.target.value })}
-                    >
-                      <option>Qwen 7B policy QA baseline</option>
-                      <option>Mistral 7B adaptation check</option>
-                      <option>Bedrock Qwen3-Coder procurement baseline</option>
-                    </select>
-                  </Field>
-                  {error ? <span className="demo-note">{error}</span> : null}
-                  <button className="button primary" type="submit" disabled={loading}>
-                    {loading ? "Submitting..." : "Submit pilot job"}
-                  </button>
-                </form>
-              </section>
-            ) : null}
-
-            {step === 1 && submittedJob ? (
-              <section className="app-card">
-                <div>
-                  <p className="eyebrow">Job status</p>
-                  <h2>{submittedJob.id}</h2>
-                </div>
-                <div className="status-grid">
-                  {submittedJob.events.map((event) => (
-                    <Status key={event.label} label={event.label} value={event.detail} />
-                  ))}
-                </div>
-                <div className="receipt-preview">
-                  <span>Workload</span>
-                  <strong>{submittedJob.workload}</strong>
-                  <p>{submittedJob.dataPolicy}. Routed for {submittedJob.jurisdiction}.</p>
-                </div>
-                <button className="button primary" type="button" onClick={() => setStep(2)}>
-                  View evidence receipt
-                </button>
-              </section>
-            ) : null}
-
-            {step === 2 && submittedJob ? (
-              <section className="app-card">
-                <div>
-                  <p className="eyebrow">Evidence receipt</p>
-                  <h2>Audit-ready package.</h2>
-                </div>
-                <div className="receipt-ledger">
-                  <ReceiptRow label="Job ID" value={submittedJob.receipt.jobId} />
-                  <ReceiptRow label="Evidence root" value={submittedJob.receipt.evidenceRoot} />
-                  <ReceiptRow label="Manifest" value={submittedJob.receipt.manifest} />
-                  <ReceiptRow label="Provider receipt" value={submittedJob.receipt.providerReceipt} />
-                  <ReceiptRow label="Cost-to-quality" value={submittedJob.receipt.costToQuality} />
-                </div>
-                <div className="hero-actions">
-                  <button className="button secondary" type="button" onClick={downloadReceipt}>
-                    Download JSON receipt
-                  </button>
-                  <button className="button primary" type="button" onClick={() => setStep(3)}>
-                    Review verifier result
-                  </button>
-                </div>
-              </section>
-            ) : null}
-
-            {step === 3 && submittedJob ? (
-              <section className="app-card verifier-result">
-                <div>
-                  <p className="eyebrow">Verifier result</p>
-                  <h2>Accepted with scoped evidence.</h2>
-                </div>
-                <div className="verifier-panel">
-                  <strong>Quorum: {submittedJob.verifierResult.quorum}</strong>
-                  <p>
-                    {submittedJob.verifierResult.notes}
-                  </p>
-                </div>
-                <div className="status-grid">
-                  <Status label="Verifier" value={submittedJob.verifierResult.verifier} />
-                  <Status label="Decision" value={submittedJob.verifierResult.decision} />
-                  <Status label="Settlement" value={submittedJob.verifierResult.settlement} />
-                  <Status label="Horizen anchor" value={submittedJob.protocolStatus.horizenAnchor} />
-                </div>
-              </section>
-            ) : null}
-          </>
-        )}
+              </article>
+            ))}
+          </div>
+        </section>
       </main>
     </PageShell>
   );
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <label>
-      <span>{label}</span>
-      {children}
-    </label>
-  );
+function truncate(value: string) {
+  return `${value.slice(0, 10)}...${value.slice(-8)}`;
 }
 
 function Status({ label, value }: { label: string; value: string }) {

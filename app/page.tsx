@@ -136,7 +136,7 @@ export default function Home() {
               verified compute. Export audit-ready receipts.
             </p>
             <div className="hero-actions">
-              <ButtonLink href="/app">Open pilot app</ButtonLink>
+              <ButtonLink href="/app">Open proof console</ButtonLink>
               <ButtonLink href="mailto:info@oscirislabs.com" variant="secondary">
                 Request private review
               </ButtonLink>

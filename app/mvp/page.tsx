@@ -6,7 +6,7 @@ import { PageShell } from "@/components/PageShell";
 export const metadata: Metadata = {
   title: "MVP",
   description:
-    "OSCIRIS MVP path: private AI job submission, DSP transformation, provider execution, verifier receipts, evidence export, and Horizen testnet coordination.",
+    "OSCIRIS MVP path: published Horizen testnet receipts, DSP evidence, verifier decisions, and asynchronous proof updates.",
 };
 
 const mvpFlow = [
@@ -62,7 +62,7 @@ const readiness = [
   {
     label: "Buyer surface",
     value: "MVP",
-    detail: "static product demo and private-review path before authenticated app buildout",
+    detail: "published proof console and private review path before a richer operational console",
   },
   {
     label: "Onchain path",
@@ -100,9 +100,9 @@ export default function MvpPage() {
       <main className="page-main">
         <PageHero eyebrow="MVP path" title="From private workload to verifiable AI receipt.">
           <p>
-            The OSCIRIS MVP is a proof-backed workflow: submit a private AI workload,
-            prepare it with DSP, run it on assigned compute, verify the output, and
-            export auditable receipts for buyer review and testnet settlement.
+            The OSCIRIS MVP is a proof-backed workflow: prepare workload evidence,
+            publish reviewed receipts from Horizen testnet, and let buyers inspect
+            verifier state and contract anchors through a read-only proof surface.
           </p>
         </PageHero>
 

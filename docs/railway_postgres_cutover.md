@@ -2,6 +2,9 @@
 
 Date: 2026-06-23
 
+Status: deferred for the current public MVP. Keep this only as an optional
+future path for private operational state.
+
 ## Goal
 
 Move OSCIRIS from file-backed pilot storage to managed Postgres and prove the
