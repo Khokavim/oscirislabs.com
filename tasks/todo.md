@@ -1,5 +1,15 @@
 # Task Plan
 
+## MVP Execution 1-6
+
+- [x] Verify and document live deployment routing state for `oscirislabs.com`
+- [x] Define the OSCIRIS MVP product flow and buyer-facing artifacts
+- [x] Add public MVP dashboard/product page to the website
+- [x] Add provider-node MVP operating path
+- [x] Add verifier/receipt MVP operating path
+- [x] Add Horizen testnet MVP integration path
+- [x] Build, verify, push, and document completion
+
 ## Sovereign AI Business Website Refresh
 
 - [x] Review current landing page, footer, resources, and public proof links
@@ -73,6 +83,35 @@
 - [x] Verify desktop and mobile rendering with a local build and browser checks
 
 ## Review
+
+MVP execution result: added a dedicated `/mvp` public product page that explains
+the six-step buyer flow: submit workload, prepare DSP artifact, assign provider,
+execute and capture evidence, verify result, and export receipt state. The page
+also exposes readiness status across protocol state, privacy layer, buyer
+surface, and Horizen testnet path.
+
+Deployment routing result: git and GitHub Actions deploy correctly, but
+`oscirislabs.com` currently serves through Cloudflare to Railway, so the public
+domain will not reflect GitHub Pages artifacts until DNS/hosting routing is
+fixed. The exact routing options are documented in
+`docs/deployment_routing_fix.md`.
+
+MVP implementation support result: protocol docs now include provider-node,
+verifier/receipt, evidence packaging, and Horizen testnet integration runbooks.
+The Rust CLI was extended so the MVP network commands can read signing seeds
+from private seed files rather than exposing seeds in shell arguments.
+
+Verification passed:
+- `npm run build`
+- `npm audit --omit=dev`
+- `cargo fmt --check`
+- `cargo test --workspace`
+- CLI help output confirms `--signing-key-seed-file` for the MVP network
+  commands
+
+MVP boundary: this is a buyer-visible developer MVP path, not production
+mainnet, audited privacy, permissionless provider admission, or real-payment
+settlement.
 
 Sovereign AI business refresh result: the homepage now sells OSCIRIS as
 Sovereign AI Infrastructure-as-a-Service for regulated enterprises, public

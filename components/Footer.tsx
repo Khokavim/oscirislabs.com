@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const proofLinks = [
+  { href: "/mvp", label: "MVP flow" },
   { href: "/resources", label: "Proof resources" },
   { href: "/whitepaper", label: "Whitepaper overview" },
   { href: "/osciris-protocol-whitepaper.pdf", label: "Download PDF" },
