@@ -1,10 +1,20 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { PageShell } from "@/components/PageShell";
 import type { StoredJob } from "@/lib/mvp-store";
 
 const steps = ["Submit Job", "Job Status", "Evidence Receipt", "Verifier Result"];
+
+type RuntimeHealth = {
+  ok: boolean;
+  runtime: string;
+  store: {
+    mode: "postgres" | "file";
+    databaseConfigured: boolean;
+    databaseReachable: boolean;
+  };
+};
 
 type JobForm = {
   organization: string;
@@ -31,6 +41,30 @@ export default function PilotAppPage() {
   const [token, setToken] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [runtimeHealth, setRuntimeHealth] = useState<RuntimeHealth | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadHealth() {
+      try {
+        const response = await fetch("/api/health", { cache: "no-store" });
+        if (!response.ok) return;
+        const data = (await response.json()) as RuntimeHealth;
+        if (!cancelled) {
+          setRuntimeHealth(data);
+        }
+      } catch {
+        // Keep the app usable even if health introspection fails.
+      }
+    }
+
+    loadHealth();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   async function handleAuth(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -132,6 +166,19 @@ export default function PilotAppPage() {
             </form>
             {error ? <span className="demo-note">{error}</span> : null}
             <span className="demo-note">Private pilot access enabled.</span>
+            {runtimeHealth ? (
+              <div className="receipt-preview">
+                <span>Runtime storage</span>
+                <strong>{runtimeHealth.store.mode === "postgres" ? "Postgres" : "File fallback"}</strong>
+                <p>
+                  {runtimeHealth.store.mode === "postgres"
+                    ? runtimeHealth.store.databaseReachable
+                      ? "Database configured and reachable."
+                      : "Database configured but not reachable."
+                    : "No database configured yet. Jobs persist in local runtime storage."}
+                </p>
+              </div>
+            ) : null}
           </section>
         ) : (
           <>
@@ -142,6 +189,16 @@ export default function PilotAppPage() {
                 <p>
                   One buyer flow. Four screens. Clear proof state.
                 </p>
+                {runtimeHealth ? (
+                  <p className="demo-note">
+                    Storage:{" "}
+                    {runtimeHealth.store.mode === "postgres"
+                      ? runtimeHealth.store.databaseReachable
+                        ? "Postgres live"
+                        : "Postgres configured, connection pending"
+                      : "file fallback"}
+                  </p>
+                ) : null}
               </div>
               <button
                 className="button secondary"

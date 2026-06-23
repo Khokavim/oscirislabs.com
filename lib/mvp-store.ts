@@ -56,6 +56,12 @@ export type StoredJob = JobInput & {
   protocolStatus: ProtocolStatus;
 };
 
+export type StoreRuntimeStatus = {
+  mode: "postgres" | "file";
+  databaseConfigured: boolean;
+  databaseReachable: boolean;
+};
+
 type StoreShape = {
   jobs: StoredJob[];
 };
@@ -148,6 +154,18 @@ async function ensureSchema() {
   }
 
   await schemaReady;
+}
+
+async function canReachDatabase() {
+  const db = getPool();
+  if (!db) return false;
+
+  try {
+    await db.query("SELECT 1");
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 function parseJson<T>(value: T | string) {
@@ -372,4 +390,21 @@ export async function getJob(jobId: string) {
 
   const store = await readStore();
   return store.jobs.find((job) => job.id === jobId) || null;
+}
+
+export async function getStoreRuntimeStatus(): Promise<StoreRuntimeStatus> {
+  const configured = Boolean(databaseUrl());
+  if (!configured) {
+    return {
+      mode: "file",
+      databaseConfigured: false,
+      databaseReachable: false,
+    };
+  }
+
+  return {
+    mode: "postgres",
+    databaseConfigured: true,
+    databaseReachable: await canReachDatabase(),
+  };
 }

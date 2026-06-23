@@ -34,6 +34,12 @@
 - [x] Remove public pilot-code disclosure from the app UI
 - [ ] Add Railway Postgres and verify DATABASE_URL wiring
 
+## Runtime Storage Visibility
+
+- [x] Expose active MVP storage mode in runtime health output
+- [x] Surface storage readiness in the pilot app
+- [x] Verify file-mode fallback locally and document the result
+
 ## MVP Execution 1-6
 
 - [x] Verify and document live deployment routing state for `oscirislabs.com`
@@ -134,6 +140,7 @@ Verification passed:
 - `npm audit --omit=dev`
 - local static export served `/` and `/app/` with expected content markers
 - Railway-style start command served `out/` correctly with `PORT=4181`
+- local `/api/health` now reports storage mode and database readiness
 
 Next MVP build order is documented in `docs/mvp_next_steps.md`: production
 routing, authentication, persisted jobs, receipt API, verifier API, and protocol
@@ -181,6 +188,12 @@ Verification passed:
 MVP boundary: this is a buyer-visible developer MVP path, not production
 mainnet, audited privacy, permissionless provider admission, or real-payment
 settlement.
+
+Runtime storage visibility result: `/api/health` now reports whether the app is
+running on file fallback or Postgres, and the pilot app surfaces the same state
+to the user. Local verification confirms the current no-database path reports
+`mode=file`, `databaseConfigured=false`, and `databaseReachable=false`, which
+sets a clean verification baseline before Railway Postgres is attached.
 
 Sovereign AI business refresh result: the homepage now sells OSCIRIS as
 Sovereign AI Infrastructure-as-a-Service for regulated enterprises, public

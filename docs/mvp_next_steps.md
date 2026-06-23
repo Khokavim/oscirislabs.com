@@ -49,6 +49,8 @@ Production hardening:
 - Move from file-backed storage to Postgres before real pilots.
 - Railway variables required: `DATABASE_URL`, `OSCIRIS_PILOT_ACCESS_CODE`, and
   `OSCIRIS_APP_SECRET`.
+- Verify `/api/health` reports `store.mode=postgres` and
+  `databaseReachable=true` after Railway Postgres is attached.
 
 ### 4. Receipt API
 
