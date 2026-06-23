@@ -20,6 +20,17 @@
 - [ ] Re-check live domain after deployment
 - [x] Define next MVP implementation steps
 
+## Server-Backed MVP 1-6
+
+- [x] Switch production runtime from static export to Next server
+- [x] Add signed pilot authentication API
+- [x] Add persisted job API
+- [x] Add evidence receipt API
+- [x] Add verifier result API
+- [x] Add protocol status integration stub
+- [x] Build, audit, and verify API flow locally
+- [x] Push server-backed MVP update
+
 ## MVP Execution 1-6
 
 - [x] Verify and document live deployment routing state for `oscirislabs.com`
@@ -104,11 +115,10 @@
 
 ## Review
 
-Authenticated MVP app flow result: added `/app` as a static-export compatible
-pilot surface. It uses a local demo access gate with code `pilot`, then walks the
-buyer through Submit Job, Job Status, Evidence Receipt, and Verifier Result. This
-is intentionally marked as demo authentication; real backend auth, persistence,
-and signed live receipts remain next-step product work.
+Authenticated MVP app flow result: added `/app` as a buyer pilot surface. It
+uses a signed pilot access session, then walks the buyer through Submit Job, Job
+Status, Evidence Receipt, and Verifier Result. Job state, receipts, verifier
+results, and protocol status are now served through MVP API routes.
 
 Conversion critique implementation: tightened the hero promise to say more with
 less: keep data under institutional control, run workloads on verified compute,
@@ -126,6 +136,13 @@ Next MVP build order is documented in `docs/mvp_next_steps.md`: production
 routing, authentication, persisted jobs, receipt API, verifier API, and protocol
 integration. The intended scope is one controlled buyer job, one provider path,
 one verifier path, and one exportable receipt before marketplace expansion.
+
+Server-backed MVP 1-6 result: the app now runs on the Next server runtime rather
+than static export. `/api/session` issues signed pilot sessions, `/api/jobs`
+creates and lists persisted job records, and each job exposes receipt, verifier,
+and protocol status endpoints. Local production verification passed for login,
+job creation, job retrieval, receipt retrieval, verifier retrieval, protocol
+status retrieval, unauthorized `401`, and `/app/` rendering.
 
 Verification limitation: Playwright is not installed in this website repo, so the
 interactive click-through was not browser-automated in this pass. The flow is

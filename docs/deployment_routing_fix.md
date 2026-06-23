@@ -96,6 +96,13 @@ curl -I https://oscirislabs.com/
 
 ## Decision
 
-For the current static Next.js export, GitHub Pages is the simplest production
-path. Railway is only needed if the site later adds server-side APIs,
-authentication, database writes, or dynamic job submission.
+The authenticated app now needs server-side API routes. Railway is the correct
+production path for the MVP. GitHub Actions should remain a build check unless a
+separate static marketing site is split out later.
+
+Required Railway environment variables:
+
+```text
+OSCIRIS_PILOT_ACCESS_CODE=<private access code>
+OSCIRIS_APP_SECRET=<long random signing secret>
+```

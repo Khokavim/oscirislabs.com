@@ -1,7 +1,8 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useState } from "react";
 import { PageShell } from "@/components/PageShell";
+import type { StoredJob } from "@/lib/mvp-store";
 
 const steps = ["Submit Job", "Job Status", "Evidence Receipt", "Verifier Result"];
 
@@ -26,27 +27,84 @@ export default function PilotAppPage() {
   const [accessCode, setAccessCode] = useState("");
   const [step, setStep] = useState(0);
   const [job, setJob] = useState<JobForm>(initialJob);
-  const [submittedJob, setSubmittedJob] = useState<JobForm | null>(null);
+  const [submittedJob, setSubmittedJob] = useState<StoredJob | null>(null);
+  const [token, setToken] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const jobId = useMemo(() => {
-    if (!submittedJob) return "OSC-PILOT-DRAFT";
-    const seed = `${submittedJob.organization}-${submittedJob.workload}-${submittedJob.model}`;
-    let hash = 0;
-    for (const char of seed) hash = (hash * 31 + char.charCodeAt(0)) >>> 0;
-    return `OSC-${hash.toString(16).toUpperCase().slice(0, 8)}`;
-  }, [submittedJob]);
-
-  function handleAuth(event: FormEvent<HTMLFormElement>) {
+  async function handleAuth(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (accessCode.trim().toLowerCase() === "pilot") {
+    setLoading(true);
+    setError("");
+
+    const response = await fetch("/api/session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ accessCode }),
+    });
+
+    if (response.ok) {
+      const data = (await response.json()) as { token: string };
+      setToken(data.token);
       setAuthenticated(true);
+    } else {
+      setError("Access code rejected.");
     }
+
+    setLoading(false);
   }
 
-  function submitJob(event: FormEvent<HTMLFormElement>) {
+  async function submitJob(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSubmittedJob(job);
-    setStep(1);
+    setLoading(true);
+    setError("");
+
+    const response = await fetch("/api/jobs", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(job),
+    });
+
+    if (response.ok) {
+      const data = (await response.json()) as { job: StoredJob };
+      setSubmittedJob(data.job);
+      setStep(1);
+    } else {
+      setError("Job submission failed.");
+    }
+
+    setLoading(false);
+  }
+
+  async function downloadReceipt() {
+    if (!submittedJob) return;
+    setLoading(true);
+    setError("");
+
+    const response = await fetch(`/api/jobs/${submittedJob.id}/receipt`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (!response.ok) {
+      setError("Receipt export failed.");
+      setLoading(false);
+      return;
+    }
+
+    const data = await response.json();
+    const blob = new Blob([JSON.stringify(data.receipt, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `${submittedJob.id.toLowerCase()}-receipt.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+    setLoading(false);
   }
 
   return (
@@ -68,11 +126,14 @@ export default function PilotAppPage() {
                 onChange={(event) => setAccessCode(event.target.value)}
                 placeholder="pilot"
               />
-              <button className="button primary" type="submit">
-                Enter pilot app
+              <button className="button primary" type="submit" disabled={loading}>
+                {loading ? "Checking..." : "Enter pilot app"}
               </button>
             </form>
-            <span className="demo-note">Demo code: pilot. Backend authentication comes next.</span>
+            {error ? <span className="demo-note">{error}</span> : null}
+            <span className="demo-note">
+              Private pilot access. Default local code: pilot.
+            </span>
           </section>
         ) : (
           <>
@@ -90,6 +151,8 @@ export default function PilotAppPage() {
                 onClick={() => {
                   setAuthenticated(false);
                   setStep(0);
+                  setToken("");
+                  setSubmittedJob(null);
                 }}
               >
                 Sign out
@@ -156,8 +219,9 @@ export default function PilotAppPage() {
                       <option>Bedrock Qwen3-Coder procurement baseline</option>
                     </select>
                   </Field>
-                  <button className="button primary" type="submit">
-                    Submit pilot job
+                  {error ? <span className="demo-note">{error}</span> : null}
+                  <button className="button primary" type="submit" disabled={loading}>
+                    {loading ? "Submitting..." : "Submit pilot job"}
                   </button>
                 </form>
               </section>
@@ -167,13 +231,12 @@ export default function PilotAppPage() {
               <section className="app-card">
                 <div>
                   <p className="eyebrow">Job status</p>
-                  <h2>{jobId}</h2>
+                  <h2>{submittedJob.id}</h2>
                 </div>
                 <div className="status-grid">
-                  <Status label="DSP preparation" value="Complete" />
-                  <Status label="Provider assignment" value="Provider A10G-01" />
-                  <Status label="Execution" value="Receipt emitted" />
-                  <Status label="Challenge window" value="Open" />
+                  {submittedJob.events.map((event) => (
+                    <Status key={event.label} label={event.label} value={event.detail} />
+                  ))}
                 </div>
                 <div className="receipt-preview">
                   <span>Workload</span>
@@ -193,15 +256,20 @@ export default function PilotAppPage() {
                   <h2>Audit-ready package.</h2>
                 </div>
                 <div className="receipt-ledger">
-                  <ReceiptRow label="Job ID" value={jobId} />
-                  <ReceiptRow label="Evidence root" value="sha256:8f22...c91a" />
-                  <ReceiptRow label="Manifest" value="dsp-policy-manifest.json" />
-                  <ReceiptRow label="Provider receipt" value="signed: provider-a" />
-                  <ReceiptRow label="Cost-to-quality" value="bounded benchmark attached" />
+                  <ReceiptRow label="Job ID" value={submittedJob.receipt.jobId} />
+                  <ReceiptRow label="Evidence root" value={submittedJob.receipt.evidenceRoot} />
+                  <ReceiptRow label="Manifest" value={submittedJob.receipt.manifest} />
+                  <ReceiptRow label="Provider receipt" value={submittedJob.receipt.providerReceipt} />
+                  <ReceiptRow label="Cost-to-quality" value={submittedJob.receipt.costToQuality} />
                 </div>
-                <button className="button primary" type="button" onClick={() => setStep(3)}>
-                  Review verifier result
-                </button>
+                <div className="hero-actions">
+                  <button className="button secondary" type="button" onClick={downloadReceipt}>
+                    Download JSON receipt
+                  </button>
+                  <button className="button primary" type="button" onClick={() => setStep(3)}>
+                    Review verifier result
+                  </button>
+                </div>
               </section>
             ) : null}
 
@@ -212,17 +280,16 @@ export default function PilotAppPage() {
                   <h2>Accepted with scoped evidence.</h2>
                 </div>
                 <div className="verifier-panel">
-                  <strong>Quorum: accepted</strong>
+                  <strong>Quorum: {submittedJob.verifierResult.quorum}</strong>
                   <p>
-                    Verifier confirms evidence hash, provider signature, policy manifest,
-                    and receipt availability. Settlement remains testnet/demo scoped.
+                    {submittedJob.verifierResult.notes}
                   </p>
                 </div>
                 <div className="status-grid">
-                  <Status label="Verifier" value="verifier-1" />
-                  <Status label="Decision" value="Accepted" />
-                  <Status label="Settlement" value="Ready after challenge window" />
-                  <Status label="Export" value="Reviewer pack available" />
+                  <Status label="Verifier" value={submittedJob.verifierResult.verifier} />
+                  <Status label="Decision" value={submittedJob.verifierResult.decision} />
+                  <Status label="Settlement" value={submittedJob.verifierResult.settlement} />
+                  <Status label="Horizen anchor" value={submittedJob.protocolStatus.horizenAnchor} />
                 </div>
               </section>
             ) : null}
