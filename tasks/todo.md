@@ -32,7 +32,10 @@
 - [x] Push server-backed MVP update
 - [x] Replace file store with Postgres-capable MVP store
 - [x] Remove public pilot-code disclosure from the app UI
-- [ ] Add Railway Postgres and verify DATABASE_URL wiring
+
+## Deferred Infrastructure
+
+- [ ] Add Railway Postgres and verify DATABASE_URL wiring if private operational state returns to the public MVP path
 
 ## Runtime Storage Visibility
 
@@ -251,6 +254,8 @@ contract addresses, transaction hashes, block references, verifier decisions,
 and publication cadence as the MVP proof surface. The current user-facing app
 no longer depends on Postgres framing or private session flow to explain the
 product.
+The former Railway Postgres item is now deferred infrastructure, not current
+MVP scope.
 
 Sovereign AI business refresh result: the homepage now sells OSCIRIS as
 Sovereign AI Infrastructure-as-a-Service for regulated enterprises, public
