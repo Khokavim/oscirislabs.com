@@ -52,6 +52,12 @@
 - [x] Surface actionable storage failure messages in the pilot app
 - [x] Verify unreachable-database behavior locally
 
+## MVP Smoke Check
+
+- [x] Add a one-command MVP API verification script
+- [x] Wire the script into package scripts
+- [x] Verify the smoke check locally against the running app
+
 ## MVP Execution 1-6
 
 - [x] Verify and document live deployment routing state for `oscirislabs.com`
@@ -224,6 +230,12 @@ surfaces the returned storage detail message so Railway misconfiguration is
 immediately visible to a reviewer. Local verification against an invalid
 Postgres URL returned the expected `503` body for both job listing and receipt
 retrieval.
+
+MVP smoke-check result: `npm run verify:mvp` now validates the end-to-end pilot
+API path in one command: health, session creation, job listing, job creation,
+recent-job ordering, receipt retrieval, verifier retrieval, and protocol
+retrieval. Local verification passed against the running app and produced a new
+job record in the expected first position of the recent-jobs list.
 
 Sovereign AI business refresh result: the homepage now sells OSCIRIS as
 Sovereign AI Infrastructure-as-a-Service for regulated enterprises, public

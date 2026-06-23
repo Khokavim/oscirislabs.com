@@ -55,6 +55,9 @@ Production hardening:
   signing in again, and confirming the same job appears in the recent-jobs list.
 - If the database is miswired, verify authenticated job endpoints return `503
   Storage unavailable` instead of a generic `500`.
+- Run `npm run verify:mvp` locally or against a deployed environment with
+  `OSCIRIS_BASE_URL` to confirm health, auth, job creation, recent-job ordering,
+  receipt retrieval, verifier retrieval, and protocol retrieval in one pass.
 
 ### 4. Receipt API
 
