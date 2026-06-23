@@ -733,6 +733,22 @@ h1 {
   padding: 30px;
 }
 
+.header-actions,
+.jobs-header,
+.job-summary-meta {
+  display: flex;
+}
+
+.header-actions {
+  gap: 12px;
+}
+
+.jobs-header {
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
 .app-steps {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -837,6 +853,48 @@ h1 {
 
 .verifier-result h2 {
   color: var(--green);
+}
+
+.jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.job-summary {
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(237, 247, 250, .72);
+  padding: 18px;
+}
+
+.job-summary span,
+.job-summary small {
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.job-summary span {
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.job-summary p {
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.job-summary-meta {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.job-summary .button {
+  width: fit-content;
 }
 
 .proof-strip article {
@@ -1313,14 +1371,17 @@ h3 {
   }
 
   .app-header,
-  .cta-panel {
+  .cta-panel,
+  .jobs-header,
+  .header-actions {
     align-items: flex-start;
     flex-direction: column;
   }
 
   .app-steps,
   .job-form,
-  .status-grid {
+  .status-grid,
+  .jobs-grid {
     grid-template-columns: 1fr;
   }
 

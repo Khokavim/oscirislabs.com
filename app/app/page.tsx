@@ -38,6 +38,7 @@ export default function PilotAppPage() {
   const [step, setStep] = useState(0);
   const [job, setJob] = useState<JobForm>(initialJob);
   const [submittedJob, setSubmittedJob] = useState<StoredJob | null>(null);
+  const [recentJobs, setRecentJobs] = useState<StoredJob[]>([]);
   const [token, setToken] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -66,6 +67,20 @@ export default function PilotAppPage() {
     };
   }, []);
 
+  async function loadJobs(sessionToken: string) {
+    const response = await fetch("/api/jobs", {
+      headers: { Authorization: `Bearer ${sessionToken}` },
+      cache: "no-store",
+    });
+
+    if (!response.ok) {
+      throw new Error("Could not load jobs.");
+    }
+
+    const data = (await response.json()) as { jobs: StoredJob[] };
+    setRecentJobs(data.jobs);
+  }
+
   async function handleAuth(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
@@ -81,6 +96,7 @@ export default function PilotAppPage() {
       const data = (await response.json()) as { token: string };
       setToken(data.token);
       setAuthenticated(true);
+      await loadJobs(data.token);
     } else {
       setError("Access code rejected.");
     }
@@ -105,6 +121,7 @@ export default function PilotAppPage() {
     if (response.ok) {
       const data = (await response.json()) as { job: StoredJob };
       setSubmittedJob(data.job);
+      await loadJobs(token);
       setStep(1);
     } else {
       setError("Job submission failed.");
@@ -200,18 +217,71 @@ export default function PilotAppPage() {
                   </p>
                 ) : null}
               </div>
-              <button
-                className="button secondary"
-                type="button"
-                onClick={() => {
-                  setAuthenticated(false);
-                  setStep(0);
-                  setToken("");
-                  setSubmittedJob(null);
-                }}
-              >
-                Sign out
-              </button>
+              <div className="header-actions">
+                <button
+                  className="button secondary"
+                  type="button"
+                  onClick={() => void loadJobs(token)}
+                >
+                  Refresh jobs
+                </button>
+                <button
+                  className="button secondary"
+                  type="button"
+                  onClick={() => {
+                    setAuthenticated(false);
+                    setStep(0);
+                    setToken("");
+                    setSubmittedJob(null);
+                    setRecentJobs([]);
+                  }}
+                >
+                  Sign out
+                </button>
+              </div>
+            </section>
+
+            <section className="app-card">
+              <div className="jobs-header">
+                <div>
+                  <p className="eyebrow">Persisted jobs</p>
+                  <h2>Recent pilot records.</h2>
+                </div>
+                <p className="demo-note">
+                  Use this list to confirm whether jobs survive redeploys and restarts.
+                </p>
+              </div>
+              {recentJobs.length ? (
+                <div className="jobs-grid">
+                  {recentJobs.map((item) => (
+                    <article key={item.id} className="job-summary">
+                      <span>{item.id}</span>
+                      <strong>{item.organization}</strong>
+                      <p>{item.workload}</p>
+                      <div className="job-summary-meta">
+                        <small>{item.model}</small>
+                        <small>{item.status}</small>
+                      </div>
+                      <button
+                        className="button secondary"
+                        type="button"
+                        onClick={() => {
+                          setSubmittedJob(item);
+                          setStep(1);
+                        }}
+                      >
+                        Open job
+                      </button>
+                    </article>
+                  ))}
+                </div>
+              ) : (
+                <div className="receipt-preview">
+                  <span>Persistence check</span>
+                  <strong>No jobs stored yet.</strong>
+                  <p>Create one pilot job, then refresh after a restart or redeploy.</p>
+                </div>
+              )}
             </section>
 
             <nav className="app-steps" aria-label="Pilot workflow">

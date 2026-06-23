@@ -40,6 +40,12 @@
 - [x] Surface storage readiness in the pilot app
 - [x] Verify file-mode fallback locally and document the result
 
+## Persistence Verification
+
+- [x] Surface recent authenticated jobs in the pilot app
+- [x] Allow reopening a prior job to inspect persisted receipt state
+- [x] Verify the recent-jobs flow locally
+
 ## MVP Execution 1-6
 
 - [x] Verify and document live deployment routing state for `oscirislabs.com`
@@ -197,6 +203,13 @@ sets a clean verification baseline before Railway Postgres is attached.
 Production verification now matches the same state at
 `https://oscirislabs.com/api/health/`, which means Railway is serving the live
 app correctly but has not yet been wired to Postgres.
+
+Persistence verification result: the pilot app now exposes recent authenticated
+jobs and allows reopening a prior record to inspect the same receipt and
+verifier state. Local API verification passed for session creation, job
+creation, job listing, and newest-job ordering, which gives a concrete test path
+for the future Railway Postgres check: create a job, redeploy or restart, sign
+in again, and confirm the same job still appears in the recent-jobs list.
 
 Sovereign AI business refresh result: the homepage now sells OSCIRIS as
 Sovereign AI Infrastructure-as-a-Service for regulated enterprises, public

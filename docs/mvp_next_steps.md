@@ -51,6 +51,8 @@ Production hardening:
   `OSCIRIS_APP_SECRET`.
 - Verify `/api/health` reports `store.mode=postgres` and
   `databaseReachable=true` after Railway Postgres is attached.
+- Verify persistence by creating a pilot job, restarting or redeploying the app,
+  signing in again, and confirming the same job appears in the recent-jobs list.
 
 ### 4. Receipt API
 
