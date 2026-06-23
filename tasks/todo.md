@@ -30,6 +30,9 @@
 - [x] Add protocol status integration stub
 - [x] Build, audit, and verify API flow locally
 - [x] Push server-backed MVP update
+- [x] Replace file store with Postgres-capable MVP store
+- [x] Remove public pilot-code disclosure from the app UI
+- [ ] Add Railway Postgres and verify DATABASE_URL wiring
 
 ## MVP Execution 1-6
 

@@ -47,6 +47,8 @@ Production hardening:
 - `job_events`: submitted, prepared, assigned, running, completed, challenged.
 - `artifacts`: manifest hash, evidence root, receipt bundle URL, verifier result.
 - Move from file-backed storage to Postgres before real pilots.
+- Railway variables required: `DATABASE_URL`, `OSCIRIS_PILOT_ACCESS_CODE`, and
+  `OSCIRIS_APP_SECRET`.
 
 ### 4. Receipt API
 

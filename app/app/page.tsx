@@ -131,9 +131,7 @@ export default function PilotAppPage() {
               </button>
             </form>
             {error ? <span className="demo-note">{error}</span> : null}
-            <span className="demo-note">
-              Private pilot access. Default local code: pilot.
-            </span>
+            <span className="demo-note">Private pilot access enabled.</span>
           </section>
         ) : (
           <>
