@@ -17,7 +17,7 @@
 - [x] Add Railway runtime config for repo-root static export
 - [x] Build and verify Railway-compatible start command locally
 - [x] Push routing config update
-- [ ] Re-check live domain after deployment
+- [x] Re-check live domain after deployment
 - [x] Define next MVP implementation steps
 
 ## Server-Backed MVP 1-6
@@ -215,6 +215,8 @@ sets a clean verification baseline before Railway Postgres is attached.
 Production verification now matches the same state at
 `https://oscirislabs.com/api/health/`, which means Railway is serving the live
 app correctly but has not yet been wired to Postgres.
+The cutover checklist is now documented in
+`docs/railway_postgres_cutover.md`.
 
 Persistence verification result: the pilot app now exposes recent authenticated
 jobs and allows reopening a prior record to inspect the same receipt and
