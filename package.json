@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev -p 4173",
     "build": "next build && node scripts/create-pages-artifact.mjs",
-    "start": "next start -H 0.0.0.0 -p ${PORT:-4173}"
+    "start": "next start -H 0.0.0.0 -p 4173"
   },
   "dependencies": {
     "next": "^15.0.0",
