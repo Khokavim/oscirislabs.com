@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { withStorageGuard } from "@/lib/mvp-api";
 import { createJob, listJobs, requireToken, type JobInput } from "@/lib/mvp-store";
 
 function unauthorized() {
@@ -7,7 +8,7 @@ function unauthorized() {
 
 export async function GET(request: Request) {
   if (!requireToken(request.headers.get("authorization"))) return unauthorized();
-  return NextResponse.json({ jobs: await listJobs() });
+  return withStorageGuard(async () => NextResponse.json({ jobs: await listJobs() }));
 }
 
 export async function POST(request: Request) {
@@ -28,6 +29,8 @@ export async function POST(request: Request) {
     }
   }
 
-  const job = await createJob(body as JobInput);
-  return NextResponse.json({ job }, { status: 201 });
+  return withStorageGuard(async () => {
+    const job = await createJob(body as JobInput);
+    return NextResponse.json({ job }, { status: 201 });
+  });
 }

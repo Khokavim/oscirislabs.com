@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { withStorageGuard } from "@/lib/mvp-api";
 import { getJob, requireToken } from "@/lib/mvp-store";
 
 type RouteContext = {
@@ -10,9 +11,11 @@ export async function GET(request: Request, context: RouteContext) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { jobId } = await context.params;
-  const job = await getJob(jobId);
-  if (!job) return NextResponse.json({ error: "Job not found" }, { status: 404 });
+  return withStorageGuard(async () => {
+    const { jobId } = await context.params;
+    const job = await getJob(jobId);
+    if (!job) return NextResponse.json({ error: "Job not found" }, { status: 404 });
 
-  return NextResponse.json({ protocolStatus: job.protocolStatus });
+    return NextResponse.json({ protocolStatus: job.protocolStatus });
+  });
 }

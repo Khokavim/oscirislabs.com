@@ -74,7 +74,10 @@ export default function PilotAppPage() {
     });
 
     if (!response.ok) {
-      throw new Error("Could not load jobs.");
+      const payload = (await response.json().catch(() => null)) as
+        | { error?: string; detail?: string }
+        | null;
+      throw new Error(payload?.detail || payload?.error || "Could not load jobs.");
     }
 
     const data = (await response.json()) as { jobs: StoredJob[] };
@@ -96,7 +99,11 @@ export default function PilotAppPage() {
       const data = (await response.json()) as { token: string };
       setToken(data.token);
       setAuthenticated(true);
-      await loadJobs(data.token);
+      try {
+        await loadJobs(data.token);
+      } catch (authError) {
+        setError(authError instanceof Error ? authError.message : "Could not load jobs.");
+      }
     } else {
       setError("Access code rejected.");
     }
@@ -121,10 +128,17 @@ export default function PilotAppPage() {
     if (response.ok) {
       const data = (await response.json()) as { job: StoredJob };
       setSubmittedJob(data.job);
-      await loadJobs(token);
+      try {
+        await loadJobs(token);
+      } catch (jobError) {
+        setError(jobError instanceof Error ? jobError.message : "Could not load jobs.");
+      }
       setStep(1);
     } else {
-      setError("Job submission failed.");
+      const payload = (await response.json().catch(() => null)) as
+        | { error?: string; detail?: string }
+        | null;
+      setError(payload?.detail || payload?.error || "Job submission failed.");
     }
 
     setLoading(false);
@@ -221,7 +235,16 @@ export default function PilotAppPage() {
                 <button
                   className="button secondary"
                   type="button"
-                  onClick={() => void loadJobs(token)}
+                  onClick={() => {
+                    setError("");
+                    void loadJobs(token).catch((refreshError) => {
+                      setError(
+                        refreshError instanceof Error
+                          ? refreshError.message
+                          : "Could not load jobs."
+                      );
+                    });
+                  }}
                 >
                   Refresh jobs
                 </button>

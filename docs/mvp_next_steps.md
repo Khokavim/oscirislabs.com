@@ -53,6 +53,8 @@ Production hardening:
   `databaseReachable=true` after Railway Postgres is attached.
 - Verify persistence by creating a pilot job, restarting or redeploying the app,
   signing in again, and confirming the same job appears in the recent-jobs list.
+- If the database is miswired, verify authenticated job endpoints return `503
+  Storage unavailable` instead of a generic `500`.
 
 ### 4. Receipt API
 

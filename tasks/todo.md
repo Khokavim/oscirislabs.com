@@ -46,6 +46,12 @@
 - [x] Allow reopening a prior job to inspect persisted receipt state
 - [x] Verify the recent-jobs flow locally
 
+## Storage Failure Handling
+
+- [x] Return explicit `503` responses when configured storage is unavailable
+- [x] Surface actionable storage failure messages in the pilot app
+- [x] Verify unreachable-database behavior locally
+
 ## MVP Execution 1-6
 
 - [x] Verify and document live deployment routing state for `oscirislabs.com`
@@ -210,6 +216,14 @@ verifier state. Local API verification passed for session creation, job
 creation, job listing, and newest-job ordering, which gives a concrete test path
 for the future Railway Postgres check: create a job, redeploy or restart, sign
 in again, and confirm the same job still appears in the recent-jobs list.
+
+Storage failure handling result: authenticated job endpoints now return explicit
+`503` responses when `DATABASE_URL` is configured but the database is not
+reachable, instead of failing with a generic server error. The pilot app now
+surfaces the returned storage detail message so Railway misconfiguration is
+immediately visible to a reviewer. Local verification against an invalid
+Postgres URL returned the expected `503` body for both job listing and receipt
+retrieval.
 
 Sovereign AI business refresh result: the homepage now sells OSCIRIS as
 Sovereign AI Infrastructure-as-a-Service for regulated enterprises, public
