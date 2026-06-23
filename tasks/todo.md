@@ -194,6 +194,9 @@ running on file fallback or Postgres, and the pilot app surfaces the same state
 to the user. Local verification confirms the current no-database path reports
 `mode=file`, `databaseConfigured=false`, and `databaseReachable=false`, which
 sets a clean verification baseline before Railway Postgres is attached.
+Production verification now matches the same state at
+`https://oscirislabs.com/api/health/`, which means Railway is serving the live
+app correctly but has not yet been wired to Postgres.
 
 Sovereign AI business refresh result: the homepage now sells OSCIRIS as
 Sovereign AI Infrastructure-as-a-Service for regulated enterprises, public
