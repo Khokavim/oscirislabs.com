@@ -1,5 +1,15 @@
 # Task Plan
 
+## Authenticated MVP App Flow
+
+- [x] Review conversion critique and extract implementation scope
+- [x] Tighten homepage promise with less copy
+- [x] Add buyer use cases and simple architecture diagram
+- [x] Build `/app` authenticated demo flow
+- [x] Implement Submit Job -> Job Status -> Evidence Receipt -> Verifier Result
+- [x] Verify static export and production audit
+- [x] Push website update and document result
+
 ## MVP Execution 1-6
 
 - [x] Verify and document live deployment routing state for `oscirislabs.com`
@@ -83,6 +93,27 @@
 - [x] Verify desktop and mobile rendering with a local build and browser checks
 
 ## Review
+
+Authenticated MVP app flow result: added `/app` as a static-export compatible
+pilot surface. It uses a local demo access gate with code `pilot`, then walks the
+buyer through Submit Job, Job Status, Evidence Receipt, and Verifier Result. This
+is intentionally marked as demo authentication; real backend auth, persistence,
+and signed live receipts remain next-step product work.
+
+Conversion critique implementation: tightened the hero promise to say more with
+less: keep data under institutional control, run workloads on verified compute,
+and export audit-ready receipts. Added immediate buyer use cases for banking and
+fintech, telcos, public sector, and research/universities. Added a simple
+architecture path from institutional data to buyer dashboard.
+
+Verification passed:
+- `npm run build`
+- `npm audit --omit=dev`
+- local static export served `/` and `/app/` with expected content markers
+
+Verification limitation: Playwright is not installed in this website repo, so the
+interactive click-through was not browser-automated in this pass. The flow is
+implemented as a client component and compiles into the static export.
 
 MVP execution result: added a dedicated `/mvp` public product page that explains
 the six-step buyer flow: submit workload, prepare DSP artifact, assign provider,

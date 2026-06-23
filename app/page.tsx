@@ -11,6 +11,34 @@ const proofMetrics = [
   { label: "Inference evidence", value: "100 cases", detail: "Bedrock procurement baseline" },
 ];
 
+const useCases = [
+  {
+    title: "Banking & Fintech",
+    body: "Private RAG, compliance assistants, fraud analysis, document intelligence, and audit receipts.",
+  },
+  {
+    title: "Telcos",
+    body: "Support automation, local-language analytics, customer intelligence, and privacy-aware inference.",
+  },
+  {
+    title: "Public Sector",
+    body: "Sovereign AI workflows, policy analysis, records intelligence, and controlled data processing.",
+  },
+  {
+    title: "Research & Universities",
+    body: "Affordable evaluation, fine-tuning, synthetic data, and model benchmarking.",
+  },
+];
+
+const architectureFlow = [
+  "Institution data",
+  "DSP policy artifact",
+  "Verified provider",
+  "Verifier node",
+  "Audit receipt",
+  "Buyer dashboard",
+];
+
 const sovereigntyControls = [
   {
     title: "Data sovereignty",
@@ -104,12 +132,14 @@ export default function Home() {
             <p className="hero-kicker">Sovereignty-enabling AI infrastructure</p>
             <h1>Sovereign AI Infrastructure-as-a-Service.</h1>
             <p className="hero-text">
-              OSCIRIS helps regulated enterprises, public institutions, and emerging-market
-              AI ecosystems run private AI workloads without surrendering data,
-              jurisdiction, auditability, or compute control.
+              Keep sensitive data under institutional control. Run AI workloads on
+              verified compute. Export audit-ready receipts.
             </p>
             <div className="hero-actions">
-              <ButtonLink href="mailto:info@oscirislabs.com">Request private review</ButtonLink>
+              <ButtonLink href="/app">Open pilot app</ButtonLink>
+              <ButtonLink href="mailto:info@oscirislabs.com" variant="secondary">
+                Request private review
+              </ButtonLink>
               <ButtonLink href={whitepaperPdf} variant="secondary">
                 Download whitepaper
               </ButtonLink>
@@ -131,9 +161,39 @@ export default function Home() {
 
         <section className="statement-band">
           <p>
-            The next AI infrastructure market is not only cheaper compute. It is private,
-            jurisdiction-aware, auditable compute that serious buyers can govern.
+            Built for banks, telcos, public institutions, and research teams that need
+            privacy, auditability, and jurisdiction-aware execution.
           </p>
+        </section>
+
+        <section className="use-case-section" aria-label="OSCIRIS use cases">
+          <div className="section-copy">
+            <p className="eyebrow">Use cases</p>
+            <h2>What buyers can pilot in 30-60 days.</h2>
+          </div>
+          <div className="use-case-grid">
+            {useCases.map((item) => (
+              <article key={item.title}>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="architecture-section" aria-label="OSCIRIS architecture">
+          <div className="section-copy">
+            <p className="eyebrow">Architecture</p>
+            <h2>One path from private data to verifiable receipt.</h2>
+          </div>
+          <div className="architecture-flow">
+            {architectureFlow.map((item, index) => (
+              <article key={item}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{item}</strong>
+              </article>
+            ))}
+          </div>
         </section>
 
         <section className="sovereignty-section" aria-label="OSCIRIS sovereignty controls">
