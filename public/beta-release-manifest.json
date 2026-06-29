@@ -1,7 +1,7 @@
 {
   "channel": "beta",
   "latest_version": "0.1.0",
-  "published_at": "2026-06-29T15:42:27.572090Z",
+  "published_at": "2026-06-29T16:55:12.079514Z",
   "release_page_url": "https://github.com/oscirisprotocol/core/releases/tag/v0.1.0",
   "release_notes": "Beta collaboration release for colleague onboarding, published bundle sync, and release checks.",
   "assets": [
@@ -9,13 +9,19 @@
       "platform": "macos-aarch64",
       "filename": "osciris-node-macos-aarch64.tar.gz",
       "url": "https://github.com/oscirisprotocol/core/releases/download/v0.1.0/osciris-node-macos-aarch64.tar.gz",
-      "sha256": "7f5fa15a315761a035340c0e5ba748c5470ee8b112a40c6dd6b5a31de7f580f2"
+      "sha256": "581b722b557658284db59027e4227548c57a324ebfe34d951ee821e1dc268458"
     },
     {
       "platform": "linux-x86_64",
       "filename": "osciris-node-linux-x86_64.tar.gz",
       "url": "https://github.com/oscirisprotocol/core/releases/download/v0.1.0/osciris-node-linux-x86_64.tar.gz",
-      "sha256": "984d0dc3222f4eda7339bc11f01a90e9b0b843e46a094ee648afdb29225e9f73"
+      "sha256": "8bb7196adca091d3a1a00c4ad2c991e8ada125d982794917cfc04bd25af734bd"
+    },
+    {
+      "platform": "windows-x86_64",
+      "filename": "osciris-node-windows-x86_64.zip",
+      "url": "https://github.com/oscirisprotocol/core/releases/download/v0.1.0/osciris-node-windows-x86_64.zip",
+      "sha256": "9e044aa09b93c3b46431e273780202ae473462a920ede5ed187ff11a4e5c159f"
     }
   ]
 }
