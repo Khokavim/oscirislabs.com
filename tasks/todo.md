@@ -73,6 +73,14 @@
 - [x] Add a JSON route for the published proof feed
 - [x] Render `/app` from the async feed with fixture fallback
 
+## Beta Release Surface Repair
+
+- [x] Confirm the published beta manifest points at a real GitHub release
+- [x] Publish the missing `core` GitHub beta release
+- [x] Reconcile the website beta manifest with the real asset filename and checksum
+- [x] Make the bundle publisher prefer a real packaged release manifest
+- [x] Verify the public release surface locally against HTTP
+
 ## Participant Snapshot Publication
 
 - [x] Publish the OSCIRIS participant snapshot bundle into `public/`
@@ -452,3 +460,13 @@ Brand asset refresh: imported the official `Osciris.zip` package into `public/br
 Mobile-view correction: replaced the collapsing header row with a dedicated mobile menu control and panel, reduced small-screen header/hero spacing, and strengthened the mobile homepage overlay so the background image stays atmospheric without hurting text contrast.
 
 Verification passed with `npm run build`, Browser reload of `http://localhost:4173/` for the updated desktop render, and a Playwright WebKit iPhone 12 screenshot at `/tmp/osciris-mobile-20260603.png` confirming the small-screen layout and stacked CTAs.
+
+Beta release surface repair result: published `oscirisprotocol/core` release
+`v0.1.0` with asset `osciris-node-macos-aarch64.tar.gz`, then updated the
+website publisher to consume a real packaged manifest from
+`protocol-rs/dist/beta-release/beta-release-manifest.json` or
+`OSCIRIS_BETA_RELEASE_MANIFEST` instead of regenerating stale placeholder asset
+names. Local verification passed with
+`python3 protocol-rs/scripts/verify_beta_release_surface.py --base-url http://127.0.0.1:8876`,
+which confirmed the static bundle endpoints, GitHub release page, asset URL,
+SHA-256 checksum, and tar contents.

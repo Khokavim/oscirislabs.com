@@ -216,21 +216,36 @@ function workflowDetailFor(step) {
 }
 
 function buildBetaReleaseManifest(oscirisRoot) {
-  const version = readWorkspaceVersion(join(oscirisRoot, "protocol-rs", "Cargo.toml"));
-  const repositoryBaseUrl = resolveReleaseRepositoryUrl(join(oscirisRoot, "protocol-rs"));
+  const protocolRoot = join(oscirisRoot, "protocol-rs");
+  const version = readWorkspaceVersion(join(protocolRoot, "Cargo.toml"));
+  const repositoryBaseUrl = resolveReleaseRepositoryUrl(protocolRoot);
+  const externalManifestPath = process.env.OSCIRIS_BETA_RELEASE_MANIFEST?.trim();
+  const defaultManifestPath = join(protocolRoot, "dist", "beta-release", "beta-release-manifest.json");
+
+  for (const candidate of [externalManifestPath, defaultManifestPath]) {
+    if (!candidate) {
+      continue;
+    }
+
+    try {
+      const source = readFileSync(candidate, "utf8");
+      const parsed = JSON.parse(source);
+      if (parsed && Array.isArray(parsed.assets) && parsed.assets.length > 0) {
+        return parsed;
+      }
+    } catch {
+      // Fall back to the inferred manifest below when the supplied file is
+      // missing or malformed.
+    }
+  }
+
   const releasePageUrl = `${repositoryBaseUrl}/releases/tag/v${version}`;
   const downloadBaseUrl = `${repositoryBaseUrl}/releases/download/v${version}`;
   const assets = [
     {
-      platform: "linux-x86_64",
-      filename: `osciris-node-x86_64-unknown-linux-gnu.tar.gz`,
-      url: `${downloadBaseUrl}/osciris-node-x86_64-unknown-linux-gnu.tar.gz`,
-      sha256: null,
-    },
-    {
       platform: "macos-aarch64",
-      filename: `osciris-node-aarch64-apple-darwin.tar.gz`,
-      url: `${downloadBaseUrl}/osciris-node-aarch64-apple-darwin.tar.gz`,
+      filename: `osciris-node-macos-aarch64.tar.gz`,
+      url: `${downloadBaseUrl}/osciris-node-macos-aarch64.tar.gz`,
       sha256: null,
     },
   ];
