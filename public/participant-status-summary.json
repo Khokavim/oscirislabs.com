@@ -1,0 +1,266 @@
+{
+  "generated_at": "2026-06-29T01:42:40.253050+00:00",
+  "source_path": null,
+  "job_id": "019f110a-faea-7431-978e-a6a16779460e",
+  "job_type": "llm_lora_economics",
+  "privacy_mode": "dsp_prepared",
+  "payment_token": "USDC_TEST",
+  "required_capability": "gpu>=24gb",
+  "submitter_node_id": "enterprise-1",
+  "assigned_provider_node_id": "provider-a",
+  "current_state": "settlement_ready",
+  "participant_summary": {
+    "assignment_present": true,
+    "challenge_count": 1,
+    "claim_count": 2,
+    "job_id": "019f110a-faea-7431-978e-a6a16779460e",
+    "milestone_count": 1,
+    "quorum_status": "accepted",
+    "receipt_availability_count": 1,
+    "settlement_lifecycle_state": "settlement_ready",
+    "verification_receipt_count": 1
+  },
+  "counts": {
+    "claims": 2,
+    "challenges": 1,
+    "milestones": 1,
+    "receipt_availability": 1,
+    "verification_receipts": 1
+  },
+  "stages": [
+    {
+      "name": "Submit Job",
+      "status": "complete",
+      "summary": "llm_lora_economics announced for provider-a.",
+      "facts": [
+        "Job ID: 019f110a-faea-7431-978e-a6a16779460e",
+        "Announced at: 2026-06-29T01:42:40.106702+00:00",
+        "Required capability: gpu>=24gb"
+      ]
+    },
+    {
+      "name": "Job Status",
+      "status": "complete",
+      "summary": "Settlement lifecycle state is settlement_ready.",
+      "facts": [
+        "Quorum: accepted",
+        "Claims: 2",
+        "Challenges: 1"
+      ]
+    },
+    {
+      "name": "Evidence Receipt",
+      "status": "complete",
+      "summary": "1 receipt availability record(s) and 1 milestone(s).",
+      "facts": [
+        "Receipt availability: 1",
+        "Milestones: 1",
+        "Evidence ready: yes"
+      ]
+    },
+    {
+      "name": "Verifier Result",
+      "status": "accepted",
+      "summary": "Quorum accepted with 1 verification receipt(s).",
+      "facts": [
+        "Accepted verifiers: 1",
+        "Rejected verifiers: 0",
+        "Verification receipts: 1"
+      ]
+    }
+  ],
+  "job_announcement": {
+    "announced_at": "2026-06-29T01:42:40.106702+00:00",
+    "escrow_amount_atomic": "1000000",
+    "estimated_runtime_class": "short",
+    "job_id": "019f110a-faea-7431-978e-a6a16779460e",
+    "job_spec": {
+      "args": [
+        "-c",
+        "import json, pathlib, sys; output_dir = pathlib.Path(sys.argv[sys.argv.index(\"--output-dir\") + 1]); output_dir.mkdir(parents=True, exist_ok=True); (output_dir / \"llm_lora_economics.json\").write_text(json.dumps({\"kind\": \"llm_lora_economics_benchmark\", \"config\": {\"model_id\": \"mock-7b\"}, \"aggregate\": {\"quality_retention\": 0.96}, \"runs\": [{\"mode\": \"raw_lora\", \"eval_loss\": 1.2}, {\"mode\": \"dsp_prepared_lora\", \"eval_loss\": 1.25}]}, indent=2), encoding=\"utf-8\"); (output_dir / \"llm_lora_economics.csv\").write_text(\"mode,quality\\nraw_lora,1.0\\ndsp_prepared_lora,0.96\\n\", encoding=\"utf-8\"); print(\"osciris demo workload complete\")"
+      ],
+      "challenge_window_seconds": 3600,
+      "command": "python3",
+      "created_at": "2026-06-29T01:42:40.106575+00:00",
+      "dataset": "enterprise_synthetic",
+      "escrow_amount_atomic": "1000000",
+      "job_id": "019f110a-faea-7431-978e-a6a16779460e",
+      "job_type": "llm_lora_economics",
+      "model_id": "mock-7b",
+      "payment_token": "USDC_TEST",
+      "privacy_policy": {
+        "evidence_profile": "developer_demo_local_settlement",
+        "formal_dp_claim": false,
+        "privacy_mode": "dsp_prepared",
+        "release_object": "model",
+        "sensitive_field_policy": "configured_guard"
+      },
+      "required_verifier_count": 1
+    },
+    "job_type": "llm_lora_economics",
+    "payment_token": "USDC_TEST",
+    "privacy_mode": "dsp_prepared",
+    "required_capability": "gpu>=24gb",
+    "required_verifier_count": 1,
+    "signature": "cmyWpM5/vfYNFAsQIXT9hCdmlp8HNLSU3cpC8nq6fB2bPNEPC8/nvEH2HCLq+QES/47O0wNIG9V5CbCSSAzrAA==",
+    "submitter_ed25519_public_key_base64": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w=",
+    "submitter_node_id": "enterprise-1"
+  },
+  "job_spec": {
+    "args": [
+      "-c",
+      "import json, pathlib, sys; output_dir = pathlib.Path(sys.argv[sys.argv.index(\"--output-dir\") + 1]); output_dir.mkdir(parents=True, exist_ok=True); (output_dir / \"llm_lora_economics.json\").write_text(json.dumps({\"kind\": \"llm_lora_economics_benchmark\", \"config\": {\"model_id\": \"mock-7b\"}, \"aggregate\": {\"quality_retention\": 0.96}, \"runs\": [{\"mode\": \"raw_lora\", \"eval_loss\": 1.2}, {\"mode\": \"dsp_prepared_lora\", \"eval_loss\": 1.25}]}, indent=2), encoding=\"utf-8\"); (output_dir / \"llm_lora_economics.csv\").write_text(\"mode,quality\\nraw_lora,1.0\\ndsp_prepared_lora,0.96\\n\", encoding=\"utf-8\"); print(\"osciris demo workload complete\")"
+    ],
+    "challenge_window_seconds": 3600,
+    "command": "python3",
+    "created_at": "2026-06-29T01:42:40.106575+00:00",
+    "dataset": "enterprise_synthetic",
+    "escrow_amount_atomic": "1000000",
+    "job_id": "019f110a-faea-7431-978e-a6a16779460e",
+    "job_type": "llm_lora_economics",
+    "model_id": "mock-7b",
+    "payment_token": "USDC_TEST",
+    "privacy_policy": {
+      "evidence_profile": "developer_demo_local_settlement",
+      "formal_dp_claim": false,
+      "privacy_mode": "dsp_prepared",
+      "release_object": "model",
+      "sensitive_field_policy": "configured_guard"
+    },
+    "required_verifier_count": 1
+  },
+  "assignment": {
+    "assigned_at": "2026-06-29T01:42:40.109018+00:00",
+    "assigned_provider_node_id": "provider-a",
+    "assigner_ed25519_public_key_base64": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w=",
+    "assigner_node_id": "enterprise-1",
+    "assignment_reason": "demo_preferred_provider",
+    "job_id": "019f110a-faea-7431-978e-a6a16779460e",
+    "signature": "4bl4tqdk2s4YYlyXYf8VpYmEKo3GWbLnkcayJ2EDGPVnUhiWTuytgkyuFmfICHU/1U//pvUtzVI9x+8leAyVDA=="
+  },
+  "quorum": {
+    "accepted_verifier_count": 1,
+    "accepted_verifier_ids": [
+      "verifier-1"
+    ],
+    "bundle_sha256": "60730f954c10904f008f8ac68f974c4e3b877962c2f59a10c021d0aaaa683d8d",
+    "job_id": "019f110a-faea-7431-978e-a6a16779460e",
+    "rejected_verifier_count": 0,
+    "rejected_verifier_ids": [],
+    "required_verifier_count": 1,
+    "status": "accepted"
+  },
+  "settlement": {
+    "accepted_verifier_count": 1,
+    "active_challenge_count": 0,
+    "assigned_provider_node_id": "provider-a",
+    "bundle_sha256": "b35f3797a9c4b86cf47ccbc2ff91118b21173fb300f018284587fddfc069a967",
+    "challenge_window_ends_at": "2026-06-29T02:42:40.199077+00:00",
+    "job_id": "019f110a-faea-7431-978e-a6a16779460e",
+    "lifecycle_state": "settlement_ready",
+    "quorum_status": "accepted",
+    "rejected_challenge_count": 1,
+    "rejected_verifier_count": 0,
+    "required_verifier_count": 1,
+    "settlement_blockers": [],
+    "settlement_ready": true,
+    "upheld_challenge_count": 0
+  },
+  "receipt_availability": [
+    {
+      "announced_at": "2026-06-29T01:42:40.195776+00:00",
+      "bundle_sha256": "60730f954c10904f008f8ac68f974c4e3b877962c2f59a10c021d0aaaa683d8d",
+      "bundle_uri": "file:///var/folders/3b/5q3fv8gd5hjd0bxnv0fyc4r40000gn/T/osciris-publish-Nymf3p/.osciris/evidence/019f110a-faea-7431-978e-a6a16779460e",
+      "execution_receipt_sha256": "0f4934e11f166834a96b66eff7b8a1bd100546426e2f173e970d103e3f1ff1b4",
+      "job_id": "019f110a-faea-7431-978e-a6a16779460e",
+      "provider_ed25519_public_key_base64": "gTl3Dqh9F19Wo1Rmw0x+zMuNipG07jeiXfYPW4/Js5Q=",
+      "provider_node_id": "provider-a",
+      "signature": "cW897AIun2UMOifNohDYpyKlBsflcTIW8wTb+hTwoDDQog5cCNiMwpvVvmPJG0qItIdaQgg9ZUtw83s0ppbiCQ=="
+    }
+  ],
+  "verification_receipts": [
+    {
+      "bundle_sha256": "60730f954c10904f008f8ac68f974c4e3b877962c2f59a10c021d0aaaa683d8d",
+      "checks": {
+        "artifact_root_valid": true,
+        "hardware_claim_valid": true,
+        "manifest_valid": true,
+        "required_metrics_present": true,
+        "signature_valid": true,
+        "stderr_hash_valid": true,
+        "stdout_hash_valid": true
+      },
+      "failure_reasons": [],
+      "job_id": "019f110a-faea-7431-978e-a6a16779460e",
+      "receipt_id": "019f110a-fb41-7da1-b078-348af1980f8c",
+      "signature": "ONH86JezY7McXkLQL9bDwGzC6UBSZsjTH8gfyGnZD/lkYruk50aukjU9/jV5gmt5JoVbCls3nP39Tx7aB5vzCQ==",
+      "signing_key_id": "verifier-1-key",
+      "verification_receipt_id": "019f110a-fb47-7c21-8842-30aff3f278a5",
+      "verification_status": "accepted",
+      "verified_at": "2026-06-29T01:42:40.199077+00:00",
+      "verifier_id": "verifier-1"
+    }
+  ],
+  "milestones": [
+    {
+      "contributing_node_ids": [
+        "enterprise-1",
+        "provider-a",
+        "verifier-1"
+      ],
+      "evidence_bundle_sha256": "b35f3797a9c4b86cf47ccbc2ff91118b21173fb300f018284587fddfc069a967",
+      "job_id": "019f110a-faea-7431-978e-a6a16779460e",
+      "job_type": "llm_lora_economics",
+      "milestone_id": "019f110a-fb48-7c93-87a4-618a3f8387df",
+      "published_at": "2026-06-29T01:42:40.200689+00:00",
+      "published_by": "enterprise-1",
+      "quality_metric_name": "quality_retention",
+      "quality_metric_value": 0.96,
+      "signature": "z4Tl6fpktB8gggrvNG9xbi8lGJz9eJQ/2pxnxdD0ShZZ9Bg1NkR42niYuukgC448CB6Sq2rhX7IfNsnoSRFDAA==",
+      "signing_key_id": "enterprise-key",
+      "summary": "Provider and verifier peers completed the shared private AI checkpoint.",
+      "title": "Shared settlement milestone",
+      "verification_receipt_sha256_list": [
+        "4f19eaa2b75f8bcb0e4eadbb8e923627970405b8509bbdea00da9ed26b64a42f"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_note": "demo_claim",
+      "claimed_at": "2026-06-29T01:42:40.107949+00:00",
+      "job_id": "019f110a-faea-7431-978e-a6a16779460e",
+      "provider_ed25519_public_key_base64": "7UkoxijRwsbq6QM4kFmVYSlZJzpcY/k2NsFGFKyHN9E=",
+      "provider_node_id": "provider-b",
+      "signature": "FH9uTBKrSbRxthr/gW3Vku8R7lhYF7LuNyc9J18o2dd4EH6xAAxjZH8BYNdEnlwNkuFGTlVSy1eTAuLJkYSWDQ=="
+    },
+    {
+      "claim_note": "demo_claim",
+      "claimed_at": "2026-06-29T01:42:40.107808+00:00",
+      "job_id": "019f110a-faea-7431-978e-a6a16779460e",
+      "provider_ed25519_public_key_base64": "gTl3Dqh9F19Wo1Rmw0x+zMuNipG07jeiXfYPW4/Js5Q=",
+      "provider_node_id": "provider-a",
+      "signature": "l1270bznAJ3XFMK0DwAjTq0JMT6SKsC0o+9oq8xh5m3kF1oHM5Qcibetkk6zjLdvgiq3vE/ThmFkU5Zc4XNfAg=="
+    }
+  ],
+  "challenges": [
+    {
+      "bundle_sha256": "60730f954c10904f008f8ac68f974c4e3b877962c2f59a10c021d0aaaa683d8d",
+      "challenge_id": "019f110a-fb49-7f52-a094-574ee16e04f8",
+      "job_id": "019f110a-faea-7431-978e-a6a16779460e",
+      "opened_at": "2026-06-29T01:42:40.201909+00:00",
+      "opened_by": "enterprise-1",
+      "opened_by_ed25519_public_key_base64": "iojj3XQJ8ZX9UtstPLpdcspnCb8dlBIb83SIAbQPb1w=",
+      "reason_code": "forbidden_job_transition",
+      "reason_detail": "demo challenge gate",
+      "resolution_note": "demo challenge rejected",
+      "resolved_at": "2026-06-29T01:42:40.203398+00:00",
+      "resolved_by": "verifier-1",
+      "resolved_by_ed25519_public_key_base64": "ypOsFwUYcHHWe4PH/w7+gQjo7EUwV113JoeTM9vavnw=",
+      "signature": "WybXI07usStOMo4N44CnTvQ8KrMqUwhwfcjybAIbfhMl5qFUZviQNP+modUQTMtNhXFx7Swq/vUVgOEnkHXgAw==",
+      "status": "resolved_rejected"
+    }
+  ],
+  "published_from": "src/osciris/participant_status.py",
+  "published_bundle": "read-only participant snapshot"
+}

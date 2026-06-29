@@ -6,6 +6,7 @@
     "dev": "next dev -p 4173",
     "build": "next build && node scripts/create-pages-artifact.mjs",
     "start": "next start -H 0.0.0.0 -p 4173",
+    "publish:bundles": "node scripts/publish-public-bundles.mjs",
     "verify:mvp": "node scripts/verify-mvp-flow.mjs"
   },
   "dependencies": {

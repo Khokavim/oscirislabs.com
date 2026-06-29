@@ -2,6 +2,7 @@ import Link from "next/link";
 
 const proofLinks = [
   { href: "/app", label: "Pilot app" },
+  { href: "/participant-status.html", label: "Participant snapshot" },
   { href: "/mvp", label: "MVP flow" },
   { href: "/resources", label: "Proof resources" },
   { href: "/whitepaper", label: "Whitepaper overview" },
@@ -19,6 +20,8 @@ const evidenceLinks = [
   { href: "/resources/#training-evidence", label: "Training evidence" },
   { href: "/resources/#protocol-proof", label: "Protocol proof" },
   { href: "/resources/#evidence-availability", label: "Evidence availability" },
+  { href: "/participant-status-summary.json", label: "Participant snapshot JSON" },
+  { href: "/contributor-manifest.json", label: "Contributor manifest JSON" },
 ];
 
 function FooterLink({ href, label }: { href: string; label: string }) {

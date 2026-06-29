@@ -1,0 +1,114 @@
+{
+  "source": {
+    "label": "Reviewed participant snapshot",
+    "mode": "bundle",
+    "url": "/participant-status-summary.json",
+    "lastSyncedAt": "2026-06-29T01:42:40.253050+00:00"
+  },
+  "overview": [
+    {
+      "label": "Source of truth",
+      "value": "Reviewed snapshot",
+      "detail": "Hashes and status are derived from the published participant snapshot bundle."
+    },
+    {
+      "label": "Anchoring mode",
+      "value": "Hashes first",
+      "detail": "The public surface exposes proof commitments and receipt status, not raw payloads."
+    },
+    {
+      "label": "Public storage",
+      "value": "OSCIRISLABS/public",
+      "detail": "The website consumes the published bundle directly from the public directory."
+    },
+    {
+      "label": "Current state",
+      "value": "settlement_ready",
+      "detail": "Read-only progress snapshot for reviewers and partners."
+    }
+  ],
+  "publishingModel": [
+    {
+      "title": "Published asynchronously",
+      "body": "OSCIRIS publishes reviewed snapshots after the local protocol state is finalized for the current evidence window."
+    },
+    {
+      "title": "Hash-led public surface",
+      "body": "The public feed carries commitments, receipt hashes, verifier status, and milestone hashes instead of raw evidence bundles."
+    },
+    {
+      "title": "Read-only review path",
+      "body": "The website is a public proof surface, not an operational control plane."
+    }
+  ],
+  "anchors": [
+    {
+      "id": "receipt-availability-1",
+      "anchorType": "receipt_availability",
+      "subject": "019f110a-faea-7431-978e-a6a16779460e",
+      "status": "published",
+      "commitmentHash": "0f4934e11f166834a96b66eff7b8a1bd100546426e2f173e970d103e3f1ff1b4",
+      "bundleHash": "60730f954c10904f008f8ac68f974c4e3b877962c2f59a10c021d0aaaa683d8d",
+      "reviewer": "provider-a",
+      "publishedAt": "2026-06-29T01:42:40.195776+00:00",
+      "note": "Provider provider-a published receipt availability for llm_lora_economics."
+    },
+    {
+      "id": "verification-receipt-1",
+      "anchorType": "verification_receipt",
+      "subject": "019f110a-faea-7431-978e-a6a16779460e",
+      "status": "accepted",
+      "commitmentHash": "95af4296824f3f8219672a819c99f370e1b4f4e551078abac9d36ce7778c8b88",
+      "bundleHash": "60730f954c10904f008f8ac68f974c4e3b877962c2f59a10c021d0aaaa683d8d",
+      "reviewer": "verifier-1",
+      "publishedAt": "2026-06-29T01:42:40.199077+00:00",
+      "note": "Verifier result for 019f110a-faea-7431-978e-a6a16779460e entered the public snapshot."
+    },
+    {
+      "id": "milestone-1",
+      "anchorType": "milestone",
+      "subject": "Shared settlement milestone",
+      "status": "published",
+      "commitmentHash": "b35f3797a9c4b86cf47ccbc2ff91118b21173fb300f018284587fddfc069a967",
+      "bundleHash": "4f19eaa2b75f8bcb0e4eadbb8e923627970405b8509bbdea00da9ed26b64a42f",
+      "reviewer": "enterprise-1",
+      "publishedAt": "2026-06-29T01:42:40.200689+00:00",
+      "note": "quality_retention=0.96 recorded as a communal milestone."
+    }
+  ],
+  "receipts": [
+    {
+      "id": "receipt-availability-1",
+      "anchorType": "receipt_availability",
+      "subject": "019f110a-faea-7431-978e-a6a16779460e",
+      "status": "published",
+      "commitmentHash": "0f4934e11f166834a96b66eff7b8a1bd100546426e2f173e970d103e3f1ff1b4",
+      "bundleHash": "60730f954c10904f008f8ac68f974c4e3b877962c2f59a10c021d0aaaa683d8d",
+      "reviewer": "provider-a",
+      "publishedAt": "2026-06-29T01:42:40.195776+00:00",
+      "note": "Provider provider-a published receipt availability for llm_lora_economics."
+    },
+    {
+      "id": "verification-receipt-1",
+      "anchorType": "verification_receipt",
+      "subject": "019f110a-faea-7431-978e-a6a16779460e",
+      "status": "accepted",
+      "commitmentHash": "95af4296824f3f8219672a819c99f370e1b4f4e551078abac9d36ce7778c8b88",
+      "bundleHash": "60730f954c10904f008f8ac68f974c4e3b877962c2f59a10c021d0aaaa683d8d",
+      "reviewer": "verifier-1",
+      "publishedAt": "2026-06-29T01:42:40.199077+00:00",
+      "note": "Verifier result for 019f110a-faea-7431-978e-a6a16779460e entered the public snapshot."
+    },
+    {
+      "id": "milestone-1",
+      "anchorType": "milestone",
+      "subject": "Shared settlement milestone",
+      "status": "published",
+      "commitmentHash": "b35f3797a9c4b86cf47ccbc2ff91118b21173fb300f018284587fddfc069a967",
+      "bundleHash": "4f19eaa2b75f8bcb0e4eadbb8e923627970405b8509bbdea00da9ed26b64a42f",
+      "reviewer": "enterprise-1",
+      "publishedAt": "2026-06-29T01:42:40.200689+00:00",
+      "note": "quality_retention=0.96 recorded as a communal milestone."
+    }
+  ]
+}

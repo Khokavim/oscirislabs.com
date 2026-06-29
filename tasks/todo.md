@@ -55,17 +55,43 @@
 - [x] Surface actionable storage failure messages in the pilot app
 - [x] Verify unreachable-database behavior locally
 
-## MVP Smoke Check
+## Proof Feed Smoke Check
 
-- [x] Add a one-command MVP API verification script
+- [x] Add a one-command proof feed verification script
 - [x] Wire the script into package scripts
-- [x] Verify the smoke check locally against the running app
+- [x] Verify the proof feed smoke check locally against the running app
 
 ## Blockchain-Published App MVP
 
 - [x] Reframe `/app` as a blockchain-published proof console
 - [x] Remove private job-console framing from the user-facing `/app`
 - [x] Verify the new read-only proof surface locally
+
+## Async Proof Feed
+
+- [x] Add a feed loader for Horizen testnet proof snapshots
+- [x] Add a JSON route for the published proof feed
+- [x] Render `/app` from the async feed with fixture fallback
+
+## Participant Snapshot Publication
+
+- [x] Publish the OSCIRIS participant snapshot bundle into `public/`
+- [x] Expose the snapshot through `/api/participant-status`
+- [x] Render the Submit Job -> Job Status -> Evidence Receipt -> Verifier Result
+      flow on the proof console
+- [x] Add footer links to the participant snapshot HTML and JSON artifacts
+- [x] Re-run the website smoke verification against the updated proof surface
+
+### Review
+
+- Added `public/participant-status-summary.json` and
+  `public/participant-status.html` as published snapshot artifacts.
+- The proof console now renders the participant snapshot flow directly from the
+  published JSON bundle and exposes the same data through `/api/participant-status`.
+- Footer links now point to both the snapshot HTML and the raw JSON artifact.
+- Verification passed:
+  - `npm run build`
+  - `npm run verify:mvp`
 
 ## MVP Execution 1-6
 
@@ -242,11 +268,10 @@ immediately visible to a reviewer. Local verification against an invalid
 Postgres URL returned the expected `503` body for both job listing and receipt
 retrieval.
 
-MVP smoke-check result: `npm run verify:mvp` now validates the end-to-end pilot
-API path in one command: health, session creation, job listing, job creation,
-recent-job ordering, receipt retrieval, verifier retrieval, and protocol
-retrieval. Local verification passed against the running app and produced a new
-job record in the expected first position of the recent-jobs list.
+Proof feed smoke-check result: `npm run verify:mvp` now validates the published
+proof surface in one command: health, proof-feed JSON, proof-console markers,
+and homepage proof-console CTA. Local verification passed against the running
+app and confirmed the proof console markers on `/app` and `/`.
 
 Blockchain-published app result: `/app` is now a read-only proof console rather
 than a private operational dashboard. It presents published receipt snapshots,
@@ -256,6 +281,22 @@ no longer depends on Postgres framing or private session flow to explain the
 product.
 The former Railway Postgres item is now deferred infrastructure, not current
 MVP scope.
+
+Async proof feed result: the proof console now renders from `loadPublishedProofFeed()`
+and can switch to `OSCIRIS_HORIZEN_TESTNET_FEED_URL` or
+`OSCIRIS_PUBLISHED_FEED_URL` when a real Horizen testnet publication endpoint is
+available. It can also read a published bundle from `public/proof-feed.json` or
+an explicit `OSCIRIS_PUBLISHED_FEED_PATH`. Until then it uses the published
+fixture feed and exposes the same JSON through `/api/proof-feed`.
+
+Build artifact fix result: `scripts/create-pages-artifact.mjs` now skips missing
+static outputs like `/app.html`, so the server-rendered proof console can stay
+dynamic while the remaining static pages still build cleanly.
+
+Published bundle result: the proof console now prefers a remote testnet feed,
+then a published JSON bundle at `public/proof-feed.json` or
+`OSCIRIS_PUBLISHED_FEED_PATH`, and only falls back to the in-code fixture if no
+published artifact is present.
 
 Sovereign AI business refresh result: the homepage now sells OSCIRIS as
 Sovereign AI Infrastructure-as-a-Service for regulated enterprises, public

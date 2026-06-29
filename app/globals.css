@@ -649,6 +649,46 @@ h1 {
   line-height: 1.58;
 }
 
+.participant-flow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.participant-flow article {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .9), rgba(237, 247, 250, .72));
+  padding: 24px;
+  box-shadow: 0 18px 60px rgba(6, 24, 32, .08);
+}
+
+.participant-flow span {
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.participant-flow h2 {
+  margin-top: 46px;
+  font-size: 24px;
+}
+
+.participant-flow p,
+.participant-flow ul {
+  color: var(--muted);
+  line-height: 1.58;
+}
+
+.participant-flow ul {
+  margin: 14px 0 0;
+  padding-left: 18px;
+}
+
 .artifact-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

@@ -1,0 +1,79 @@
+{
+  "generated_at": "2026-06-29T01:42:40.259Z",
+  "source_path": null,
+  "install": "cargo install --path crates/osciris-cli",
+  "workflow": [
+    {
+      "name": "install",
+      "detail": "cargo install --path crates/osciris-cli"
+    },
+    {
+      "name": "create-provider-capability",
+      "detail": "Publish provider GPU capability and policy fit."
+    },
+    {
+      "name": "create-job-claim",
+      "detail": "Create a signed job claim for the assigned provider."
+    },
+    {
+      "name": "run-provider",
+      "detail": "Run the assigned provider workload and emit evidence."
+    },
+    {
+      "name": "create-receipt-availability",
+      "detail": "Emit receipt availability after execution completes."
+    },
+    {
+      "name": "run-verifier",
+      "detail": "Run verifier acceptance or rejection and sign the receipt."
+    },
+    {
+      "name": "publish-milestone",
+      "detail": "Publish the communal milestone and shared status record."
+    },
+    {
+      "name": "participant-status",
+      "detail": "Expose the participant snapshot as a read-only public bundle."
+    }
+  ],
+  "identities": {
+    "enterprise": {
+      "identity_json": "/contributor-manifest.json#enterprise",
+      "node_id": "enterprise-1",
+      "peer_id": "12D3KooWKeygezGZ68iXTesRUCumQegKGDUE12xnktSbyvCTBRqZ"
+    },
+    "provider": {
+      "identity_json": "/contributor-manifest.json#provider",
+      "node_id": "provider-a",
+      "peer_id": "12D3KooWJ3gwsBuvtevFHYbqNaBA2PQoo8U2jwPmD61YKPZUw2NR"
+    },
+    "verifier": {
+      "identity_json": "/contributor-manifest.json#verifier",
+      "node_id": "verifier-1",
+      "peer_id": "12D3KooWDECETkS3xhvmMAob7hHxF6ZQknM7TUXdhQ9XCHc5dX5w"
+    }
+  },
+  "public_proofs": [
+    {
+      "label": "Participant snapshot JSON",
+      "url": "/participant-status-summary.json",
+      "detail": "Read-only reviewed participant bundle."
+    },
+    {
+      "label": "Participant snapshot HTML",
+      "url": "/participant-status.html",
+      "detail": "Human-readable mirror of the same bundle."
+    },
+    {
+      "label": "Proof feed JSON",
+      "url": "/api/proof-feed",
+      "detail": "Hash-led proof feed derived from reviewed snapshots."
+    },
+    {
+      "label": "Contributor manifest JSON",
+      "url": "/api/contributor-manifest",
+      "detail": "Published GPU peer flow manifest."
+    }
+  ],
+  "note": "Read-only bundle. No raw payloads, no mutable protocol state, and no hidden operational controls."
+}

@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OSCIRIS Participant Status</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07111d;
+      --panel: #0c1726;
+      --panel-2: #0f1d31;
+      --border: rgba(148, 163, 184, 0.22);
+      --text: #e5eefb;
+      --muted: #9eb0c7;
+      --accent: #62d0ff;
+      --green: #42d392;
+      --amber: #f6c177;
+      --red: #ef6b73;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(98, 208, 255, 0.16), transparent 24%),
+        radial-gradient(circle at top right, rgba(66, 211, 146, 0.12), transparent 28%),
+        linear-gradient(180deg, #050b13 0%, var(--bg) 44%, #050b13 100%);
+      color: var(--text);
+    }
+    .shell {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+    .hero {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 28px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(12, 23, 38, 0.98), rgba(9, 17, 29, 0.96));
+      box-shadow: var(--shadow);
+    }
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    h1, h2, h3 { margin: 0; line-height: 1.15; }
+    h1 { font-size: clamp(2rem, 4vw, 3.4rem); }
+    h2 { font-size: 1.2rem; margin-bottom: 14px; }
+    p { margin: 0; color: var(--muted); line-height: 1.6; }
+    .meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .meta-item, .card, .table-card {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--panel);
+    }
+    .meta-item {
+      padding: 14px 16px;
+    }
+    .meta-label {
+      display: block;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .meta-value {
+      font-size: 0.98rem;
+      word-break: break-word;
+    }
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+    .stage-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-bottom: 24px;
+    }
+    .card {
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+    .stage-name {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .stage-status {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+    .status-complete, .status-accepted {
+      background: rgba(66, 211, 146, 0.18);
+      color: #8df1c2;
+    }
+    .status-pending, .status-ready {
+      background: rgba(246, 193, 119, 0.18);
+      color: #ffd9a0;
+    }
+    .status-rejected, .status-blocked {
+      background: rgba(239, 107, 115, 0.18);
+      color: #ff9ca2;
+    }
+    .stage-summary {
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .stage-facts {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .section {
+      margin-top: 22px;
+    }
+    .table-card {
+      padding: 18px;
+      margin-top: 18px;
+      overflow: hidden;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 12px 10px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+      vertical-align: top;
+    }
+    th {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    td {
+      word-break: break-word;
+    }
+    .empty {
+      color: var(--muted);
+      font-style: italic;
+      padding: 10px 0 0;
+    }
+    @media (max-width: 720px) {
+      .shell { padding: 18px 14px 40px; }
+      .hero { padding: 20px; border-radius: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <div class="eyebrow">OSCIRIS participant snapshot</div>
+      <h1>Read-only job flow dashboard</h1>
+      <p>Submit Job → Job Status → Evidence Receipt → Verifier Result</p>
+      <div class="meta">
+        <div class="meta-item">
+          <span class="meta-label">Job ID</span>
+          <span class="meta-value">019f110a-faea-7431-978e-a6a16779460e</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Current State</span>
+          <span class="meta-value">settlement_ready</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Privacy Mode</span>
+          <span class="meta-value">dsp_prepared</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Assigned Provider</span>
+          <span class="meta-value">provider-a</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Stage Flow</h2>
+      <div class="grid stage-grid">
+        
+      <article class="card">
+        <div class="stage-name">
+          <h3>Submit Job</h3>
+          <span class="stage-status status-complete">complete</span>
+        </div>
+        <p class="stage-summary">llm_lora_economics announced for provider-a.</p>
+        <ul class="stage-facts"><li>Job ID: 019f110a-faea-7431-978e-a6a16779460e</li><li>Announced at: 2026-06-29T01:42:40.106702+00:00</li><li>Required capability: gpu&gt;=24gb</li></ul>
+      </article>
+    
+
+      <article class="card">
+        <div class="stage-name">
+          <h3>Job Status</h3>
+          <span class="stage-status status-complete">complete</span>
+        </div>
+        <p class="stage-summary">Settlement lifecycle state is settlement_ready.</p>
+        <ul class="stage-facts"><li>Quorum: accepted</li><li>Claims: 2</li><li>Challenges: 1</li></ul>
+      </article>
+    
+
+      <article class="card">
+        <div class="stage-name">
+          <h3>Evidence Receipt</h3>
+          <span class="stage-status status-complete">complete</span>
+        </div>
+        <p class="stage-summary">1 receipt availability record(s) and 1 milestone(s).</p>
+        <ul class="stage-facts"><li>Receipt availability: 1</li><li>Milestones: 1</li><li>Evidence ready: yes</li></ul>
+      </article>
+    
+
+      <article class="card">
+        <div class="stage-name">
+          <h3>Verifier Result</h3>
+          <span class="stage-status status-accepted">accepted</span>
+        </div>
+        <p class="stage-summary">Quorum accepted with 1 verification receipt(s).</p>
+        <ul class="stage-facts"><li>Accepted verifiers: 1</li><li>Rejected verifiers: 0</li><li>Verification receipts: 1</li></ul>
+      </article>
+    
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Milestones</h2>
+      <div class="table-card">
+        <table><thead><tr><th>Title</th><th>Quality</th><th>Evidence bundle</th><th>Published at</th></tr></thead><tbody><tr><td>Shared settlement milestone</td><td>0.96</td><td>b35f3797a9c4b86cf47ccbc2ff91118b21173fb300f018284587fddfc069a967</td><td>2026-06-29T01:42:40.200689+00:00</td></tr></tbody></table>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Receipt Availability</h2>
+      <div class="table-card">
+        <table><thead><tr><th>Provider</th><th>Execution receipt</th><th>Bundle</th><th>Announced at</th></tr></thead><tbody><tr><td>provider-a</td><td>0f4934e11f166834a96b66eff7b8a1bd100546426e2f173e970d103e3f1ff1b4</td><td>60730f954c10904f008f8ac68f974c4e3b877962c2f59a10c021d0aaaa683d8d</td><td>2026-06-29T01:42:40.195776+00:00</td></tr></tbody></table>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Verifier Results</h2>
+      <div class="table-card">
+        <table><thead><tr><th>Verifier</th><th>Status</th><th>Receipt</th><th>Created at</th></tr></thead><tbody><tr><td>verifier-1</td><td>accepted</td><td></td><td></td></tr></tbody></table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

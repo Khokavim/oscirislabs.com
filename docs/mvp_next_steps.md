@@ -35,6 +35,8 @@ Production hardening:
 - Replace static receipt snapshots with published testnet event ingestion.
 - Publish contract address, tx hash, block number, receipt hash, and verifier decision.
 - Add last-sync metadata for daily or weekly publication windows.
+- Use `OSCIRIS_HORIZEN_TESTNET_FEED_URL` or `OSCIRIS_PUBLISHED_FEED_URL` to switch from the fixture feed to a real publication endpoint.
+- Use `OSCIRIS_PUBLISHED_FEED_PATH` for a local published bundle when the feed is exported as a static JSON artifact.
 - Keep private reviewer workflows off the public path until needed.
 
 ### 3. Optional Private Operations
