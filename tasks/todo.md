@@ -1,5 +1,19 @@
 # Task Plan
 
+## Apache Beta Manifest Publication
+
+- [x] Verify the `oscirisprotocol/core` `v0.1.1` release and all platform assets
+- [x] Confirm every archive contains the binary, Apache `LICENSE`, and `NOTICE`
+- [x] Replace the website beta manifest with the verified `v0.1.1` checksums
+- [ ] Push the website manifest and verify the deployed public endpoint
+
+### Review
+
+- Core release: `https://github.com/oscirisprotocol/core/releases/tag/v0.1.1`
+- Source/release license boundary: Apache-2.0 from `v0.1.1`; `v0.1.0` remains MIT.
+- GPU requirements: `https://github.com/oscirisprotocol/core/blob/main/docs/hardware_requirements.md`
+- Public manifest deployment verification is pending the website push.
+
 ## Authenticated MVP App Flow
 
 - [x] Review conversion critique and extract implementation scope
