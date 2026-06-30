@@ -11,3 +11,6 @@
 - Keep grant/application-specific language out of public website copy. Use neutral enterprise, protocol, review, and smart-contract coordination language unless the user explicitly asks for a grant-facing page.
 - Before AWS GPU evidence is complete, avoid saying cheaper training is proven. Use cost-to-quality validation and efficiency assumptions that can be tested before scale-out.
 - For the current OSCIRIS MVP, prefer a blockchain-published proof surface over a database-backed operational console. Treat the website and `/app` as reviewed receipt publication layers until the user explicitly asks for private workflow state again.
+- Treat GitHub repositories, releases, and raw repository artifacts as the
+  OSCIRIS publication authority. Railway is only a website runtime or mirror
+  and must not be described as blocking publication.
