@@ -1,27 +1,27 @@
 {
   "channel": "beta",
-  "latest_version": "0.1.0",
-  "published_at": "2026-06-29T16:55:12.079514Z",
-  "release_page_url": "https://github.com/oscirisprotocol/core/releases/tag/v0.1.0",
-  "release_notes": "Beta collaboration release for colleague onboarding, published bundle sync, and release checks.",
+  "latest_version": "0.1.1",
+  "published_at": "2026-06-30T01:52:19.309870Z",
+  "release_page_url": "https://github.com/oscirisprotocol/core/releases/tag/v0.1.1",
+  "release_notes": "OSCIRIS Developer Beta v0.1.1",
   "assets": [
     {
       "platform": "macos-aarch64",
       "filename": "osciris-node-macos-aarch64.tar.gz",
-      "url": "https://github.com/oscirisprotocol/core/releases/download/v0.1.0/osciris-node-macos-aarch64.tar.gz",
-      "sha256": "581b722b557658284db59027e4227548c57a324ebfe34d951ee821e1dc268458"
+      "url": "https://github.com/oscirisprotocol/core/releases/download/v0.1.1/osciris-node-macos-aarch64.tar.gz",
+      "sha256": "af448b4d5763019cb6fc828d2c40b72bf8c03229ca83dbb2576606adc2778491"
     },
     {
       "platform": "linux-x86_64",
       "filename": "osciris-node-linux-x86_64.tar.gz",
-      "url": "https://github.com/oscirisprotocol/core/releases/download/v0.1.0/osciris-node-linux-x86_64.tar.gz",
-      "sha256": "8bb7196adca091d3a1a00c4ad2c991e8ada125d982794917cfc04bd25af734bd"
+      "url": "https://github.com/oscirisprotocol/core/releases/download/v0.1.1/osciris-node-linux-x86_64.tar.gz",
+      "sha256": "3c3f125c5a6fad12657a6869b9016dcb076c045c96e7abbb845a9733fecfcc61"
     },
     {
       "platform": "windows-x86_64",
       "filename": "osciris-node-windows-x86_64.zip",
-      "url": "https://github.com/oscirisprotocol/core/releases/download/v0.1.0/osciris-node-windows-x86_64.zip",
-      "sha256": "9e044aa09b93c3b46431e273780202ae473462a920ede5ed187ff11a4e5c159f"
+      "url": "https://github.com/oscirisprotocol/core/releases/download/v0.1.1/osciris-node-windows-x86_64.zip",
+      "sha256": "510a072332c138361aefb131bdae0a8e3b3e9289851d7b77c85f0a3edf8c8d2e"
     }
   ]
 }
