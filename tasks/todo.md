@@ -17,6 +17,34 @@
 - GitHub is the publication authority. Railway is only a website runtime and
   does not gate release, documentation, or manifest publication.
 
+## Sanitized Enterprise Product Website
+
+- [x] Reframe homepage around enterprise buyer value instead of proof-first protocol language
+- [x] Make `Request private review` the primary public CTA
+- [x] Move proof console, MVP flow, manifests, and raw artifacts into trust/resources/footer paths
+- [x] Update header and footer navigation for business-first discovery
+- [x] Soften About copy and make Resources the technical validation library
+- [x] Add a proprietary hero control-plane visual for the first viewport
+- [x] Build and verify public/proof routes after the redesign
+
+### Review
+
+- Homepage now leads with enterprise buyer value, private AI operations, buyer
+  outcomes, deployment path, and `Request private review`.
+- The first viewport now includes an OSCIRIS control-plane preview that frames
+  private workload intake, policy controls, verified routing, and audit-ready
+  review delivery as a buyer-facing product system.
+- Header nav is business-first (`Platform`, `Solutions`, `Trust`, `Resources`,
+  `Contact`), while `/app`, `/mvp`, whitepaper, manifests, and raw public
+  artifacts remain available through the trust/resources/footer paths.
+- About copy is less protocol-heavy, and Resources is now framed as the technical
+  validation library for qualified reviewers.
+- Verification passed:
+  - `npm run build`
+  - `npm run verify:mvp` against local `http://127.0.0.1:4173`
+  - local HTTP checks for homepage markers, resources markers,
+    `/beta-release-manifest.json`, and `/osciris-protocol-whitepaper.pdf`
+
 ## Authenticated MVP App Flow
 
 - [x] Review conversion critique and extract implementation scope

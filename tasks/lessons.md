@@ -14,3 +14,4 @@
 - Treat GitHub repositories, releases, and raw repository artifacts as the
   OSCIRIS publication authority. Railway is only a website runtime or mirror
   and must not be described as blocking publication.
+- For public OSCIRIS marketing pages, lead with enterprise buyer value and keep proof, manifests, protocol details, and raw evidence in a contained trust/resources path. Do not scatter technical proof language across the primary sales flow.

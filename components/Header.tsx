@@ -1,11 +1,11 @@
 import Link from "next/link";
 
 const navItems = [
-  { href: "/app", label: "App" },
-  { href: "/mvp", label: "MVP" },
-  { href: "/whitepaper", label: "Whitepaper" },
-  { href: "/about", label: "About" },
+  { href: "/#platform", label: "Platform" },
+  { href: "/#solutions", label: "Solutions" },
+  { href: "/#trust", label: "Trust" },
   { href: "/resources", label: "Resources" },
+  { href: "mailto:info@oscirislabs.com", label: "Contact" },
 ];
 
 export function Header() {
@@ -22,7 +22,7 @@ export function Header() {
         ))}
       </nav>
       <a className="header-action header-action-desktop" href="mailto:info@oscirislabs.com">
-        Contact
+        Request private review
       </a>
       <details className="mobile-nav">
         <summary className="mobile-nav-toggle" aria-label="Open navigation menu">
@@ -39,7 +39,7 @@ export function Header() {
             ))}
           </nav>
           <a className="mobile-nav-action" href="mailto:info@oscirislabs.com">
-            Contact
+            Request private review
           </a>
         </div>
       </details>

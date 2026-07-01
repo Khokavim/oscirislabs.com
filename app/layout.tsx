@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     template: "%s | OSCIRIS",
   },
   description:
-    "OSCIRIS provides Sovereign AI Infrastructure-as-a-Service: privacy-preserving AI compute with verified execution, jurisdiction-aware routing, audit receipts, stable billing, and economically accountable providers.",
+    "OSCIRIS provides private AI infrastructure for regulated teams with controlled data exposure, verified compute execution, and audit-ready delivery.",
 };
 
 export default function RootLayout({

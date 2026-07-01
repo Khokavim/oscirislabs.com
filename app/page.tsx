@@ -4,123 +4,140 @@ import { PageShell } from "@/components/PageShell";
 
 const whitepaperPdf = "/osciris-protocol-whitepaper.pdf";
 
-const proofMetrics = [
-  { label: "Category", value: "Sovereign AI", detail: "Infrastructure-as-a-Service" },
-  { label: "Protocol proof", value: "4 hosts", detail: "AWS settlement-ready run" },
-  { label: "Training evidence", value: "7B", detail: "bounded QLoRA adaptation" },
-  { label: "Inference evidence", value: "100 cases", detail: "Bedrock procurement baseline" },
+const outcomeMetrics = [
+  {
+    label: "Private AI workloads",
+    value: "Controlled",
+    detail: "Training, inference, evaluation, and document intelligence under policy.",
+  },
+  {
+    label: "Compute access",
+    value: "Verified",
+    detail: "Capacity routed by provider fit, jurisdiction, and operating controls.",
+  },
+  {
+    label: "Operations",
+    value: "Audit-ready",
+    detail: "Receipts, review packs, and accountable delivery for sensitive teams.",
+  },
+  {
+    label: "Developer beta",
+    value: "3 platforms",
+    detail: "macOS, Linux, and Windows release assets are available for reviewers.",
+  },
+];
+
+const businessOutcomes = [
+  {
+    title: "Use AI without exposing the whole operation",
+    body:
+      "Prepare sensitive data into controlled workload surfaces before it reaches external compute, vendors, or review environments.",
+  },
+  {
+    title: "Know where work runs and why",
+    body:
+      "Route AI jobs by policy, jurisdiction, provider capability, review requirements, and operating constraints.",
+  },
+  {
+    title: "Give compliance teams something usable",
+    body:
+      "Package delivery with receipts, hashes, reviewer notes, and evidence bundles that support internal approval.",
+  },
 ];
 
 const useCases = [
   {
     title: "Banking & Fintech",
-    body: "Private RAG, compliance assistants, fraud analysis, document intelligence, and audit receipts.",
+    body:
+      "Private retrieval, compliance assistance, fraud analysis, records intelligence, and controlled model evaluation.",
   },
   {
-    title: "Telcos",
-    body: "Support automation, local-language analytics, customer intelligence, and privacy-aware inference.",
+    title: "Telecoms",
+    body:
+      "Customer intelligence, support automation, local-language analytics, and privacy-aware operational workflows.",
   },
   {
     title: "Public Sector",
-    body: "Sovereign AI workflows, policy analysis, records intelligence, and controlled data processing.",
+    body:
+      "Jurisdiction-aware AI workflows for policy analysis, case review, records processing, and controlled data operations.",
   },
   {
-    title: "Research & Universities",
-    body: "Affordable evaluation, fine-tuning, synthetic data, and model benchmarking.",
+    title: "Enterprise AI Teams",
+    body:
+      "Pilot private training, inference, benchmarking, and synthetic-data workflows before broader rollout.",
   },
 ];
 
-const architectureFlow = [
-  "Institution data",
-  "DSP policy artifact",
-  "Verified provider",
-  "Verifier node",
-  "Audit receipt",
-  "Buyer dashboard",
-];
-
-const sovereigntyControls = [
-  {
-    title: "Data sovereignty",
-    body:
-      "Reduce raw-data exposure before workloads reach external compute through DSP-controlled training and inference surfaces.",
-  },
-  {
-    title: "Compute sovereignty",
-    body:
-      "Route workloads by jurisdiction, privacy tier, provider class, evidence requirement, and operating policy.",
-  },
-  {
-    title: "Model sovereignty",
-    body:
-      "Track checkpoints, adapters, outputs, manifests, hashes, and release objects across the AI workload lifecycle.",
-  },
-  {
-    title: "Operational sovereignty",
-    body:
-      "Export audit receipts, retention records, challenge status, incident evidence, and provider accountability data.",
-  },
-  {
-    title: "Economic sovereignty",
-    body:
-      "Use stable-value customer billing while providers post economic collateral for accountable participation.",
-  },
-];
-
-const businessOffers = [
+const serviceModel = [
   {
     title: "Private AI workload execution",
     body:
-      "Package enterprise training, inference, evaluation, and synthetic-data workloads with DSP privacy controls and measurable quality gates.",
+      "Package training, inference, evaluation, and synthetic-data jobs with privacy controls and buyer-visible delivery requirements.",
   },
   {
-    title: "Verified provider coordination",
+    title: "Verified compute routing",
     body:
-      "Turn distributed GPU supply into assignable capacity with signed capabilities, job receipts, verifier checks, challenges, and settlement readiness.",
+      "Coordinate distributed compute supply as assignable capacity instead of asking buyers to trust raw infrastructure.",
   },
   {
-    title: "Audit-ready evidence layer",
+    title: "Audit-ready delivery",
     body:
-      "Give buyers a proof trail: manifests, hashes, logs, receipts, benchmark outputs, challenge records, and policy checkpoints.",
+      "Return a reviewable evidence pack for internal stakeholders, technical reviewers, and regulated operating teams.",
   },
 ];
 
-const evidenceCards = [
+const deploymentPath = [
   {
-    label: "Protocol proof",
-    value: "Accepted",
-    title: "AWS multi-host settlement-ready run",
+    step: "01",
+    title: "Private review",
     body:
-      "Four separate AWS hosts proved provider claims, enterprise assignment, assigned-provider execution, P2P evidence transfer, verifier acceptance/rejection, quorum, and challenge-gated settlement readiness.",
+      "Review the workload, data sensitivity, policy boundaries, and buyer requirements before any pilot is scoped.",
   },
   {
-    label: "Private training",
-    value: "16.08%",
-    title: "Qwen 7B adaptation savings",
+    step: "02",
+    title: "Controlled pilot",
     body:
-      "Measured bounded 7B QLoRA enterprise adaptation showed positive cost-to-quality on AWS for Qwen-family training workloads.",
+      "Run one bounded AI workflow with clear inputs, provider requirements, evidence expectations, and success criteria.",
   },
   {
-    label: "Private training",
-    value: "12.55%",
-    title: "Mistral 7B adaptation savings",
+    step: "03",
+    title: "Operational rollout",
     body:
-      "A second 7B-family run reproduced positive training economics while keeping the claim scoped to controlled enterprise adaptation.",
+      "Expand only after the buyer can inspect quality, privacy controls, delivery artifacts, and operating boundaries.",
+  },
+];
+
+const trustItems = [
+  {
+    label: "Release integrity",
+    title: "Public beta assets are checksum verified",
+    body:
+      "The current developer beta publishes macOS, Linux, and Windows assets through a manifest with matching SHA-256 checks.",
+    href: "/beta-release-manifest.json",
+    linkLabel: "View manifest",
   },
   {
-    label: "Managed inference",
-    value: "40.49%",
-    title: "Qwen3-Coder 480B Bedrock savings",
+    label: "Technical validation",
+    title: "Bounded evidence is available for reviewers",
     body:
-      "DSP-projected prompts improved measured cost-to-quality on a deterministic 100-case enterprise policy QA benchmark.",
+      "OSCIRIS publishes protocol evidence, workload benchmarks, and review resources without turning the sales page into a proof dump.",
+    href: "/resources",
+    linkLabel: "Open resources",
   },
   {
-    label: "Managed inference",
-    value: "58.21%",
-    title: "Qwen3-Coder 30B Bedrock savings",
+    label: "Reviewer console",
+    title: "Proof console remains public",
     body:
-      "The lower-cost Qwen3-Coder managed model showed the strongest bounded inference cost-to-quality result in the current evidence set.",
+      "Technical evaluators can inspect the read-only proof console, participant snapshot, and supporting artifacts from the trust library.",
+    href: "/app",
+    linkLabel: "Open proof console",
   },
+];
+
+const heroSignals = [
+  { label: "Workload", value: "Private review packet" },
+  { label: "Policy", value: "Jurisdiction and data controls" },
+  { label: "Compute", value: "Verified provider routing" },
 ];
 
 export default function Home() {
@@ -129,28 +146,57 @@ export default function Home() {
       <main className="home-main">
         <section className="hero">
           <div className="hero-copy">
-            <p className="hero-kicker">Sovereignty-enabling AI infrastructure</p>
-            <h1>Sovereign AI Infrastructure-as-a-Service.</h1>
+            <p className="hero-kicker">Private AI infrastructure for regulated teams</p>
+            <h1>Run sensitive AI workloads without surrendering operational control.</h1>
             <p className="hero-text">
-              Keep sensitive data under institutional control. Run AI workloads on
-              verified compute. Export audit-ready receipts.
+              OSCIRIS helps institutions use AI with controlled data exposure,
+              verified compute execution, and audit-ready delivery for internal
+              review.
             </p>
             <div className="hero-actions">
-              <ButtonLink href="/app">Open proof console</ButtonLink>
-              <ButtonLink href="mailto:info@oscirislabs.com" variant="secondary">
-                Request private review
+              <ButtonLink href="mailto:info@oscirislabs.com">Request private review</ButtonLink>
+              <ButtonLink href="#platform" variant="secondary">
+                Explore platform
               </ButtonLink>
-              <ButtonLink href={whitepaperPdf} variant="secondary">
-                Download whitepaper
+              <ButtonLink href="#trust" variant="secondary">
+                Review validation
               </ButtonLink>
             </div>
           </div>
 
-          <div className="hero-spacer" aria-hidden="true" />
+          <aside className="hero-visual" aria-label="OSCIRIS private AI control plane preview">
+            <div className="hero-visual-shell">
+              <div className="hero-visual-header">
+                <span>OSCIRIS Control Plane</span>
+                <strong>Private AI workload</strong>
+              </div>
+              <div className="hero-visual-path" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </div>
+              <div className="hero-signal-grid">
+                {heroSignals.map((signal) => (
+                  <article key={signal.label}>
+                    <span>{signal.label}</span>
+                    <strong>{signal.value}</strong>
+                  </article>
+                ))}
+              </div>
+              <div className="hero-review-card">
+                <span>Review pack</span>
+                <strong>Audit-ready delivery</strong>
+                <p>
+                  Receipts, policy notes, workload boundaries, and reviewer-facing
+                  evidence packaged for internal approval.
+                </p>
+              </div>
+            </div>
+          </aside>
         </section>
 
-        <section className="metrics-strip" aria-label="OSCIRIS validation highlights">
-          {proofMetrics.map((metric) => (
+        <section className="metrics-strip" aria-label="OSCIRIS business capabilities">
+          {outcomeMetrics.map((metric) => (
             <div key={metric.label}>
               <span>{metric.label}</span>
               <strong>{metric.value}</strong>
@@ -161,15 +207,37 @@ export default function Home() {
 
         <section className="statement-band">
           <p>
-            Built for banks, telcos, public institutions, and research teams that need
-            privacy, auditability, and jurisdiction-aware execution.
+            Designed for organizations that need AI capability, privacy discipline,
+            and accountable delivery before sensitive workloads move into production.
           </p>
         </section>
 
-        <section className="use-case-section" aria-label="OSCIRIS use cases">
+        <section className="split-section" id="platform">
           <div className="section-copy">
-            <p className="eyebrow">Use cases</p>
-            <h2>What buyers can pilot in 30-60 days.</h2>
+            <p className="eyebrow">Platform</p>
+            <h2>Enterprise AI operations with privacy, routing, and review built in.</h2>
+            <p>
+              OSCIRIS packages the parts regulated teams need before they can rely on
+              external AI compute: controlled workload preparation, policy-aware routing,
+              and evidence that can be reviewed after execution.
+            </p>
+          </div>
+          <div className="feature-grid">
+            {businessOutcomes.map((outcome, index) => (
+              <FeatureCard
+                key={outcome.title}
+                tone={index === 0 ? "cyan" : index === 1 ? "green" : "amber"}
+                title={outcome.title}
+                body={outcome.body}
+              />
+            ))}
+          </div>
+        </section>
+
+        <section className="use-case-section" id="solutions" aria-label="OSCIRIS buyer use cases">
+          <div className="section-copy">
+            <p className="eyebrow">Solutions</p>
+            <h2>Where buyers can start with a controlled pilot.</h2>
           </div>
           <div className="use-case-grid">
             {useCases.map((item) => (
@@ -181,160 +249,92 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="architecture-section" aria-label="OSCIRIS architecture">
-          <div className="section-copy">
-            <p className="eyebrow">Architecture</p>
-            <h2>One path from private data to verifiable receipt.</h2>
-          </div>
-          <div className="architecture-flow">
-            {architectureFlow.map((item, index) => (
-              <article key={item}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <strong>{item}</strong>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="sovereignty-section" aria-label="OSCIRIS sovereignty controls">
-          <div className="section-copy">
-            <p className="eyebrow">Sovereign AI controls</p>
-            <h2>Cloud-like access to AI compute with institutional control retained.</h2>
-            <p>
-              Sovereign AI infrastructure means institutions keep control over data
-              location, privacy policy, execution jurisdiction, audit evidence, provider
-              accountability, and model governance while using distributed compute.
-            </p>
-          </div>
-          <div className="sovereignty-grid">
-            {sovereigntyControls.map((control) => (
-              <article key={control.title}>
-                <h3>{control.title}</h3>
-                <p>{control.body}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
         <section className="split-section business-stack">
           <div className="section-copy">
-            <p className="eyebrow">The business</p>
-            <h2>Private, auditable, jurisdiction-aware AI compute for buyers who cannot use blind infrastructure.</h2>
+            <p className="eyebrow">Service model</p>
+            <h2>A practical path from sensitive workload to reviewed delivery.</h2>
             <p>
-              OSCIRIS is not another raw GPU marketplace. It is the orchestration,
-              privacy, verification, and accountability layer that can make distributed
-              GPU supply usable for sensitive enterprise and sovereign workloads.
+              OSCIRIS is built as a productized service layer for teams that need
+              useful AI outcomes with control over data handling, compute selection,
+              and review artifacts.
             </p>
-            <ButtonLink href="/resources" variant="secondary">
-              View proof resources
+            <ButtonLink href="mailto:info@oscirislabs.com" variant="secondary">
+              Discuss a private workload
             </ButtonLink>
           </div>
           <div className="feature-grid">
-            {businessOffers.map((offer, index) => (
+            {serviceModel.map((offer, index) => (
               <FeatureCard
                 key={offer.title}
                 tone={index === 0 ? "cyan" : index === 1 ? "green" : "amber"}
                 title={offer.title}
                 body={offer.body}
-                href="/resources"
-                linkLabel="See evidence"
               />
             ))}
           </div>
         </section>
 
-        <section className="split-section">
+        <section className="architecture-section" aria-label="OSCIRIS deployment path">
           <div className="section-copy">
-            <p className="eyebrow">Protocol stack</p>
-            <h2>DSP privacy controls, verified execution, and stable-value procurement.</h2>
-            <p>
-              DSP reduces raw-data exposure before execution. Verifier receipts and
-              challenge windows make outcomes inspectable. Horizen coordinates proof
-              receipts, escrow, provider accountability, and settlement state.
-            </p>
+            <p className="eyebrow">Deployment path</p>
+            <h2>Start with review. Prove one workflow. Expand with evidence.</h2>
           </div>
-          <div className="proof-strip" aria-label="OSCIRIS operating model">
-            <article>
-              <span>01</span>
-              <h3>Prepare</h3>
-              <p>Transform sensitive data into controlled training or inference surfaces.</p>
-            </article>
-            <article>
-              <span>02</span>
-              <h3>Route</h3>
-              <p>Assign work by provider capability, jurisdiction, policy, and evidence tier.</p>
-            </article>
-            <article>
-              <span>03</span>
-              <h3>Verify</h3>
-              <p>Generate receipts, verify artifacts, resolve challenges, and export audit trails.</p>
-            </article>
-          </div>
-        </section>
-
-        <section className="evidence-section" aria-label="Latest OSCIRIS validation evidence">
-          <div className="section-copy">
-            <p className="eyebrow">Proof-backed credibility</p>
-            <h2>Built from measured evidence, not narrative alone.</h2>
-            <p>
-              Current results support bounded enterprise AI workloads and a working
-              multi-host protocol proof. The evidence is intentionally scoped: it proves
-              specific workloads and off-chain protocol behavior, not broad public
-              production network economics.
-            </p>
-          </div>
-          <div className="evidence-grid">
-            {evidenceCards.map((card) => (
-              <article key={card.title}>
-                <span>{card.label}</span>
-                <strong>{card.value}</strong>
-                <h3>{card.title}</h3>
-                <p>{card.body}</p>
+          <div className="architecture-flow deployment-flow">
+            {deploymentPath.map((item) => (
+              <article key={item.step}>
+                <span>{item.step}</span>
+                <strong>{item.title}</strong>
+                <p>{item.body}</p>
               </article>
             ))}
           </div>
-          <p className="evidence-boundary">
-            Boundary: proven evidence covers bounded AWS training adaptation, AWS L40S
-            single-host inference, AWS Bedrock managed-inference procurement baselines,
-            and an off-chain AWS multi-host settlement-ready protocol run. Horizen
-            testnet anchoring and decentralized market pricing remain next-step evidence.
-          </p>
         </section>
 
-        <section className="blockchain-layer" aria-label="Horizen smart-contract verification layer">
-          <div>
-            <p className="eyebrow">Why blockchain fits</p>
-            <h2>Open compute networks need neutral economic state.</h2>
+        <section className="evidence-section trust-section" id="trust" aria-label="OSCIRIS trust and technical validation">
+          <div className="section-copy">
+            <p className="eyebrow">Trust & Technical Validation</p>
+            <h2>Technical evidence is available without making it the sales story.</h2>
+            <p>
+              OSCIRIS publishes technical validation for qualified reviewers. Current
+              materials cover release integrity, beta platform coverage, protocol
+              evidence, and controlled workload benchmarks. Windows developer support is
+              available in beta; Windows NVIDIA provider behavior still requires host
+              smoke testing before stronger production claims.
+            </p>
           </div>
-          <div className="chain-grid">
-            <article>
-              <span>01</span>
-              <h3>Proof receipt registry</h3>
-              <p>Record job receipts, verification status, policy checkpoints, and provider accountability onchain.</p>
-            </article>
-            <article>
-              <span>02</span>
-              <h3>Accountable providers</h3>
-              <p>Providers stake collateral for participation while customers use stable-value procurement rails.</p>
-            </article>
-            <article>
-              <span>03</span>
-              <h3>Challengeable settlement</h3>
-              <p>Escrow, verifier status, challenge windows, and reputation become shared protocol state.</p>
-            </article>
+          <div className="trust-grid">
+            {trustItems.map((item) => (
+              <article key={item.title}>
+                <span>{item.label}</span>
+                <h3>{item.title}</h3>
+                <p>{item.body}</p>
+                <a href={item.href}>{item.linkLabel}</a>
+              </article>
+            ))}
+          </div>
+          <div className="trust-actions">
+            <ButtonLink href="/resources" variant="secondary">
+              Technical resources
+            </ButtonLink>
+            <ButtonLink href={whitepaperPdf} variant="secondary">
+              Whitepaper
+            </ButtonLink>
+            <ButtonLink href="https://github.com/oscirisprotocol/core/releases/tag/v0.1.0" variant="secondary">
+              Developer beta
+            </ButtonLink>
           </div>
         </section>
 
         <section className="cta-panel">
           <div>
             <p className="eyebrow">Private review</p>
-            <h2>Evaluate OSCIRIS for regulated AI workloads.</h2>
+            <h2>Evaluate OSCIRIS for sensitive AI operations.</h2>
             <p>
-              Review DSP privacy controls, jurisdiction-aware routing, verified execution,
-              stable-value procurement, and audit receipts for sensitive AI operations.
+              Bring one workload, one operating boundary, and one review requirement.
+              OSCIRIS will help scope a controlled pilot around buyer-visible outcomes.
             </p>
           </div>
-          <ButtonLink href="mailto:info@oscirislabs.com">Contact OSCIRIS</ButtonLink>
+          <ButtonLink href="mailto:info@oscirislabs.com">Request private review</ButtonLink>
         </section>
       </main>
     </PageShell>

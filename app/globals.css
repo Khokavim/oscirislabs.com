@@ -338,6 +338,153 @@ h1 {
   gap: 12px;
 }
 
+.hero-visual {
+  justify-self: end;
+  width: min(100%, 440px);
+}
+
+.hero-visual-shell {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(167, 197, 207, .72);
+  border-radius: 18px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, .88), rgba(237, 247, 250, .68)),
+    rgba(255, 255, 255, .72);
+  box-shadow:
+    0 34px 100px rgba(6, 24, 32, .16),
+    inset 0 1px 0 rgba(255, 255, 255, .9);
+  padding: 22px;
+  backdrop-filter: blur(18px);
+}
+
+.hero-visual-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(0, 184, 212, .08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 184, 212, .06) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, .88), transparent 84%);
+}
+
+.hero-visual-shell > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-visual-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 34px;
+}
+
+.hero-visual-header span,
+.hero-signal-grid span,
+.hero-review-card span {
+  color: var(--dim);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.hero-visual-header strong {
+  max-width: 150px;
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 620;
+  line-height: 1.18;
+  text-align: right;
+}
+
+.hero-visual-path {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 0 8px 26px;
+}
+
+.hero-visual-path::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 18px;
+  right: 18px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--green), var(--amber));
+  transform: translateY(-50%);
+}
+
+.hero-visual-path span {
+  position: relative;
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin-inline: auto;
+  border: 1px solid rgba(0, 184, 212, .38);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .92);
+  box-shadow: 0 0 32px rgba(0, 184, 212, .16);
+}
+
+.hero-visual-path span::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: inherit;
+  background: var(--cyan);
+}
+
+.hero-visual-path span:nth-child(2)::after {
+  background: var(--green);
+}
+
+.hero-visual-path span:nth-child(3)::after {
+  background: var(--amber);
+}
+
+.hero-signal-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.hero-signal-grid article,
+.hero-review-card {
+  border: 1px solid rgba(219, 231, 236, .9);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, .78);
+  padding: 16px;
+  box-shadow: 0 12px 36px rgba(6, 24, 32, .07);
+}
+
+.hero-signal-grid strong,
+.hero-review-card strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.hero-review-card {
+  margin-top: 12px;
+  background:
+    linear-gradient(135deg, rgba(0, 184, 212, .12), rgba(255, 255, 255, .82)),
+    rgba(255, 255, 255, .84);
+}
+
+.hero-review-card p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .metrics-strip,
 .feature-card,
 .cta-panel,
@@ -371,10 +518,10 @@ h1 {
 .metrics-strip strong {
   display: block;
   margin: 10px 0 6px;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: 28px;
-  font-weight: 650;
-  line-height: 1;
+  font-family: inherit;
+  font-size: 26px;
+  font-weight: 560;
+  line-height: 1.08;
 }
 
 .metrics-strip p {
@@ -457,9 +604,18 @@ h1 {
   margin-top: 24px;
 }
 
+.deployment-flow {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
 .architecture-flow article {
   position: relative;
   min-height: 134px;
+}
+
+.deployment-flow article {
+  min-height: 240px;
 }
 
 .architecture-flow article:not(:last-child)::after {
@@ -488,6 +644,12 @@ h1 {
 .architecture-flow strong {
   font-size: 16px;
   line-height: 1.3;
+}
+
+.deployment-flow p {
+  margin: 16px 0 0;
+  color: var(--muted);
+  line-height: 1.56;
 }
 
 .unlock-grid {
@@ -568,6 +730,54 @@ h1 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
+}
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.trust-grid article {
+  min-height: 260px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .9), rgba(237, 247, 250, .72));
+  box-shadow: 0 18px 60px rgba(6, 24, 32, .08);
+  padding: 22px;
+  backdrop-filter: blur(12px);
+}
+
+.trust-grid span {
+  color: var(--cyan);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.trust-grid h3 {
+  margin-top: 42px;
+}
+
+.trust-grid p {
+  color: var(--muted);
+  line-height: 1.56;
+}
+
+.trust-grid a {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--cyan);
+  font-weight: 800;
+}
+
+.trust-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
 }
 
 .proof-strip {
@@ -1059,19 +1269,18 @@ h2 {
 }
 
 .feature-card {
-  min-height: 276px;
-  padding: 22px;
+  min-height: 252px;
+  padding: 24px;
 }
 
 .glyph {
   display: block;
-  width: 42px;
-  height: 42px;
-  margin-bottom: 48px;
-  border: 1px solid currentColor;
-  background:
-    linear-gradient(currentColor 0 0) center / 18px 2px no-repeat,
-    linear-gradient(currentColor 0 0) center / 2px 18px no-repeat;
+  width: 56px;
+  height: 4px;
+  margin-bottom: 58px;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: 0 0 24px color-mix(in srgb, currentColor 24%, transparent);
 }
 
 .glyph.cyan {
@@ -1304,12 +1513,18 @@ h3 {
     min-height: auto;
   }
 
+  .hero-visual {
+    justify-self: stretch;
+    width: 100%;
+  }
+
   .feature-grid,
   .about-grid,
   .evidence-grid,
   .unlock-grid,
   .use-case-grid,
   .architecture-flow,
+  .trust-grid,
   .storage-grid,
   .sovereignty-grid,
   .proof-strip,
@@ -1352,6 +1567,7 @@ h3 {
     .evidence-section,
     .unlock-section,
     .sovereignty-section,
+    .trust-section,
     .storage-layer,
     .cta-panel,
     .site-footer,
@@ -1395,10 +1611,15 @@ h3 {
     padding-bottom: 28px;
   }
 
+  .hero-visual {
+    display: none;
+  }
+
   .metrics-strip,
   .footer-proof-library,
   .use-case-grid,
   .architecture-flow,
+  .trust-grid,
   .mvp-readiness,
   .mvp-flow,
   .artifact-grid,
@@ -1437,8 +1658,14 @@ h3 {
   .use-case-section,
   .architecture-section,
   .sovereignty-section,
+  .trust-section,
   .storage-layer {
     padding-top: 76px;
+  }
+
+  .trust-actions,
+  .trust-actions .button {
+    width: 100%;
   }
 
   .architecture-flow article:not(:last-child)::after {

@@ -5,24 +5,24 @@ import { PageShell } from "@/components/PageShell";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "About OSCIRIS, a commercial Data Shadow Protocol for privacy-preserving enterprise AI training and inference with smart-contract verification coordination.",
+    "About OSCIRIS, private AI infrastructure for regulated teams that need controlled data exposure, verified compute execution, and audit-ready delivery.",
 };
 
 const aboutCards = [
   {
-    title: "Mission",
+    title: "What OSCIRIS does",
     body:
-      "Make private enterprise AI workloads commercially practical: less raw-data exposure, auditable release objects, and cost-to-quality validation tied to model outcomes.",
+      "OSCIRIS helps organizations run sensitive AI workloads with clearer control over data handling, compute selection, and delivery review.",
   },
   {
-    title: "Protocol",
+    title: "Who it serves",
     body:
-      "DSP is the core product layer: guarded transformations, model-release paths, projected inference prompts, sharding, manifests, and empirical leakage tests around enterprise workloads.",
+      "The product is built for banks, telecoms, public institutions, and enterprise AI teams that need AI capability without blind infrastructure assumptions.",
   },
   {
-    title: "Commercial path",
+    title: "How it is adopted",
     body:
-      "OSCIRIS is built for commercial deployment while keeping validation gates explicit for GPU economics, Horizen smart-contract verification, Filecoin evidence availability, distributed reliability, and independent privacy review.",
+      "Adoption starts with a private review and a bounded pilot, then expands only when quality, controls, and review artifacts satisfy the buyer.",
   },
 ];
 
@@ -30,11 +30,12 @@ export default function AboutPage() {
   return (
     <PageShell>
       <main className="page-main">
-        <PageHero eyebrow="About" title="A commercial protocol for private enterprise AI.">
+        <PageHero eyebrow="About" title="Private AI infrastructure for serious operating teams.">
           <p>
-            OSCIRIS brings the Data Shadow Protocol to enterprise teams that need privacy,
-            cost-to-quality validation, and smart-contract verification coordination before
-            moving sensitive training or inference workflows into AI pipelines.
+            OSCIRIS is built for organizations that want the benefits of advanced AI
+            without giving up control of sensitive data, execution policy, or review
+            obligations. The public technical material is available for evaluators, but
+            the product path starts with business risk and operational fit.
           </p>
         </PageHero>
         <section className="about-grid">

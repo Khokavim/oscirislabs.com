@@ -1,26 +1,26 @@
 import Link from "next/link";
 
-const proofLinks = [
-  { href: "/app", label: "Pilot app" },
-  { href: "/participant-status.html", label: "Participant snapshot" },
-  { href: "/mvp", label: "MVP flow" },
-  { href: "/resources", label: "Proof resources" },
-  { href: "/whitepaper", label: "Whitepaper overview" },
-  { href: "/osciris-protocol-whitepaper.pdf", label: "Download PDF" },
-];
-
 const businessLinks = [
   { href: "/about", label: "About OSCIRIS" },
+  { href: "/#platform", label: "Platform" },
+  { href: "/#solutions", label: "Solutions" },
   { href: "mailto:info@oscirislabs.com", label: "Private review" },
+];
+
+const technicalLinks = [
+  { href: "/app", label: "Proof Console" },
+  { href: "/mvp", label: "Technical validation" },
+  { href: "/resources", label: "Resources" },
+  { href: "/whitepaper", label: "Whitepaper" },
+  { href: "/osciris-protocol-whitepaper.pdf", label: "Download PDF" },
   { href: "https://github.com/oscirisprotocol", label: "GitHub" },
 ];
 
-const evidenceLinks = [
-  { href: "/resources/#privacy-threat-model", label: "Privacy threat model" },
-  { href: "/resources/#training-evidence", label: "Training evidence" },
-  { href: "/resources/#protocol-proof", label: "Protocol proof" },
-  { href: "/resources/#evidence-availability", label: "Evidence availability" },
+const artifactLinks = [
+  { href: "/beta-release-manifest.json", label: "Beta release manifest" },
+  { href: "/proof-feed.json", label: "Proof feed JSON" },
   { href: "/participant-status-summary.json", label: "Participant snapshot JSON" },
+  { href: "/participant-status.html", label: "Participant snapshot HTML" },
   { href: "/contributor-manifest.json", label: "Contributor manifest JSON" },
 ];
 
@@ -44,7 +44,7 @@ export function Footer() {
           <Link className="footer-logo-link" href="/" aria-label="OSCIRIS home">
             <img src="/brand/osciris/wide-blue.svg" alt="OSCIRIS" className="footer-logo" />
           </Link>
-          <p>Sovereign AI Infrastructure-as-a-Service.</p>
+          <p>Private AI infrastructure for regulated teams.</p>
         </div>
         <a className="footer-email" href="mailto:info@oscirislabs.com">
           info@oscirislabs.com
@@ -53,20 +53,20 @@ export function Footer() {
 
       <div className="footer-proof-library" aria-label="OSCIRIS proof and business links">
         <div>
-          <span>Proof</span>
-          {proofLinks.map((link) => (
-            <FooterLink key={link.href} href={link.href} label={link.label} />
-          ))}
-        </div>
-        <div>
-          <span>Evidence</span>
-          {evidenceLinks.map((link) => (
-            <FooterLink key={link.href} href={link.href} label={link.label} />
-          ))}
-        </div>
-        <div>
           <span>Business</span>
           {businessLinks.map((link) => (
+            <FooterLink key={link.href} href={link.href} label={link.label} />
+          ))}
+        </div>
+        <div>
+          <span>Technical</span>
+          {technicalLinks.map((link) => (
+            <FooterLink key={link.href} href={link.href} label={link.label} />
+          ))}
+        </div>
+        <div>
+          <span>Public artifacts</span>
+          {artifactLinks.map((link) => (
             <FooterLink key={link.href} href={link.href} label={link.label} />
           ))}
         </div>
@@ -74,7 +74,7 @@ export function Footer() {
 
       <div className="footer-bottomline">
         <p>Copyright 2026 OSCIRIS Labs. All rights reserved.</p>
-        <p>Private, auditable, jurisdiction-aware AI compute.</p>
+        <p>Controlled AI workloads, verified compute, audit-ready delivery.</p>
       </div>
     </footer>
   );
