@@ -4,23 +4,26 @@ Date: 2026-06-23
 
 ## Current State
 
-The repository is pushed and the GitHub Pages workflow deploys successfully.
+The repository is pushed and the GitHub publication surface is current.
 
 - Repo: `https://github.com/Khokavim/oscirislabs.com.git`
 - Branch: `main`
-- Latest verified commit: `34622d4`
+- Latest verified commit: `af3d4d9`
 - Workflow: `.github/workflows/deploy.yml`
 - GitHub Actions result: success
+- Public beta manifest on GitHub: `public/beta-release-manifest.json`
+  points to `v0.1.2`
 
 The public domain `https://oscirislabs.com/` is reachable, but response headers
-show that Cloudflare is routing traffic to Railway:
+still show that Cloudflare is routing traffic to Railway:
 
 - `server: cloudflare`
 - `x-railway-request-id`
 - `x-railway-edge`
 
-That means a git push to the GitHub Pages workflow is not enough to update the
-live domain while Cloudflare continues forwarding the apex domain to Railway.
+That means a git push to the GitHub publication workflow is not enough to
+update the live custom domain while Cloudflare continues forwarding the apex
+domain to Railway.
 
 ## Required Fix
 
@@ -96,9 +99,10 @@ curl -I https://oscirislabs.com/
 
 ## Decision
 
-The authenticated app now needs server-side API routes. Railway is the correct
-production path for the MVP. GitHub Actions should remain a build check unless a
-separate static marketing site is split out later.
+GitHub Releases and the raw GitHub-hosted manifest are the publication
+authority for the beta. Railway can remain a runtime mirror only if it is
+pointed at the same published build. The custom domain still needs routing
+correction if it is expected to mirror the current GitHub release surface.
 
 Required Railway environment variables:
 

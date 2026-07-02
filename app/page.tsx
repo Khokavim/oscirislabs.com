@@ -319,7 +319,7 @@ export default function Home() {
             <ButtonLink href={whitepaperPdf} variant="secondary">
               Whitepaper
             </ButtonLink>
-            <ButtonLink href="https://github.com/oscirisprotocol/core/releases/tag/v0.1.0" variant="secondary">
+            <ButtonLink href="https://github.com/oscirisprotocol/core/releases/tag/v0.1.2" variant="secondary">
               Developer beta
             </ButtonLink>
           </div>
