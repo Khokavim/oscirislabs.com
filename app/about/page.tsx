@@ -34,8 +34,9 @@ export default function AboutPage() {
           <p>
             OSCIRIS is built for organizations that want the benefits of advanced AI
             without giving up control of sensitive data, execution policy, or review
-            obligations. The public technical material is available for evaluators, but
-            the product path starts with business risk and operational fit.
+            obligations. Detailed technical material is available to qualified evaluators
+            under confidentiality, while the product path starts with business risk and
+            operational fit.
           </p>
         </PageHero>
         <section className="about-grid">

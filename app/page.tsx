@@ -2,8 +2,6 @@ import { ButtonLink } from "@/components/ButtonLink";
 import { FeatureCard } from "@/components/FeatureCard";
 import { PageShell } from "@/components/PageShell";
 
-const whitepaperPdf = "/osciris-protocol-whitepaper.pdf";
-
 const outcomeMetrics = [
   {
     label: "Private AI workloads",
@@ -21,9 +19,9 @@ const outcomeMetrics = [
     detail: "Receipts, review packs, and accountable delivery for sensitive teams.",
   },
   {
-    label: "Developer beta",
-    value: "3 platforms",
-    detail: "macOS, Linux, and Windows release assets are available for reviewers.",
+    label: "Technical review",
+    value: "Private",
+    detail: "Detailed validation is shared with qualified reviewers under confidentiality.",
   },
 ];
 
@@ -109,28 +107,28 @@ const deploymentPath = [
 
 const trustItems = [
   {
-    label: "Release integrity",
-    title: "Public beta assets are checksum verified",
+    label: "Controlled representation",
+    title: "Reduce exposure while preserving useful work",
     body:
-      "The current developer beta publishes macOS, Linux, and Windows assets through a manifest with matching SHA-256 checks.",
-    href: "/beta-release-manifest.json",
-    linkLabel: "View manifest",
+      "DSP prepares workload-specific controlled representations of sensitive data for external AI execution.",
+    href: "mailto:info@oscirislabs.com?subject=OSCIRIS%20DSP%20review",
+    linkLabel: "Request DSP review",
   },
   {
-    label: "Technical validation",
-    title: "Bounded evidence is available for reviewers",
+    label: "Qualified review",
+    title: "Technical evidence is shared confidentially",
     body:
-      "OSCIRIS publishes protocol evidence, workload benchmarks, and review resources without turning the sales page into a proof dump.",
-    href: "/resources",
-    linkLabel: "Open resources",
+      "Implementation details, evaluation methods, and validation materials are available to qualified reviewers under confidentiality.",
+    href: "mailto:info@oscirislabs.com?subject=OSCIRIS%20technical%20review",
+    linkLabel: "Request technical review",
   },
   {
-    label: "Reviewer console",
-    title: "Proof console remains public",
+    label: "Public credibility",
+    title: "A limited proof status remains public",
     body:
-      "Technical evaluators can inspect the read-only proof console, participant snapshot, and supporting artifacts from the trust library.",
+      "The public status surface confirms reviewed execution and receipt outcomes without exposing the operational blueprint.",
     href: "/app",
-    linkLabel: "Open proof console",
+    linkLabel: "View proof status",
   },
 ];
 
@@ -293,13 +291,13 @@ export default function Home() {
         <section className="evidence-section trust-section" id="trust" aria-label="OSCIRIS trust and technical validation">
           <div className="section-copy">
             <p className="eyebrow">Trust & Technical Validation</p>
-            <h2>Technical evidence is available without making it the sales story.</h2>
+            <h2>Technical confidence without publishing the implementation.</h2>
             <p>
-              OSCIRIS publishes technical validation for qualified reviewers. Current
-              materials cover release integrity, beta platform coverage, protocol
-              evidence, and controlled workload benchmarks. Windows developer support is
-              available in beta; Windows NVIDIA provider behavior still requires host
-              smoke testing before stronger production claims.
+              DSP is OSCIRIS&apos;s workload-aware privacy layer. It prepares controlled
+              representations of sensitive data for external AI execution, measures task
+              utility and privacy risk, and produces auditable execution evidence.
+              Detailed mechanisms are proprietary and available to qualified reviewers
+              under confidentiality.
             </p>
           </div>
           <div className="trust-grid">
@@ -313,14 +311,11 @@ export default function Home() {
             ))}
           </div>
           <div className="trust-actions">
-            <ButtonLink href="/resources" variant="secondary">
-              Technical resources
+            <ButtonLink href="mailto:info@oscirislabs.com?subject=OSCIRIS%20technical%20review" variant="secondary">
+              Request technical review
             </ButtonLink>
-            <ButtonLink href={whitepaperPdf} variant="secondary">
-              Whitepaper
-            </ButtonLink>
-            <ButtonLink href="https://github.com/oscirisprotocol/core/releases/tag/v0.1.2" variant="secondary">
-              Developer beta
+            <ButtonLink href="/app" variant="secondary">
+              View proof status
             </ButtonLink>
           </div>
         </section>

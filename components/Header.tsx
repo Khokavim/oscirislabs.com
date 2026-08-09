@@ -4,7 +4,7 @@ const navItems = [
   { href: "/#platform", label: "Platform" },
   { href: "/#solutions", label: "Solutions" },
   { href: "/#trust", label: "Trust" },
-  { href: "/resources", label: "Resources" },
+  { href: "/about", label: "About" },
   { href: "mailto:info@oscirislabs.com", label: "Contact" },
 ];
 

@@ -4,93 +4,30 @@ import { PageHero } from "@/components/PageHero";
 import { PageShell } from "@/components/PageShell";
 
 export const metadata: Metadata = {
-  title: "MVP",
-  description:
-    "OSCIRIS MVP path: published Horizen testnet receipts, DSP evidence, verifier decisions, and asynchronous proof updates.",
+  title: "Controlled Pilot",
+  description: "A high-level overview of the OSCIRIS controlled-pilot path.",
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+  },
 };
 
-const mvpFlow = [
+const pilotStages = [
   {
     step: "01",
-    title: "Submit workload",
-    body:
-      "A buyer submits an AI training, inference, or evaluation workload with privacy tier, jurisdiction policy, model target, and evidence requirements.",
+    title: "Private review",
+    body: "Define the workload, sensitivity boundary, operating requirements, and success criteria.",
   },
   {
     step: "02",
-    title: "Prepare DSP artifact",
-    body:
-      "DSP transforms sensitive inputs into controlled training or inference surfaces before they are routed to external compute.",
+    title: "Controlled pilot",
+    body: "Evaluate one bounded use case under agreed controls and review conditions.",
   },
   {
     step: "03",
-    title: "Assign provider",
-    body:
-      "Provider capability, hardware class, policy fit, collateral status, and workload requirements determine the assigned compute node.",
-  },
-  {
-    step: "04",
-    title: "Execute and capture evidence",
-    body:
-      "The provider runs the workload and emits signed execution receipts, manifests, logs, model metrics, and cost-to-quality telemetry.",
-  },
-  {
-    step: "05",
-    title: "Verify result",
-    body:
-      "Verifier nodes inspect the evidence bundle, accept or reject the result, and produce signed verification receipts for quorum.",
-  },
-  {
-    step: "06",
-    title: "Export receipt state",
-    body:
-      "The MVP exports buyer-visible receipts and testnet-ready records for settlement status, challenge handling, and audit review.",
-  },
-];
-
-const readiness = [
-  {
-    label: "Protocol state",
-    value: "Working",
-    detail: "multi-host provider, verifier, quorum, challenge, and settlement-ready lifecycle",
-  },
-  {
-    label: "Privacy layer",
-    value: "Working",
-    detail: "DSP benchmark and privacy threat-model artifacts with bounded evidence",
-  },
-  {
-    label: "Buyer surface",
-    value: "MVP",
-    detail: "published proof console and private review path before a richer operational console",
-  },
-  {
-    label: "Onchain path",
-    value: "Testnet",
-    detail: "Horizen contracts deployed for provider registry, receipt registry, and job escrow",
-  },
-];
-
-const artifacts = [
-  {
-    title: "Job receipt",
-    body:
-      "Signed provider execution record with job ID, assigned provider, model target, evidence root, runtime metadata, and receipt signature.",
-  },
-  {
-    title: "Verifier receipt",
-    body:
-      "Signed acceptance or rejection record with verifier identity, policy checks, evidence hash, and quorum contribution.",
-  },
-  {
-    title: "Evidence bundle",
-    body:
-      "Sanitized package containing manifests, benchmark outputs, logs, hashes, redaction manifest, and reviewer-facing proof index.",
-  },
-  {
-    title: "Settlement status",
-    body:
-      "Challenge-window and quorum state that shows whether a job is blocked, rejected, accepted, or settlement-ready.",
+    title: "Reviewed outcome",
+    body: "Assess utility, privacy risk, and auditable evidence before any expansion decision.",
   },
 ];
 
@@ -98,60 +35,35 @@ export default function MvpPage() {
   return (
     <PageShell>
       <main className="page-main">
-        <PageHero eyebrow="MVP path" title="From private workload to verifiable AI receipt.">
+        <PageHero eyebrow="Controlled pilot" title="Start narrow, validate outcomes, expand deliberately.">
           <p>
-            The OSCIRIS MVP is a proof-backed workflow: prepare workload evidence,
-            publish reviewed receipts from Horizen testnet, and let buyers inspect
-            verifier state and contract anchors through a read-only proof surface.
+            OSCIRIS pilots begin with a confidential review and a clearly bounded workload.
+            Detailed mechanisms and operating procedures are provided only within the
+            applicable review agreement.
           </p>
         </PageHero>
 
-        <section className="mvp-readiness" aria-label="OSCIRIS MVP readiness">
-          {readiness.map((item) => (
-            <article key={item.label}>
-              <span>{item.label}</span>
-              <strong>{item.value}</strong>
-              <p>{item.detail}</p>
-            </article>
-          ))}
-        </section>
-
-        <section className="mvp-flow" aria-label="OSCIRIS MVP flow">
-          {mvpFlow.map((item) => (
-            <article key={item.step}>
-              <span>{item.step}</span>
-              <h2>{item.title}</h2>
-              <p>{item.body}</p>
-            </article>
-          ))}
-        </section>
-
-        <section className="split-section">
-          <div className="section-copy">
-            <p className="eyebrow">What the MVP proves</p>
-            <h2>A buyer can inspect the workload result before trusting the network.</h2>
-            <p>
-              The MVP is intentionally narrow: one controlled private AI job, one assigned
-              provider, one or more verifiers, signed receipts, sanitized evidence, and a
-              clear settlement status. That is the smallest useful product proof for
-              regulated buyers.
-            </p>
-            <div className="hero-actions">
-              <ButtonLink href="/resources/#protocol-proof">View protocol proof</ButtonLink>
-              <ButtonLink href="mailto:info@oscirislabs.com" variant="secondary">
-                Request MVP demo
-              </ButtonLink>
-            </div>
-          </div>
-
-          <div className="artifact-grid">
-            {artifacts.map((artifact) => (
-              <article key={artifact.title}>
-                <h3>{artifact.title}</h3>
-                <p>{artifact.body}</p>
+        <section className="architecture-section" aria-label="OSCIRIS pilot path">
+          <div className="architecture-flow deployment-flow">
+            {pilotStages.map((stage) => (
+              <article key={stage.step}>
+                <span>{stage.step}</span>
+                <strong>{stage.title}</strong>
+                <p>{stage.body}</p>
               </article>
             ))}
           </div>
+        </section>
+
+        <section className="cta-panel">
+          <div>
+            <p className="eyebrow">Pilot review</p>
+            <h2>Bring one workload and one decision boundary.</h2>
+            <p>We will scope a controlled evaluation around buyer-visible outcomes.</p>
+          </div>
+          <ButtonLink href="mailto:info@oscirislabs.com?subject=OSCIRIS%20controlled%20pilot">
+            Discuss a private pilot
+          </ButtonLink>
         </section>
       </main>
     </PageShell>

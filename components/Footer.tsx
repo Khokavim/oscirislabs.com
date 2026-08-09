@@ -8,20 +8,9 @@ const businessLinks = [
 ];
 
 const technicalLinks = [
-  { href: "/app", label: "Proof Console" },
-  { href: "/mvp", label: "Technical validation" },
-  { href: "/resources", label: "Resources" },
-  { href: "/whitepaper", label: "Whitepaper" },
-  { href: "/osciris-protocol-whitepaper.pdf", label: "Download PDF" },
-  { href: "https://github.com/oscirisprotocol", label: "GitHub" },
-];
-
-const artifactLinks = [
-  { href: "/beta-release-manifest.json", label: "Beta release manifest" },
-  { href: "/proof-feed.json", label: "Proof feed JSON" },
-  { href: "/participant-status-summary.json", label: "Participant snapshot JSON" },
-  { href: "/participant-status.html", label: "Participant snapshot HTML" },
-  { href: "/contributor-manifest.json", label: "Contributor manifest JSON" },
+  { href: "/app", label: "Public proof status" },
+  { href: "mailto:info@oscirislabs.com?subject=OSCIRIS%20technical%20review", label: "Private technical review" },
+  { href: "mailto:info@oscirislabs.com?subject=OSCIRIS%20NDA%20review", label: "Confidential review access" },
 ];
 
 function FooterLink({ href, label }: { href: string; label: string }) {
@@ -65,10 +54,8 @@ export function Footer() {
           ))}
         </div>
         <div>
-          <span>Public artifacts</span>
-          {artifactLinks.map((link) => (
-            <FooterLink key={link.href} href={link.href} label={link.label} />
-          ))}
+          <span>Review access</span>
+          <p>Detailed mechanisms and validation materials are available to qualified reviewers under confidentiality.</p>
         </div>
       </div>
 
