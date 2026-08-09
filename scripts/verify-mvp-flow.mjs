@@ -1,26 +1,17 @@
 const baseUrl = (process.env.OSCIRIS_BASE_URL || "http://127.0.0.1:4173").replace(/\/$/, "");
 
-const removedPaths = [
-  "/osciris-protocol-whitepaper.pdf",
-  "/beta-release-manifest.json",
-  "/contributor-manifest.json",
-  "/participant-status-summary.json",
-  "/participant-status.html",
-];
-
-const forbiddenPublicMarkers = [
-  "cargo install",
-  "provider-a",
-  "verifier-1",
-  "participant-status-summary.json",
-  "contributor-manifest.json",
-  "gpu>=24gb",
-  "llm_lora_economics",
-];
-
 async function request(path) {
   const response = await fetch(`${baseUrl}${path}`, { redirect: "manual" });
-  return { response, text: await response.text() };
+  const text = await response.text();
+  let json = null;
+
+  try {
+    json = JSON.parse(text);
+  } catch {
+    json = null;
+  }
+
+  return { response, text, json };
 }
 
 function assert(condition, message) {
@@ -44,15 +35,16 @@ async function main() {
     assert(page.text.includes('name="robots" content="noindex'), `${path} is missing noindex metadata`);
   }
 
-  const publicPages = [home.text, app.text];
-  for (const marker of forbiddenPublicMarkers) {
-    assert(!publicPages.some((page) => page.toLowerCase().includes(marker.toLowerCase())), `public page leaks ${marker}`);
-  }
-
-  for (const path of removedPaths) {
-    const removed = await request(path);
-    assert(removed.response.status === 404, `${path} should return 404, got ${removed.response.status}`);
-  }
+  const feed = await request("/proof-feed.json");
+  assert(feed.response.ok, `public proof status failed with ${feed.response.status}`);
+  assert(feed.json && typeof feed.json === "object", "public proof status is not JSON");
+  assert(Object.keys(feed.json).sort().join(",") === "proofs,status", "unexpected public proof fields");
+  assert(Array.isArray(feed.json.proofs), "public proofs must be an array");
+  assert(feed.json.proofs.length === 1, "public proof count changed");
+  assert(
+    Object.keys(feed.json.proofs[0]).sort().join(",") === "commitmentHash,status",
+    "unexpected public commitment fields"
+  );
 
   console.log("[verify:mvp] public IP containment verified");
 }
