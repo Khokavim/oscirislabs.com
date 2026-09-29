@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ButtonLink } from "@/components/ButtonLink";
 import { PageShell } from "@/components/PageShell";
@@ -94,7 +95,7 @@ export default function Home() {
         </section>
 
         <section className="landing-individual" aria-labelledby="individual-title">
-          <div className="individual-symbol" aria-hidden="true"><span>O</span></div>
+          <div className="individual-symbol" aria-hidden="true"><Image src="/brand/osciris/o-blue.svg" alt="" width={190} height={190} /></div>
           <div>
             <p className="landing-label">FOR INDIVIDUALS</p>
             <h2 id="individual-title">Your laptop can be part of something larger.</h2>
