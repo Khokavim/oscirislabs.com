@@ -3,11 +3,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "OSCIRIS | Sovereign AI Infrastructure",
+    default: "OSCIRIS | AI compute, connected",
     template: "%s | OSCIRIS",
   },
   description:
-    "OSCIRIS provides private AI infrastructure for regulated teams with controlled data exposure, verified compute execution, and audit-ready delivery.",
+    "OSCIRIS is building connected AI compute for individuals and enterprises, with early-access participation and evidence-led pilots.",
 };
 
 export default function RootLayout({
@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body>{children}</body>
     </html>
   );

@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 const businessLinks = [
+  { href: "/individuals/", label: "For individuals" },
+  { href: "/enterprise/", label: "For enterprise" },
   { href: "/about", label: "About OSCIRIS" },
-  { href: "/#platform", label: "Platform" },
-  { href: "/#solutions", label: "Solutions" },
-  { href: "mailto:info@oscirislabs.com", label: "Private review" },
+  { href: "mailto:info@oscirislabs.com?subject=OSCIRIS%20pilot%20review", label: "Discuss a pilot" },
 ];
 
 const technicalLinks = [
@@ -33,7 +33,7 @@ export function Footer() {
           <Link className="footer-logo-link" href="/" aria-label="OSCIRIS home">
             <img src="/brand/osciris/wide-blue.svg" alt="OSCIRIS" className="footer-logo" />
           </Link>
-          <p>Private AI infrastructure for regulated teams.</p>
+          <p>Connected AI compute for people and serious teams.</p>
         </div>
         <a className="footer-email" href="mailto:info@oscirislabs.com">
           info@oscirislabs.com
@@ -54,14 +54,14 @@ export function Footer() {
           ))}
         </div>
         <div>
-          <span>Review access</span>
-          <p>Detailed mechanisms and validation materials are available to qualified reviewers under confidentiality.</p>
+          <span>Start safely</span>
+          <p>Tell us about a workload or machine at a high level. Please do not email confidential data or credentials.</p>
         </div>
       </div>
 
       <div className="footer-bottomline">
         <p>Copyright 2026 OSCIRIS Labs. All rights reserved.</p>
-        <p>Controlled AI workloads, verified compute, audit-ready delivery.</p>
+        <p>Early access and controlled pilots. Production qualification is in progress.</p>
       </div>
     </footer>
   );

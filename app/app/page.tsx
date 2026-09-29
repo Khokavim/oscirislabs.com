@@ -6,7 +6,7 @@ import { loadPublishedProofFeed } from "@/lib/published-proof-feed";
 export const metadata: Metadata = {
   title: "Public Proof Status",
   description:
-    "A limited, read-only OSCIRIS credibility surface showing reviewed execution and receipt status.",
+    "A static, read-only OSCIRIS proof summary, not live network status or production qualification.",
 };
 
 export default async function ProofStatusPage() {
@@ -21,9 +21,14 @@ export default async function ProofStatusPage() {
             <p className="eyebrow">Public credibility layer</p>
             <h1>Reviewed proof status.</h1>
             <p>
-              This limited, read-only surface confirms reviewed outcomes without
+              This limited, read-only page displays a published proof summary without
               exposing participant identities, job metadata, operational endpoints, or
               implementation workflow.
+            </p>
+            <p className="demo-note">
+              Published snapshot; assessment date not supplied. The statuses below come
+              from a static file, not live network telemetry, and do not establish
+              current status or production qualification.
             </p>
           </div>
           <div className="header-actions">
@@ -44,11 +49,11 @@ export default async function ProofStatusPage() {
           <div className="jobs-header">
             <div>
               <p className="eyebrow">Commitment</p>
-              <h2>Public proof of existence.</h2>
+              <h2>Published commitment.</h2>
             </div>
             <p className="demo-note">
-              The commitment supports public verification without publishing the
-              underlying evidence package or operational metadata.
+              This hash identifies a published record. Independent verification
+              requires the underlying evidence package and its validation method.
             </p>
           </div>
 

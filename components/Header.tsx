@@ -1,11 +1,10 @@
 import Link from "next/link";
 
 const navItems = [
-  { href: "/#platform", label: "Platform" },
-  { href: "/#solutions", label: "Solutions" },
-  { href: "/#trust", label: "Trust" },
-  { href: "/about", label: "About" },
-  { href: "mailto:info@oscirislabs.com", label: "Contact" },
+  { href: "/individuals/", label: "Individuals" },
+  { href: "/enterprise/", label: "Enterprise" },
+  { href: "/#how-it-works", label: "How it works" },
+  { href: "/app/", label: "Proof status" },
 ];
 
 export function Header() {
@@ -21,11 +20,11 @@ export function Header() {
           </Link>
         ))}
       </nav>
-      <a className="header-action header-action-desktop" href="mailto:info@oscirislabs.com">
-        Request private review
+      <a className="header-action header-action-desktop" href="mailto:info@oscirislabs.com?subject=OSCIRIS%20pilot%20review">
+        Discuss a pilot
       </a>
       <details className="mobile-nav">
-        <summary className="mobile-nav-toggle" aria-label="Open navigation menu">
+        <summary className="mobile-nav-toggle" aria-label="Site navigation menu">
           <span />
           <span />
           <span />
@@ -33,13 +32,13 @@ export function Header() {
         <div className="mobile-nav-panel">
           <nav className="mobile-nav-links" aria-label="Mobile site">
             {navItems.map((item) => (
-              <Link key={item.href} href={item.href}>
+              <Link key={item.href} href={item.href} aria-label={item.label}>
                 {item.label}
               </Link>
             ))}
           </nav>
-          <a className="mobile-nav-action" href="mailto:info@oscirislabs.com">
-            Request private review
+          <a className="mobile-nav-action" href="mailto:info@oscirislabs.com?subject=OSCIRIS%20pilot%20review">
+            Discuss a pilot
           </a>
         </div>
       </details>

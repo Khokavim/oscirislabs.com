@@ -1,42 +1,48 @@
 import type { Metadata } from "next";
+import { ButtonLink } from "@/components/ButtonLink";
 import { PageHero } from "@/components/PageHero";
 import { PageShell } from "@/components/PageShell";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "About OSCIRIS, private AI infrastructure for regulated teams that need controlled data exposure, verified compute execution, and audit-ready delivery.",
+    "OSCIRIS Labs is building connected AI compute for individuals and organizations through early access, provider exploration, and evidence-led enterprise pilots.",
 };
 
 const aboutCards = [
   {
-    title: "What OSCIRIS does",
+    title: "For individuals",
     body:
-      "OSCIRIS helps organizations run sensitive AI workloads with clearer control over data handling, compute selection, and delivery review.",
+      "Explore early access to shared open-weight AI, or ask how capable hardware could join a reviewed provider pilot. Self-serve access, open admission, and rewards are not live.",
+    href: "/individuals/",
+    linkLabel: "Explore the individual path",
   },
   {
-    title: "Who it serves",
+    title: "For organizations",
     body:
-      "The product is built for banks, telecoms, public institutions, and enterprise AI teams that need AI capability without blind infrastructure assumptions.",
+      "Scope one controlled workload with declared data and provider boundaries, measurable acceptance criteria, and evidence for technical and risk review.",
+    href: "/enterprise/",
+    linkLabel: "Explore enterprise pilots",
   },
   {
-    title: "How it is adopted",
+    title: "Current status",
     body:
-      "Adoption starts with a private review and a bounded pilot, then expands only when quality, controls, and review artifacts satisfy the buyer.",
+      "Development-stage multi-machine inference and signed execution receipts have been demonstrated. The public proof page is a reviewed snapshot, not live service status or production qualification.",
+    href: "/app/",
+    linkLabel: "View public proof status",
   },
 ];
 
 export default function AboutPage() {
   return (
     <PageShell>
-      <main className="page-main">
-        <PageHero eyebrow="About" title="Private AI infrastructure for serious operating teams.">
+      <main id="main-content" className="page-main">
+        <PageHero eyebrow="About" title="Connected AI compute, built with clear boundaries.">
           <p>
-            OSCIRIS is built for organizations that want the benefits of advanced AI
-            without giving up control of sensitive data, execution policy, or review
-            obligations. Detailed technical material is available to qualified evaluators
-            under confidentiality, while the product path starts with business risk and
-            operational fit.
+            OSCIRIS Labs is developing a network for open-weight AI across participating
+            machines. Individuals can express interest in access or contributing compute;
+            organizations can shape a bounded, evidence-led pilot. Neither path is a
+            generally available compute service today.
           </p>
         </PageHero>
         <section className="about-grid">
@@ -44,6 +50,7 @@ export default function AboutPage() {
             <article key={card.title}>
               <h2>{card.title}</h2>
               <p>{card.body}</p>
+              <ButtonLink href={card.href} variant="secondary">{card.linkLabel}</ButtonLink>
             </article>
           ))}
         </section>

@@ -9,8 +9,9 @@ type PageShellProps = {
 export function PageShell({ children }: PageShellProps) {
   return (
     <>
+      <a className="skip-link" href="#page-content">Skip to content</a>
       <Header />
-      {children}
+      <div id="page-content" tabIndex={-1}>{children}</div>
       <Footer />
     </>
   );

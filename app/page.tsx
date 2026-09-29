@@ -1,335 +1,145 @@
+import type { Metadata } from "next";
+import Link from "next/link";
 import { ButtonLink } from "@/components/ButtonLink";
-import { FeatureCard } from "@/components/FeatureCard";
 import { PageShell } from "@/components/PageShell";
 
-const outcomeMetrics = [
-  {
-    label: "Private AI workloads",
-    value: "Controlled",
-    detail: "Training, inference, evaluation, and document intelligence under policy.",
-  },
-  {
-    label: "Compute access",
-    value: "Verified",
-    detail: "Capacity routed by provider fit, jurisdiction, and operating controls.",
-  },
-  {
-    label: "Operations",
-    value: "Audit-ready",
-    detail: "Receipts, review packs, and accountable delivery for sensitive teams.",
-  },
-  {
-    label: "Technical review",
-    value: "Private",
-    detail: "Detailed validation is shared with qualified reviewers under confidentiality.",
-  },
+export const metadata: Metadata = {
+  title: "OSCIRIS | AI compute, connected",
+  description:
+    "Explore shared AI compute and provider participation, or scope an evidence-led enterprise pilot with OSCIRIS Labs.",
+};
+
+const steps = [
+  { number: "01", title: "Bring the workload", body: "Start with a model, a task, and the limits that matter: memory, latency, location, and data handling." },
+  { number: "02", title: "Match the machines", body: "OSCIRIS is being built to coordinate suitable compute across participating devices and cloud capacity." },
+  { number: "03", title: "Inspect the result", body: "Execution records and receipts give pilot teams a way to review what happened, not just the final answer." },
 ];
 
-const businessOutcomes = [
-  {
-    title: "Use AI without exposing the whole operation",
-    body:
-      "Prepare sensitive data into controlled workload surfaces before it reaches external compute, vendors, or review environments.",
-  },
-  {
-    title: "Know where work runs and why",
-    body:
-      "Route AI jobs by policy, jurisdiction, provider capability, review requirements, and operating constraints.",
-  },
-  {
-    title: "Give compliance teams something usable",
-    body:
-      "Package delivery with receipts, hashes, reviewer notes, and evidence bundles that support internal approval.",
-  },
-];
-
-const useCases = [
-  {
-    title: "Banking & Fintech",
-    body:
-      "Private retrieval, compliance assistance, fraud analysis, records intelligence, and controlled model evaluation.",
-  },
-  {
-    title: "Telecoms",
-    body:
-      "Customer intelligence, support automation, local-language analytics, and privacy-aware operational workflows.",
-  },
-  {
-    title: "Public Sector",
-    body:
-      "Jurisdiction-aware AI workflows for policy analysis, case review, records processing, and controlled data operations.",
-  },
-  {
-    title: "Enterprise AI Teams",
-    body:
-      "Pilot private training, inference, benchmarking, and synthetic-data workflows before broader rollout.",
-  },
-];
-
-const serviceModel = [
-  {
-    title: "Private AI workload execution",
-    body:
-      "Package training, inference, evaluation, and synthetic-data jobs with privacy controls and buyer-visible delivery requirements.",
-  },
-  {
-    title: "Verified compute routing",
-    body:
-      "Coordinate distributed compute supply as assignable capacity instead of asking buyers to trust raw infrastructure.",
-  },
-  {
-    title: "Audit-ready delivery",
-    body:
-      "Return a reviewable evidence pack for internal stakeholders, technical reviewers, and regulated operating teams.",
-  },
-];
-
-const deploymentPath = [
-  {
-    step: "01",
-    title: "Private review",
-    body:
-      "Review the workload, data sensitivity, policy boundaries, and buyer requirements before any pilot is scoped.",
-  },
-  {
-    step: "02",
-    title: "Controlled pilot",
-    body:
-      "Run one bounded AI workflow with clear inputs, provider requirements, evidence expectations, and success criteria.",
-  },
-  {
-    step: "03",
-    title: "Operational rollout",
-    body:
-      "Expand only after the buyer can inspect quality, privacy controls, delivery artifacts, and operating boundaries.",
-  },
-];
-
-const trustItems = [
-  {
-    label: "Controlled representation",
-    title: "Reduce exposure while preserving useful work",
-    body:
-      "DSP prepares workload-specific controlled representations of sensitive data for external AI execution.",
-    href: "mailto:info@oscirislabs.com?subject=OSCIRIS%20DSP%20review",
-    linkLabel: "Request DSP review",
-  },
-  {
-    label: "Qualified review",
-    title: "Technical evidence is shared confidentially",
-    body:
-      "Implementation details, evaluation methods, and validation materials are available to qualified reviewers under confidentiality.",
-    href: "mailto:info@oscirislabs.com?subject=OSCIRIS%20technical%20review",
-    linkLabel: "Request technical review",
-  },
-  {
-    label: "Public credibility",
-    title: "A limited proof status remains public",
-    body:
-      "The public status surface confirms reviewed execution and receipt outcomes without exposing the operational blueprint.",
-    href: "/app",
-    linkLabel: "View proof status",
-  },
-];
-
-const heroSignals = [
-  { label: "Workload", value: "Private review packet" },
-  { label: "Policy", value: "Jurisdiction and data controls" },
-  { label: "Compute", value: "Verified provider routing" },
+const enterpriseCases = [
+  { label: "01 / PRIVATE AI", title: "Set the data boundary", body: "Define what may leave your environment, what a provider may process, and what reviewers need to see." },
+  { label: "02 / MODEL CAPACITY", title: "Test distributed inference", body: "Evaluate a bounded open-weight workload against a declared topology, quality target, and latency budget." },
+  { label: "03 / GOVERNANCE", title: "Make the pilot reviewable", body: "Agree on acceptance criteria and retain evidence for technical, security, and procurement review." },
 ];
 
 export default function Home() {
   return (
     <PageShell>
-      <main className="home-main">
-        <section className="hero">
-          <div className="hero-copy">
-            <p className="hero-kicker">Private AI infrastructure for regulated teams</p>
-            <h1>Run sensitive AI workloads without surrendering operational control.</h1>
-            <p className="hero-text">
-              OSCIRIS helps institutions use AI with controlled data exposure,
-              verified compute execution, and audit-ready delivery for internal
-              review.
+      <main id="main-content" className="landing-main">
+        <section className="landing-hero" aria-labelledby="landing-title">
+          <div className="landing-hero-copy">
+            <p className="landing-eyebrow"><span aria-hidden="true" /> AI COMPUTE, CONNECTED</p>
+            <h1 id="landing-title">More AI power.<br /><em>More ways to take part.</em></h1>
+            <p className="landing-lede">
+              OSCIRIS is building a network that coordinates capable machines for open-weight AI.
+              Explore access as an individual, contribute compute, or shape a controlled enterprise pilot.
             </p>
-            <div className="hero-actions">
-              <ButtonLink href="mailto:info@oscirislabs.com">Request private review</ButtonLink>
-              <ButtonLink href="#platform" variant="secondary">
-                Explore platform
-              </ButtonLink>
-              <ButtonLink href="#trust" variant="secondary">
-                Review validation
-              </ButtonLink>
+            <div className="landing-actions">
+              <ButtonLink href="#choose-your-path">Find your path <span aria-hidden="true">↗</span></ButtonLink>
+              <ButtonLink href="#how-it-works" variant="secondary">See how it works</ButtonLink>
             </div>
+            <p className="landing-hero-footnote">Early access and design-partner pilots. Not a general-availability compute service.</p>
           </div>
-
-          <aside className="hero-visual" aria-label="OSCIRIS private AI control plane preview">
-            <div className="hero-visual-shell">
-              <div className="hero-visual-header">
-                <span>OSCIRIS Control Plane</span>
-                <strong>Private AI workload</strong>
-              </div>
-              <div className="hero-visual-path" aria-hidden="true">
-                <span />
-                <span />
-                <span />
-              </div>
-              <div className="hero-signal-grid">
-                {heroSignals.map((signal) => (
-                  <article key={signal.label}>
-                    <span>{signal.label}</span>
-                    <strong>{signal.value}</strong>
-                  </article>
-                ))}
-              </div>
-              <div className="hero-review-card">
-                <span>Review pack</span>
-                <strong>Audit-ready delivery</strong>
-                <p>
-                  Receipts, policy notes, workload boundaries, and reviewer-facing
-                  evidence packaged for internal approval.
-                </p>
-              </div>
+          <div className="landing-fabric" role="img" aria-label="Conceptual illustration of one AI workload moving across participating compute nodes to a reviewable result">
+            <div className="fabric-topline"><span>OSCIRIS / NETWORK VIEW</span><span>CONCEPTUAL</span></div>
+            <div className="fabric-workload"><span className="fabric-dot" /> YOUR AI WORKLOAD <span className="fabric-arrow">↓</span></div>
+            <div className="fabric-node-row">
+              <div className="fabric-node"><span>01 / DEVICE</span><strong>Personal<br />compute</strong><i /></div>
+              <div className="fabric-node"><span>02 / CLOUD</span><strong>GPU<br />capacity</strong><i /></div>
+              <div className="fabric-node"><span>03 / NETWORK</span><strong>Provider<br />nodes</strong><i /></div>
             </div>
-          </aside>
-        </section>
-
-        <section className="metrics-strip" aria-label="OSCIRIS business capabilities">
-          {outcomeMetrics.map((metric) => (
-            <div key={metric.label}>
-              <span>{metric.label}</span>
-              <strong>{metric.value}</strong>
-              <p>{metric.detail}</p>
-            </div>
-          ))}
-        </section>
-
-        <section className="statement-band">
-          <p>
-            Designed for organizations that need AI capability, privacy discipline,
-            and accountable delivery before sensitive workloads move into production.
-          </p>
-        </section>
-
-        <section className="split-section" id="platform">
-          <div className="section-copy">
-            <p className="eyebrow">Platform</p>
-            <h2>Enterprise AI operations with privacy, routing, and review built in.</h2>
-            <p>
-              OSCIRIS packages the parts regulated teams need before they can rely on
-              external AI compute: controlled workload preparation, policy-aware routing,
-              and evidence that can be reviewed after execution.
-            </p>
+            <div className="fabric-output"><span className="fabric-output-icon">✓</span><div><small>OUTPUT + EVIDENCE</small><strong>A result you can review</strong></div></div>
+            <p className="fabric-caption">Placement depends on workload, capability, and pilot policy. This is an illustration, not a live topology.</p>
           </div>
-          <div className="feature-grid">
-            {businessOutcomes.map((outcome, index) => (
-              <FeatureCard
-                key={outcome.title}
-                tone={index === 0 ? "cyan" : index === 1 ? "green" : "amber"}
-                title={outcome.title}
-                body={outcome.body}
-              />
+        </section>
+
+        <section className="landing-intro" id="choose-your-path" aria-labelledby="path-title">
+          <div className="landing-section-head">
+            <p className="landing-label">TWO WAYS IN</p>
+            <h2 id="path-title">Built for people.<br />Built for serious teams.</h2>
+            <p>Whether you need AI capacity or have capacity to share, start with the path that fits you.</p>
+          </div>
+          <div className="landing-path-grid">
+            <article className="landing-path-card landing-path-people">
+              <span className="path-index">01 / INDIVIDUALS &amp; BUILDERS</span>
+              <div className="path-orbit" aria-hidden="true"><span /><span /><span /></div>
+              <div className="path-content">
+                <h3>AI beyond the machine you own.</h3>
+                <p>Request early access to shared open-weight AI. Have a capable computer? Explore the provider pilot and help test a network for diverse hardware.</p>
+                <Link href="/individuals/" className="path-link">Explore the individual path <span aria-hidden="true">↗</span></Link>
+              </div>
+            </article>
+            <article className="landing-path-card landing-path-enterprise">
+              <span className="path-index">02 / ENTERPRISE &amp; INSTITUTIONS</span>
+              <div className="path-rules" aria-hidden="true"><span /><span /><span /></div>
+              <div className="path-content">
+                <h3>AI capacity with a clearer line of control.</h3>
+                <p>Scope one bounded workload with policy-aware placement, explicit quality targets, and evidence your security and governance teams can inspect.</p>
+                <Link href="/enterprise/" className="path-link">Explore enterprise pilots <span aria-hidden="true">↗</span></Link>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section className="landing-method" id="how-it-works" aria-labelledby="method-title">
+          <div className="landing-section-head">
+            <p className="landing-label">THE IDEA</p>
+            <h2 id="method-title">One workload.<br />The right network around it.</h2>
+            <p>OSCIRIS separates what you want to run from the question of which one machine must run it all.</p>
+          </div>
+          <div className="landing-step-grid">
+            {steps.map((step) => (
+              <article key={step.number}><span>{step.number}</span><h3>{step.title}</h3><p>{step.body}</p></article>
             ))}
           </div>
         </section>
 
-        <section className="use-case-section" id="solutions" aria-label="OSCIRIS buyer use cases">
-          <div className="section-copy">
-            <p className="eyebrow">Solutions</p>
-            <h2>Where buyers can start with a controlled pilot.</h2>
-          </div>
-          <div className="use-case-grid">
-            {useCases.map((item) => (
-              <article key={item.title}>
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="split-section business-stack">
-          <div className="section-copy">
-            <p className="eyebrow">Service model</p>
-            <h2>A practical path from sensitive workload to reviewed delivery.</h2>
-            <p>
-              OSCIRIS is built as a productized service layer for teams that need
-              useful AI outcomes with control over data handling, compute selection,
-              and review artifacts.
-            </p>
-            <ButtonLink href="mailto:info@oscirislabs.com" variant="secondary">
-              Discuss a private workload
-            </ButtonLink>
-          </div>
-          <div className="feature-grid">
-            {serviceModel.map((offer, index) => (
-              <FeatureCard
-                key={offer.title}
-                tone={index === 0 ? "cyan" : index === 1 ? "green" : "amber"}
-                title={offer.title}
-                body={offer.body}
-              />
-            ))}
-          </div>
-        </section>
-
-        <section className="architecture-section" aria-label="OSCIRIS deployment path">
-          <div className="section-copy">
-            <p className="eyebrow">Deployment path</p>
-            <h2>Start with review. Prove one workflow. Expand with evidence.</h2>
-          </div>
-          <div className="architecture-flow deployment-flow">
-            {deploymentPath.map((item) => (
-              <article key={item.step}>
-                <span>{item.step}</span>
-                <strong>{item.title}</strong>
-                <p>{item.body}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="evidence-section trust-section" id="trust" aria-label="OSCIRIS trust and technical validation">
-          <div className="section-copy">
-            <p className="eyebrow">Trust & Technical Validation</p>
-            <h2>Technical confidence without publishing the implementation.</h2>
-            <p>
-              DSP is OSCIRIS&apos;s workload-aware privacy layer. It prepares controlled
-              representations of sensitive data for external AI execution, measures task
-              utility and privacy risk, and produces auditable execution evidence.
-              Detailed mechanisms are proprietary and available to qualified reviewers
-              under confidentiality.
-            </p>
-          </div>
-          <div className="trust-grid">
-            {trustItems.map((item) => (
-              <article key={item.title}>
-                <span>{item.label}</span>
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-                <a href={item.href}>{item.linkLabel}</a>
-              </article>
-            ))}
-          </div>
-          <div className="trust-actions">
-            <ButtonLink href="mailto:info@oscirislabs.com?subject=OSCIRIS%20technical%20review" variant="secondary">
-              Request technical review
-            </ButtonLink>
-            <ButtonLink href="/app" variant="secondary">
-              View proof status
-            </ButtonLink>
-          </div>
-        </section>
-
-        <section className="cta-panel">
+        <section className="landing-individual" aria-labelledby="individual-title">
+          <div className="individual-symbol" aria-hidden="true"><span>O</span></div>
           <div>
-            <p className="eyebrow">Private review</p>
-            <h2>Evaluate OSCIRIS for sensitive AI operations.</h2>
-            <p>
-              Bring one workload, one operating boundary, and one review requirement.
-              OSCIRIS will help scope a controlled pilot around buyer-visible outcomes.
-            </p>
+            <p className="landing-label">FOR INDIVIDUALS</p>
+            <h2 id="individual-title">Your laptop can be part of something larger.</h2>
+            <p>Shared compute should be understandable on both sides: what a user can access, what a provider contributes, and how work is attributed. We are inviting early users and prospective providers into bounded pilots.</p>
+            <div className="landing-inline-actions">
+              <ButtonLink href="/individuals/">Explore early access</ButtonLink>
+              <a href="mailto:info@oscirislabs.com?subject=OSCIRIS%20provider%20pilot">Ask about contributing compute <span aria-hidden="true">↗</span></a>
+            </div>
+            <p className="landing-small-note">Provider admission and any rewards depend on capability checks, metering, and approved program terms; they are not live public features.</p>
           </div>
-          <ButtonLink href="mailto:info@oscirislabs.com">Request private review</ButtonLink>
+        </section>
+
+        <section className="landing-enterprise" id="enterprise" aria-labelledby="enterprise-title">
+          <div className="landing-section-head">
+            <p className="landing-label">FOR ENTERPRISE</p>
+            <h2 id="enterprise-title">A pilot your technical team can actually evaluate.</h2>
+            <p>Start with a workload and explicit boundaries. OSCIRIS helps define the compute route, acceptance measures, and review packet before you consider a wider rollout.</p>
+            <ButtonLink href="/enterprise/" variant="secondary">See the enterprise path <span aria-hidden="true">↗</span></ButtonLink>
+          </div>
+          <div className="landing-enterprise-grid">
+            {enterpriseCases.map((item) => (
+              <article key={item.label}><span>{item.label}</span><h3>{item.title}</h3><p>{item.body}</p></article>
+            ))}
+          </div>
+        </section>
+
+        <section className="landing-proof" id="trust" aria-labelledby="proof-title">
+          <div><p className="landing-label">PROOF, NOT PROMISES</p><h2 id="proof-title">Progress you can inspect. Limits we name plainly.</h2></div>
+          <div>
+            <p>OSCIRIS has demonstrated multi-machine inference and signed execution evidence in development. Production qualification, general self-service access, and open provider rewards are still in progress.</p>
+            <p>The public proof console is a reviewed, read-only snapshot—not a live operations dashboard. Detailed pilot evidence is available for qualified review.</p>
+            <div className="landing-proof-links">
+              <Link href="/app/">View public proof status <span aria-hidden="true">↗</span></Link>
+              <a href="mailto:info@oscirislabs.com?subject=OSCIRIS%20technical%20review">Request technical review <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </section>
+
+        <section className="landing-final" aria-labelledby="final-title">
+          <p className="landing-label">LET&apos;S BUILD WHAT COMES NEXT</p>
+          <h2 id="final-title">Find your place in the network.</h2>
+          <div className="landing-actions">
+            <ButtonLink href="/individuals/">I&apos;m an individual</ButtonLink>
+            <ButtonLink href="/enterprise/" variant="secondary">I&apos;m evaluating for a team</ButtonLink>
+          </div>
         </section>
       </main>
     </PageShell>

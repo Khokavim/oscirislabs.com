@@ -21,13 +21,25 @@ function assert(condition, message) {
 async function main() {
   const home = await request("/");
   assert(home.response.ok, `homepage failed with ${home.response.status}`);
-  assert(home.text.includes("Detailed mechanisms are proprietary"), "commercial DSP wording missing");
+  assert(home.text.includes("More AI power"), "new homepage heading missing");
+  assert(home.text.includes("Not a general-availability compute service"), "homepage readiness boundary missing");
+  assert(home.text.includes('href="/individuals/"'), "individual path missing");
+  assert(home.text.includes('href="/enterprise/"'), "enterprise path missing");
   assert(!home.text.includes("Developer beta"), "developer beta remains public");
+
+  const individuals = await request("/individuals/");
+  assert(individuals.response.ok, `individual path failed with ${individuals.response.status}`);
+  assert(individuals.text.includes("Self-serve inference is not generally available"), "individual readiness boundary missing");
+
+  const enterprise = await request("/enterprise/");
+  assert(enterprise.response.ok, `enterprise path failed with ${enterprise.response.status}`);
+  assert(enterprise.text.includes("not general enterprise availability"), "enterprise readiness boundary missing");
 
   const app = await request("/app/");
   assert(app.response.ok, `proof status failed with ${app.response.status}`);
   assert(app.text.includes("Reviewed proof status"), "proof status heading missing");
   assert(app.text.includes("Commitment hash"), "public commitment missing");
+  assert(app.text.includes("not live network telemetry"), "proof snapshot boundary missing");
 
   for (const path of ["/whitepaper/", "/resources/", "/mvp/"]) {
     const page = await request(path);
@@ -46,7 +58,7 @@ async function main() {
     "unexpected public commitment fields"
   );
 
-  console.log("[verify:mvp] public IP containment verified");
+  console.log("[verify:mvp] public positioning and IP containment verified");
 }
 
 main().catch((error) => {
