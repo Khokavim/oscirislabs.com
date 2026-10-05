@@ -9,6 +9,7 @@ const pages = [
   ["index.html", "index.html"],
   ["about.html", "about/index.html"],
   ["app.html", "app/index.html"],
+  ["beta.html", "beta/index.html"],
   ["enterprise.html", "enterprise/index.html"],
   ["home.html", "home/index.html"],
   ["individuals.html", "individuals/index.html"],

@@ -7,3 +7,4 @@ awesome-design-md/
 !.env.example
 *.log
 .DS_Store
+*.tsbuildinfo

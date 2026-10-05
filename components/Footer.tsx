@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const businessLinks = [
+  { href: "/beta/", label: "Kimi 48B GPU closed beta" },
   { href: "/individuals/", label: "For individuals" },
   { href: "/enterprise/", label: "For enterprise" },
   { href: "/about", label: "About OSCIRIS" },

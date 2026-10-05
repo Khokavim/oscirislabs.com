@@ -1,145 +1,132 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { ButtonLink } from "@/components/ButtonLink";
 import { PageShell } from "@/components/PageShell";
+import { ShardStrip } from "@/components/ShardStrip";
 
 export const metadata: Metadata = {
   title: "OSCIRIS | AI compute, connected",
   description:
-    "Explore shared AI compute and provider participation, or scope an evidence-led enterprise pilot with OSCIRIS Labs.",
+    "OSCIRIS splits open AI models into shards that everyday Macs and NVIDIA PCs can host, and runs them as one model with signed records of every step. The Kimi 48B GPU closed beta is taking applications.",
 };
 
-const steps = [
-  { number: "01", title: "Bring the workload", body: "Start with a model, a task, and the limits that matter: memory, latency, location, and data handling." },
-  { number: "02", title: "Match the machines", body: "OSCIRIS is being built to coordinate suitable compute across participating devices and cloud capacity." },
-  { number: "03", title: "Inspect the result", body: "Execution records and receipts give pilot teams a way to review what happened, not just the final answer." },
+const measured = [
+  { label: "Model", value: "Kimi Linear 48B, MIT licence" },
+  { label: "Shards", value: "27, one per layer" },
+  { label: "Smallest shard needs", value: "3.9 GB on NVIDIA · 4.8 GB on a Mac" },
+  { label: "GPU result vs CPU result", value: "Cosine 0.99999 on Apple M4 Pro · 0.9999998 on Tesla T4" },
 ];
 
-const enterpriseCases = [
-  { label: "01 / PRIVATE AI", title: "Set the data boundary", body: "Define what may leave your environment, what a provider may process, and what reviewers need to see." },
-  { label: "02 / MODEL CAPACITY", title: "Test distributed inference", body: "Evaluate a bounded open-weight workload against a declared topology, quality target, and latency budget." },
-  { label: "03 / GOVERNANCE", title: "Make the pilot reviewable", body: "Agree on acceptance criteria and retain evidence for technical, security, and procurement review." },
+const steps = [
+  { title: "Split the model", body: "Each layer of an open model becomes its own package, pinned by a content hash so every machine loads exactly the same weights." },
+  { title: "Assign shards that fit", body: "The coordinator gives each machine one shard its GPU memory can hold, using memory measured shard by shard on Apple Metal and NVIDIA CUDA." },
+  { title: "Run and check", body: "Activations pass from machine to machine over pinned, encrypted connections. Every step comes back signed, so the work can be reviewed." },
 ];
 
 export default function Home() {
   return (
     <PageShell>
-      <main id="main-content" className="landing-main">
-        <section className="landing-hero" aria-labelledby="landing-title">
-          <div className="landing-hero-copy">
-            <p className="landing-eyebrow"><span aria-hidden="true" /> AI COMPUTE, CONNECTED</p>
-            <h1 id="landing-title">More AI power.<br /><em>More ways to take part.</em></h1>
-            <p className="landing-lede">
-              OSCIRIS is building a network that coordinates capable machines for open-weight AI.
-              Explore access as an individual, contribute compute, or shape a controlled enterprise pilot.
+      <main id="main-content" className="lp-main">
+        <section className="lp-hero" aria-labelledby="landing-title">
+          <div className="lp-hero-copy">
+            <Link className="lp-pill" href="/beta/"><span aria-hidden="true" />Kimi 48B GPU closed beta · Applications open</Link>
+            <h1 id="landing-title">Run big open models on the machines people <em>already own.</em></h1>
+            <p className="lp-lede">
+              OSCIRIS splits a model like Kimi Linear 48B into shards that everyday Macs and NVIDIA PCs can host,
+              then runs them together as one model.
             </p>
             <div className="landing-actions">
-              <ButtonLink href="#choose-your-path">Find your path <span aria-hidden="true">↗</span></ButtonLink>
-              <ButtonLink href="#how-it-works" variant="secondary">See how it works</ButtonLink>
+              <ButtonLink href="/beta/">Apply for the GPU beta <span aria-hidden="true">↗</span></ButtonLink>
+              <a className="button secondary lp-on-dark" href="#how-it-works">How it works</a>
             </div>
-            <p className="landing-hero-footnote">Early access and design-partner pilots. Not a general-availability compute service.</p>
+            <p className="lp-who">Open to Apple Silicon Macs with 16 GB or more and Ubuntu PCs with an NVIDIA GPU of 8 GB or more.</p>
           </div>
-          <div className="landing-fabric" role="img" aria-label="Conceptual illustration of one AI workload moving across participating compute nodes to a reviewable result">
-            <div className="fabric-topline"><span>OSCIRIS / NETWORK VIEW</span><span>CONCEPTUAL</span></div>
-            <div className="fabric-workload"><span className="fabric-dot" /> YOUR AI WORKLOAD <span className="fabric-arrow">↓</span></div>
-            <div className="fabric-node-row">
-              <div className="fabric-node"><span>01 / DEVICE</span><strong>Personal<br />compute</strong><i /></div>
-              <div className="fabric-node"><span>02 / CLOUD</span><strong>GPU<br />capacity</strong><i /></div>
-              <div className="fabric-node"><span>03 / NETWORK</span><strong>Provider<br />nodes</strong><i /></div>
-            </div>
-            <div className="fabric-output"><span className="fabric-output-icon">✓</span><div><small>OUTPUT + EVIDENCE</small><strong>A result you can review</strong></div></div>
-            <p className="fabric-caption">Placement depends on workload, capability, and pilot policy. This is an illustration, not a live topology.</p>
+
+          <div className="lp-proof-card" aria-labelledby="proof-card-title">
+            <p className="lp-card-label" id="proof-card-title">Measured in development · October 2026</p>
+            <ShardStrip />
+            <dl className="lp-measured">
+              {measured.map((m) => (<div key={m.label}><dt>{m.label}</dt><dd>{m.value}</dd></div>))}
+            </dl>
           </div>
         </section>
 
-        <section className="landing-intro" id="choose-your-path" aria-labelledby="path-title">
-          <div className="landing-section-head">
-            <p className="landing-label">TWO WAYS IN</p>
-            <h2 id="path-title">Built for people.<br />Built for serious teams.</h2>
-            <p>Whether you need AI capacity or have capacity to share, start with the path that fits you.</p>
+        <section className="lp-section" id="how-it-works" aria-labelledby="method-title">
+          <div className="lp-head">
+            <p className="landing-label">HOW IT WORKS</p>
+            <h2 id="method-title">One model, spread across many machines.</h2>
+            <p>No single computer has to hold all 48 billion parameters. Each one holds the part it can, and the network runs the parts in order.</p>
           </div>
-          <div className="landing-path-grid">
-            <article className="landing-path-card landing-path-people">
-              <span className="path-index">01 / INDIVIDUALS &amp; BUILDERS</span>
-              <div className="path-orbit" aria-hidden="true"><span /><span /><span /></div>
-              <div className="path-content">
-                <h3>AI beyond the machine you own.</h3>
-                <p>Request early access to shared open-weight AI. Have a capable computer? Explore the provider pilot and help test a network for diverse hardware.</p>
-                <Link href="/individuals/" className="path-link">Explore the individual path <span aria-hidden="true">↗</span></Link>
+          <ol className="lp-steps">
+            {steps.map((step) => (<li key={step.title}><h3>{step.title}</h3><p>{step.body}</p></li>))}
+          </ol>
+        </section>
+
+        <section className="lp-section lp-paths" aria-labelledby="path-title">
+          <div className="lp-head">
+            <p className="landing-label">WHO IT IS FOR</p>
+            <h2 id="path-title">Bring a machine, or bring a workload.</h2>
+          </div>
+          <div className="lp-path-grid">
+            <article className="lp-path lp-path-people">
+              <p className="landing-label">INDIVIDUALS &amp; BUILDERS</p>
+              <h3>Put your Mac or GPU to work.</h3>
+              <p>Host one shard of Kimi 48B in the closed beta, and get early access to models bigger than any one of our machines.</p>
+              <div className="lp-path-links">
+                <Link href="/beta/">Apply for the GPU beta <span aria-hidden="true">↗</span></Link>
+                <Link href="/individuals/">More for individuals <span aria-hidden="true">↗</span></Link>
               </div>
             </article>
-            <article className="landing-path-card landing-path-enterprise">
-              <span className="path-index">02 / ENTERPRISE &amp; INSTITUTIONS</span>
-              <div className="path-rules" aria-hidden="true"><span /><span /><span /></div>
-              <div className="path-content">
-                <h3>AI capacity with a clearer line of control.</h3>
-                <p>Scope one bounded workload with policy-aware placement, explicit quality targets, and evidence your security and governance teams can inspect.</p>
-                <Link href="/enterprise/" className="path-link">Explore enterprise pilots <span aria-hidden="true">↗</span></Link>
+            <article className="lp-path lp-path-enterprise">
+              <p className="landing-label">ENTERPRISE &amp; INSTITUTIONS</p>
+              <h3>Run a pilot your security team can review.</h3>
+              <p>Scope one bounded workload with a declared data boundary, quality target and latency budget, and keep the signed evidence for review.</p>
+              <div className="lp-path-links">
+                <Link href="/enterprise/">Explore enterprise pilots <span aria-hidden="true">↗</span></Link>
+                <a href="mailto:info@oscirislabs.com?subject=OSCIRIS%20pilot%20review">info@oscirislabs.com</a>
               </div>
             </article>
           </div>
         </section>
 
-        <section className="landing-method" id="how-it-works" aria-labelledby="method-title">
-          <div className="landing-section-head">
-            <p className="landing-label">THE IDEA</p>
-            <h2 id="method-title">One workload.<br />The right network around it.</h2>
-            <p>OSCIRIS separates what you want to run from the question of which one machine must run it all.</p>
-          </div>
-          <div className="landing-step-grid">
-            {steps.map((step) => (
-              <article key={step.number}><span>{step.number}</span><h3>{step.title}</h3><p>{step.body}</p></article>
-            ))}
-          </div>
-        </section>
-
-        <section className="landing-individual" aria-labelledby="individual-title">
-          <div className="individual-symbol" aria-hidden="true"><Image src="/brand/osciris/o-blue.svg" alt="" width={190} height={190} /></div>
+        <section className="lp-section lp-status" id="trust" aria-labelledby="proof-title">
           <div>
-            <p className="landing-label">FOR INDIVIDUALS</p>
-            <h2 id="individual-title">Your laptop can be part of something larger.</h2>
-            <p>Shared compute should be understandable on both sides: what a user can access, what a provider contributes, and how work is attributed. We are inviting early users and prospective providers into bounded pilots.</p>
-            <div className="landing-inline-actions">
-              <ButtonLink href="/individuals/">Explore early access</ButtonLink>
-              <a href="mailto:info@oscirislabs.com?subject=OSCIRIS%20provider%20pilot">Ask about contributing compute <span aria-hidden="true">↗</span></a>
+            <p className="landing-label">WHERE WE ARE</p>
+            <h2 id="proof-title">What works today, and what doesn&apos;t yet.</h2>
+          </div>
+          <div className="lp-status-grid">
+            <div>
+              <h3>Working in development</h3>
+              <ul>
+                <li>Inference across several machines, with signed execution receipts</li>
+                <li>Every Kimi 48B shard measured for memory on Apple Metal and NVIDIA CUDA</li>
+                <li>GPU builds for Mac and Ubuntu that reproduce byte for byte</li>
+              </ul>
             </div>
-            <p className="landing-small-note">Provider admission and any rewards depend on capability checks, metering, and approved program terms; they are not live public features.</p>
-          </div>
-        </section>
-
-        <section className="landing-enterprise" id="enterprise" aria-labelledby="enterprise-title">
-          <div className="landing-section-head">
-            <p className="landing-label">FOR ENTERPRISE</p>
-            <h2 id="enterprise-title">A pilot your technical team can actually evaluate.</h2>
-            <p>Start with a workload and explicit boundaries. OSCIRIS helps define the compute route, acceptance measures, and review packet before you consider a wider rollout.</p>
-            <ButtonLink href="/enterprise/" variant="secondary">See the enterprise path <span aria-hidden="true">↗</span></ButtonLink>
-          </div>
-          <div className="landing-enterprise-grid">
-            {enterpriseCases.map((item) => (
-              <article key={item.label}><span>{item.label}</span><h3>{item.title}</h3><p>{item.body}</p></article>
-            ))}
-          </div>
-        </section>
-
-        <section className="landing-proof" id="trust" aria-labelledby="proof-title">
-          <div><p className="landing-label">PROOF, NOT PROMISES</p><h2 id="proof-title">Progress you can inspect. Limits we name plainly.</h2></div>
-          <div>
-            <p>OSCIRIS has demonstrated multi-machine inference and signed execution evidence in development. Production qualification, general self-service access, and open provider rewards are still in progress.</p>
-            <p>The public proof console is a reviewed, read-only snapshot—not a live operations dashboard. Detailed pilot evidence is available for qualified review.</p>
-            <div className="landing-proof-links">
-              <Link href="/app/">View public proof status <span aria-hidden="true">↗</span></Link>
-              <a href="mailto:info@oscirislabs.com?subject=OSCIRIS%20technical%20review">Request technical review <span aria-hidden="true">↗</span></a>
+            <div>
+              <h3>Not open yet</h3>
+              <ul>
+                <li>Open sign-up for anyone. The beta is invite only</li>
+                <li>Windows, WSL, AMD and Intel GPUs, and CPU-only machines</li>
+                <li>Rewards or payment for hosting</li>
+              </ul>
             </div>
           </div>
+          <Link className="lp-text-link" href="/app/">See the public proof status <span aria-hidden="true">↗</span></Link>
         </section>
 
-        <section className="landing-final" aria-labelledby="final-title">
-          <p className="landing-label">LET&apos;S BUILD WHAT COMES NEXT</p>
-          <h2 id="final-title">Find your place in the network.</h2>
-          <div className="landing-actions">
-            <ButtonLink href="/individuals/">I&apos;m an individual</ButtonLink>
-            <ButtonLink href="/enterprise/" variant="secondary">I&apos;m evaluating for a team</ButtonLink>
+        <section className="lp-final" aria-labelledby="final-title">
+          <a className="lp-final-flier" href="/beta/osciris-closed-beta-flier.png" aria-label="Open the closed beta flier">
+            <img src="/beta/osciris-closed-beta-flier.jpg" alt="OSCIRIS closed beta flier" width={1080} height={1350} loading="lazy" />
+          </a>
+          <div>
+            <p className="landing-label">CLOSED BETA</p>
+            <h2 id="final-title">Host a piece of Kimi 48B.</h2>
+            <p>Check what your machine can host and apply in two minutes. We invite in small rounds.</p>
+            <div className="landing-actions">
+              <ButtonLink href="/beta/">Apply for the GPU beta</ButtonLink>
+              <a className="button secondary" href="/beta/osciris-closed-beta-flier.png" download>Download the flier</a>
+            </div>
           </div>
         </section>
       </main>

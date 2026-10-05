@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const navItems = [
+  { href: "/beta/", label: "GPU beta" },
   { href: "/individuals/", label: "Individuals" },
   { href: "/enterprise/", label: "Enterprise" },
   { href: "/#how-it-works", label: "How it works" },
@@ -20,9 +21,9 @@ export function Header() {
           </Link>
         ))}
       </nav>
-      <a className="header-action header-action-desktop" href="mailto:info@oscirislabs.com?subject=OSCIRIS%20pilot%20review">
-        Discuss a pilot
-      </a>
+      <Link className="header-action header-action-desktop" href="/beta/#apply">
+        Apply for the beta
+      </Link>
       <details className="mobile-nav">
         <summary className="mobile-nav-toggle" aria-label="Site navigation menu">
           <span />
@@ -37,9 +38,9 @@ export function Header() {
               </Link>
             ))}
           </nav>
-          <a className="mobile-nav-action" href="mailto:info@oscirislabs.com?subject=OSCIRIS%20pilot%20review">
-            Discuss a pilot
-          </a>
+          <Link className="mobile-nav-action" href="/beta/#apply">
+            Apply for the beta
+          </Link>
         </div>
       </details>
     </header>
