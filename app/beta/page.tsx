@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "Host one shard of the open Kimi Linear 48B model on your Mac or NVIDIA PC. Invite-only closed beta: check what your machine can host and apply.",
   openGraph: {
     title: "OSCIRIS closed beta: host a piece of Kimi 48B on your GPU",
-    description: "Invite-only. Apple Silicon Macs with 16 GB or more, and Ubuntu PCs with an NVIDIA GPU of 8 GB or more.",
+    description: "Invite-only. Apple Silicon Macs with 16 GB or more, and Ubuntu or Windows PCs with an NVIDIA GPU of 8 GB or more.",
     images: [{ url: "/beta/osciris-closed-beta-flier.jpg", width: 1080, height: 1350 }],
   },
 };
@@ -18,6 +18,8 @@ const machines = [
   { machine: "Mac, Apple Silicon", memory: "24 GB or more", shards: "All 27" },
   { machine: "Ubuntu PC, NVIDIA GPU", memory: "8–11 GB VRAM", shards: "20 of 27" },
   { machine: "Ubuntu PC, NVIDIA GPU", memory: "12 GB VRAM or more", shards: "All 27" },
+  { machine: "Windows PC, NVIDIA GPU (first testers)", memory: "8–12 GB VRAM", shards: "20 of 27" },
+  { machine: "Windows PC, NVIDIA GPU (first testers)", memory: "More than 12 GB VRAM", shards: "All 27" },
 ];
 
 const steps = [
@@ -29,7 +31,7 @@ const steps = [
 ];
 
 const questions = [
-  { q: "Do I need a GPU?", a: "Yes, for this beta: an Apple Silicon Mac or an NVIDIA GPU on Ubuntu. CPU-only machines, Windows, WSL and AMD or Intel GPUs are coming soon." },
+  { q: "Do I need a GPU?", a: "Yes, for this beta: an Apple Silicon Mac, or an NVIDIA GPU on Ubuntu or Windows. Windows machines join as first testers. CPU-only machines, Intel Macs, WSL and AMD or Intel GPUs are coming soon." },
   { q: "Which part of the model do I get?", a: "We assign one shard that fits your memory, so the whole model stays covered. You don't pick it." },
   { q: "Why is the install manual?", a: "The beta isn't distributed through an app store. The release lists a checksum for every file so you can verify what you install. On a Mac, the guide shows how to allow the app the first time you open it." },
   { q: "What does it download?", a: "The app, then one shard of 1 to 5 GB, once. Kimi Linear 48B is an open model released under the MIT licence." },
@@ -52,7 +54,7 @@ export default function BetaPage() {
             </div>
           </div>
           <a className="beta-flier" href="/beta/osciris-closed-beta-flier.png" aria-label="Open the closed beta flier at full size">
-            <img src="/beta/osciris-closed-beta-flier.jpg" alt="OSCIRIS closed beta flier: host a piece of Kimi 48B on your GPU. Apple Silicon Macs with 16 GB or more and Ubuntu PCs with an NVIDIA GPU of 8 GB or more can join." width={1080} height={1350} />
+            <img src="/beta/osciris-closed-beta-flier.jpg" alt="OSCIRIS closed beta flier: host a piece of Kimi 48B on your GPU. Apple Silicon Macs with 16 GB or more and Ubuntu or Windows PCs with an NVIDIA GPU of 8 GB or more can join." width={1080} height={1350} />
           </a>
         </section>
 
@@ -60,7 +62,7 @@ export default function BetaPage() {
           <div>
             <p className="landing-label">WHO CAN JOIN</p>
             <h2 id="who-title">Two kinds of machine, measured shard by shard.</h2>
-            <p>We measured every shard&apos;s memory on Apple Metal and NVIDIA CUDA at 4,096 tokens of context. A Mac keeps 8 GB of its memory free for macOS.</p>
+            <p>We measured every shard&apos;s memory on Apple Metal, NVIDIA CUDA on Ubuntu and NVIDIA CUDA on Windows at 4,096 tokens of context. A Mac keeps 8 GB of its memory free for macOS, and a Windows PC keeps 1 GB of GPU memory free for the desktop.</p>
           </div>
           <div className="beta-table-wrap">
             <table className="beta-table">
@@ -69,7 +71,7 @@ export default function BetaPage() {
                 {machines.map((m) => (
                   <tr key={m.machine + m.memory}><td>{m.machine}</td><td className="num">{m.memory}</td><td className="num">{m.shards}</td></tr>
                 ))}
-                <tr className="soon"><td>Windows, WSL 2, Linux ARM, Intel Mac, AMD or Intel GPU, CPU only</td><td className="num">—</td><td>Coming soon</td></tr>
+                <tr className="soon"><td>WSL 2, Linux ARM, Intel Mac, AMD or Intel GPU, CPU only</td><td className="num">—</td><td>Coming soon</td></tr>
               </tbody>
             </table>
           </div>

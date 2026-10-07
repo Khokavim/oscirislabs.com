@@ -7,11 +7,14 @@ export const TOTAL_SHARDS = 27;
 const GIB = 1024 ** 3;
 /** Unified memory kept for macOS before a shard is compared. */
 export const MAC_HEADROOM_GIB = 8;
+/** VRAM kept for the Windows desktop on a card that also drives a display. */
+export const WINDOWS_HEADROOM_GIB = 1;
 
 export type Platform =
   | "mac_apple_silicon"
   | "ubuntu_nvidia"
   | "windows"
+  | "windows_other"
   | "mac_intel"
   | "linux_other"
   | "other";
@@ -19,18 +22,19 @@ export type Platform =
 export const PLATFORMS: ReadonlyArray<{ value: Platform; label: string; memoryLabel: string | null }> = [
   { value: "mac_apple_silicon", label: "Mac with Apple Silicon (M1–M4)", memoryLabel: "Unified memory (GB)" },
   { value: "ubuntu_nvidia", label: "Ubuntu PC with an NVIDIA GPU", memoryLabel: "GPU memory, VRAM (GB)" },
-  { value: "windows", label: "Windows PC", memoryLabel: "GPU memory, VRAM (GB)" },
+  { value: "windows", label: "Windows PC with an NVIDIA GPU", memoryLabel: "GPU memory, VRAM (GB)" },
+  { value: "windows_other", label: "Windows PC with an AMD or Intel GPU", memoryLabel: "GPU memory (GB)" },
   { value: "mac_intel", label: "Mac with an Intel chip", memoryLabel: "Memory (GB)" },
   { value: "linux_other", label: "Other Linux (ARM, AMD or Intel GPU)", memoryLabel: "GPU memory (GB)" },
   { value: "other", label: "Something else", memoryLabel: null },
 ];
 
-// [layers in class, required bytes on Metal, required bytes on CUDA]
-const CLASSES: ReadonlyArray<[number, number, number]> = [
-  [1, 4_750_707_942, 3_863_373_415], // first stage
-  [19, 8_270_521_320, 6_963_802_932], // KDA
-  [6, 12_374_978_583, 11_946_636_084], // token-scaled
-  [1, 13_224_266_847, 12_758_653_338], // terminal
+// [layers in class, required bytes on Metal, on CUDA Ubuntu, on CUDA Windows (A10G, WDDM)]
+const CLASSES: ReadonlyArray<[number, number, number, number]> = [
+  [1, 4_750_707_942, 3_863_373_415, 3_924_505_396], // first stage
+  [19, 8_270_521_320, 6_963_802_932, 6_831_158_068], // KDA
+  [6, 12_374_978_583, 11_946_636_084, 11_998_540_596], // token-scaled
+  [1, 13_224_266_847, 12_758_653_338, 12_736_738_100], // terminal
 ];
 
 export type Eligibility = {
@@ -40,16 +44,15 @@ export type Eligibility = {
 };
 
 export function eligibility(platform: Platform | "", memoryGb: number | null): Eligibility {
-  if (platform === "mac_apple_silicon" || platform === "ubuntu_nvidia") {
+  if (platform === "mac_apple_silicon" || platform === "ubuntu_nvidia" || platform === "windows") {
     const backend = platform === "mac_apple_silicon" ? "metal" : "cuda";
     if (memoryGb == null || !Number.isFinite(memoryGb) || memoryGb <= 0) {
       return { status: "unknown", hostableShards: 0, backend };
     }
-    const usable = (backend === "metal" ? Math.max(0, memoryGb - MAC_HEADROOM_GIB) : memoryGb) * GIB;
-    const hostableShards = CLASSES.reduce(
-      (sum, [layers, metal, cuda]) => sum + (usable >= (backend === "metal" ? metal : cuda) ? layers : 0),
-      0,
-    );
+    const headroom = platform === "mac_apple_silicon" ? MAC_HEADROOM_GIB : platform === "windows" ? WINDOWS_HEADROOM_GIB : 0;
+    const usable = Math.max(0, memoryGb - headroom) * GIB;
+    const column = platform === "mac_apple_silicon" ? 1 : platform === "windows" ? 3 : 2;
+    const hostableShards = CLASSES.reduce((sum, entry) => sum + (usable >= entry[column] ? entry[0] : 0), 0);
     return { status: hostableShards > 0 ? "eligible" : "below_minimum", hostableShards, backend };
   }
   if (platform === "") return { status: "unknown", hostableShards: 0, backend: null };

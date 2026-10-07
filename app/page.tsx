@@ -39,7 +39,7 @@ export default function Home() {
               <ButtonLink href="/beta/">Apply for the GPU beta <span aria-hidden="true">↗</span></ButtonLink>
               <a className="button secondary lp-on-dark" href="#how-it-works">How it works</a>
             </div>
-            <p className="lp-who">Open to Apple Silicon Macs with 16 GB or more and Ubuntu PCs with an NVIDIA GPU of 8 GB or more.</p>
+            <p className="lp-who">Open to Apple Silicon Macs with 16 GB or more, and Ubuntu or Windows PCs with an NVIDIA GPU of 8 GB or more. Windows joins as first testers.</p>
           </div>
 
           <div className="lp-proof-card" aria-labelledby="proof-card-title">
@@ -99,7 +99,7 @@ export default function Home() {
               <h3>Working in development</h3>
               <ul>
                 <li>Inference across several machines, with signed execution receipts</li>
-                <li>Every Kimi 48B shard measured for memory on Apple Metal and NVIDIA CUDA</li>
+                <li>Every Kimi 48B shard measured for memory on Apple Metal, and on NVIDIA CUDA on Ubuntu and Windows</li>
                 <li>GPU builds for Mac and Ubuntu that reproduce byte for byte</li>
               </ul>
             </div>
@@ -107,7 +107,7 @@ export default function Home() {
               <h3>Not open yet</h3>
               <ul>
                 <li>Open sign-up for anyone. The beta is invite only</li>
-                <li>Windows, WSL, AMD and Intel GPUs, and CPU-only machines</li>
+                <li>Intel Macs, WSL, AMD and Intel GPUs, and CPU-only machines</li>
                 <li>Rewards or payment for hosting</li>
               </ul>
             </div>
