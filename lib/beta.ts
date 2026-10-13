@@ -41,27 +41,35 @@ export type Eligibility = {
   status: "eligible" | "below_minimum" | "coming_soon" | "unknown";
   hostableShards: number;
   backend: "metal" | "cuda" | null;
+  /** Windows runs the test kit now; joining the pool from Windows comes later. */
+  joinsLater: boolean;
 };
 
 export function eligibility(platform: Platform | "", memoryGb: number | null): Eligibility {
   if (platform === "mac_apple_silicon" || platform === "ubuntu_nvidia" || platform === "windows") {
     const backend = platform === "mac_apple_silicon" ? "metal" : "cuda";
+    const joinsLater = platform === "windows";
     if (memoryGb == null || !Number.isFinite(memoryGb) || memoryGb <= 0) {
-      return { status: "unknown", hostableShards: 0, backend };
+      return { status: "unknown", hostableShards: 0, backend, joinsLater };
     }
     const headroom = platform === "mac_apple_silicon" ? MAC_HEADROOM_GIB : platform === "windows" ? WINDOWS_HEADROOM_GIB : 0;
     const usable = Math.max(0, memoryGb - headroom) * GIB;
     const column = platform === "mac_apple_silicon" ? 1 : platform === "windows" ? 3 : 2;
     const hostableShards = CLASSES.reduce((sum, entry) => sum + (usable >= entry[column] ? entry[0] : 0), 0);
-    return { status: hostableShards > 0 ? "eligible" : "below_minimum", hostableShards, backend };
+    return { status: hostableShards > 0 ? "eligible" : "below_minimum", hostableShards, backend, joinsLater };
   }
-  if (platform === "") return { status: "unknown", hostableShards: 0, backend: null };
-  return { status: "coming_soon", hostableShards: 0, backend: null };
+  if (platform === "") return { status: "unknown", hostableShards: 0, backend: null, joinsLater: false };
+  return { status: "coming_soon", hostableShards: 0, backend: null, joinsLater: false };
 }
 
 export function eligibilityText(e: Eligibility): string {
   switch (e.status) {
     case "eligible":
+      if (e.joinsLater) {
+        return e.hostableShards === TOTAL_SHARDS
+          ? "Your machine can run the test kit now. Joining from Windows comes later; then it can host any of the 27 shards."
+          : `Your machine can run the test kit now. Joining from Windows comes later; then it can host ${e.hostableShards} of the 27 shards.`;
+      }
       return e.hostableShards === TOTAL_SHARDS
         ? "Your machine can host any of the 27 shards."
         : `Your machine can host ${e.hostableShards} of the 27 shards.`;

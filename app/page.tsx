@@ -39,7 +39,7 @@ export default function Home() {
               <ButtonLink href="/beta/">Apply for the GPU beta <span aria-hidden="true">↗</span></ButtonLink>
               <a className="button secondary lp-on-dark" href="#how-it-works">How it works</a>
             </div>
-            <p className="lp-who">Open to Apple Silicon Macs with 16 GB or more, and Ubuntu or Windows PCs with an NVIDIA GPU of 8 GB or more. Windows joins as first testers.</p>
+            <p className="lp-who">Open to Apple Silicon Macs with 16 GB or more and Ubuntu PCs with an NVIDIA GPU of 8 GB or more. Windows PCs with an NVIDIA GPU: test kit now, joining later.</p>
           </div>
 
           <div className="lp-proof-card" aria-labelledby="proof-card-title">
