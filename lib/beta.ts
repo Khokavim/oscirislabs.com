@@ -4,6 +4,10 @@
 // table in the OSCIRIS worker (crates/osciris-node/src/kimi_shard_fit.rs).
 
 export const TOTAL_SHARDS = 27;
+/** The first stage (layer 0) is not offered to beta machines yet. */
+export const OFFERED_SHARDS = TOTAL_SHARDS - 1;
+/** Apple Silicon Macs with at least this much memory join the first round; smaller ones run the test kit first. */
+export const MAC_FIRST_ROUND_GIB = 24;
 const GIB = 1024 ** 3;
 /** Unified memory kept for macOS before a shard is compared. */
 export const MAC_HEADROOM_GIB = 8;
@@ -41,38 +45,56 @@ export type Eligibility = {
   status: "eligible" | "below_minimum" | "coming_soon" | "unknown";
   hostableShards: number;
   backend: "metal" | "cuda" | null;
-  /** Windows runs the test kit now; joining the pool from Windows comes later. */
-  joinsLater: boolean;
+  /** When this machine can join the pool: the first round, after its test kit, or later. */
+  joining: Joining;
 };
+
+/**
+ * Apple Silicon Macs with 24 GB or more join the first round. Smaller Macs run
+ * the test kit first, and Ubuntu and Windows NVIDIA PCs run the test kit now
+ * and join once their runtime packs ship.
+ */
+export type Joining = "first_round" | "after_test_kit" | "later";
 
 export function eligibility(platform: Platform | "", memoryGb: number | null): Eligibility {
   if (platform === "mac_apple_silicon" || platform === "ubuntu_nvidia" || platform === "windows") {
     const backend = platform === "mac_apple_silicon" ? "metal" : "cuda";
-    const joinsLater = platform === "windows";
+    const joining: Joining =
+      platform !== "mac_apple_silicon"
+        ? "later"
+        : memoryGb != null && memoryGb >= MAC_FIRST_ROUND_GIB
+          ? "first_round"
+          : "after_test_kit";
     if (memoryGb == null || !Number.isFinite(memoryGb) || memoryGb <= 0) {
-      return { status: "unknown", hostableShards: 0, backend, joinsLater };
+      return { status: "unknown", hostableShards: 0, backend, joining };
     }
     const headroom = platform === "mac_apple_silicon" ? MAC_HEADROOM_GIB : platform === "windows" ? WINDOWS_HEADROOM_GIB : 0;
     const usable = Math.max(0, memoryGb - headroom) * GIB;
     const column = platform === "mac_apple_silicon" ? 1 : platform === "windows" ? 3 : 2;
-    const hostableShards = CLASSES.reduce((sum, entry) => sum + (usable >= entry[column] ? entry[0] : 0), 0);
-    return { status: hostableShards > 0 ? "eligible" : "below_minimum", hostableShards, backend, joinsLater };
+    // The first stage (layer 0) is not offered yet, so it is left out of the count.
+    const hostableShards = CLASSES.slice(1).reduce((sum, entry) => sum + (usable >= entry[column] ? entry[0] : 0), 0);
+    return { status: hostableShards > 0 ? "eligible" : "below_minimum", hostableShards, backend, joining };
   }
-  if (platform === "") return { status: "unknown", hostableShards: 0, backend: null, joinsLater: false };
-  return { status: "coming_soon", hostableShards: 0, backend: null, joinsLater: false };
+  if (platform === "") return { status: "unknown", hostableShards: 0, backend: null, joining: "later" };
+  return { status: "coming_soon", hostableShards: 0, backend: null, joining: "later" };
 }
 
 export function eligibilityText(e: Eligibility): string {
   switch (e.status) {
-    case "eligible":
-      if (e.joinsLater) {
-        return e.hostableShards === TOTAL_SHARDS
-          ? "Your machine can run the test kit now. Joining from Windows comes later; then it can host any of the 27 shards."
-          : `Your machine can run the test kit now. Joining from Windows comes later; then it can host ${e.hostableShards} of the 27 shards.`;
+    case "eligible": {
+      const fit =
+        e.hostableShards === OFFERED_SHARDS
+          ? `every shard offered so far (${OFFERED_SHARDS} of ${TOTAL_SHARDS})`
+          : `${e.hostableShards} of the ${TOTAL_SHARDS} shards`;
+      switch (e.joining) {
+        case "first_round":
+          return `Your Mac can join the first round and host ${fit}.`;
+        case "after_test_kit":
+          return `Your Mac can run the test kit now. If it shows the Mac fits, it can host ${fit}.`;
+        default:
+          return `Your machine can run the test kit now. Joining comes later; then it can host ${fit}. Supported: NVIDIA RTX 20, 30 and 40 series and data-centre GPUs.`;
       }
-      return e.hostableShards === TOTAL_SHARDS
-        ? "Your machine can host any of the 27 shards."
-        : `Your machine can host ${e.hostableShards} of the 27 shards.`;
+    }
     case "below_minimum":
       return "This machine has less memory than the smallest shard needs. You can still apply for later rounds.";
     case "coming_soon":
