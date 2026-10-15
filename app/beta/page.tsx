@@ -8,14 +8,14 @@ export const metadata: Metadata = {
     "Host one shard of the open Kimi Linear 48B model on your Mac or NVIDIA PC. Invite-only closed beta: check what your machine can host and apply.",
   openGraph: {
     title: "OSCIRIS closed beta: host a piece of Kimi 48B on your GPU",
-    description: "Invite-only. Apple Silicon Macs with 24 GB or more join first. Smaller Macs and NVIDIA PCs on Ubuntu or Windows can run the test kit now and join later.",
+    description: "Invite-only. Apple Silicon Macs with 16 GB or more join first. NVIDIA PCs on Ubuntu or Windows can run the test kit now and join later.",
     images: [{ url: "/beta/osciris-closed-beta-flier.jpg", width: 1080, height: 1350 }],
   },
 };
 
 const machines = [
+  { machine: "Mac, Apple Silicon", memory: "16–23 GB", shards: "19 of 27; joins the first round" },
   { machine: "Mac, Apple Silicon", memory: "24 GB or more", shards: "26 of 27; joins the first round" },
-  { machine: "Mac, Apple Silicon (test kit first)", memory: "16–23 GB", shards: "Up to 19 of 27, if the test kit shows it fits" },
   { machine: "Ubuntu PC, NVIDIA GPU (test kit now, joining later)", memory: "8–11 GB VRAM", shards: "19 of 27 once joining opens" },
   { machine: "Ubuntu PC, NVIDIA GPU (test kit now, joining later)", memory: "12 GB VRAM or more", shards: "26 of 27 once joining opens" },
   { machine: "Windows PC, NVIDIA GPU (test kit now, joining later)", memory: "8–12 GB VRAM", shards: "19 of 27 once joining opens" },
@@ -31,7 +31,7 @@ const steps = [
 ];
 
 const questions = [
-  { q: "Do I need a GPU?", a: "Yes, for this beta. Apple Silicon Macs with 24 GB or more join first. Macs with 16–23 GB, and NVIDIA RTX 20, 30 and 40 series GPUs on Ubuntu or Windows, can apply and run the test kit now and join later. CPU-only machines, Intel Macs, WSL, AMD or Intel GPUs and NVIDIA RTX 50 are coming soon." },
+  { q: "Do I need a GPU?", a: "Yes, for this beta. Apple Silicon Macs with 16 GB or more join first. NVIDIA RTX 20, 30 and 40 series GPUs on Ubuntu or Windows can apply and run the test kit now and join later. CPU-only machines, Intel Macs, WSL, AMD or Intel GPUs and NVIDIA RTX 50 are coming soon." },
   { q: "Which part of the model do I get?", a: "We assign one shard that fits your memory, so the whole model stays covered. You don't pick it." },
   { q: "Why is the install manual?", a: "The beta isn't distributed through an app store. The release lists a checksum for every file so you can verify what you install. On a Mac, the guide shows how to allow the app the first time you open it." },
   { q: "What does it download?", a: "The app, then one shard of 1 to 5 GB, once. Kimi Linear 48B is an open model released under the MIT licence." },
@@ -54,7 +54,7 @@ export default function BetaPage() {
             </div>
           </div>
           <a className="beta-flier" href="/beta/osciris-closed-beta-flier.png" aria-label="Open the closed beta flier at full size">
-            <img src="/beta/osciris-closed-beta-flier.jpg" alt="OSCIRIS closed beta flier: host a piece of Kimi 48B on your GPU. Apple Silicon Macs with 24 GB or more join first; 16 GB Macs and NVIDIA PCs on Ubuntu or Windows run the test kit now and join later." width={1080} height={1350} />
+            <img src="/beta/osciris-closed-beta-flier.jpg" alt="OSCIRIS closed beta flier: host a piece of Kimi 48B on your GPU. Apple Silicon Macs with 16 GB or more join first; NVIDIA PCs on Ubuntu or Windows run the test kit now and join later." width={1080} height={1350} />
           </a>
         </section>
 

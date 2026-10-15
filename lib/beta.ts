@@ -6,8 +6,6 @@
 export const TOTAL_SHARDS = 27;
 /** The first stage (layer 0) is not offered to beta machines yet. */
 export const OFFERED_SHARDS = TOTAL_SHARDS - 1;
-/** Apple Silicon Macs with at least this much memory join the first round; smaller ones run the test kit first. */
-export const MAC_FIRST_ROUND_GIB = 24;
 const GIB = 1024 ** 3;
 /** Unified memory kept for macOS before a shard is compared. */
 export const MAC_HEADROOM_GIB = 8;
@@ -45,26 +43,20 @@ export type Eligibility = {
   status: "eligible" | "below_minimum" | "coming_soon" | "unknown";
   hostableShards: number;
   backend: "metal" | "cuda" | null;
-  /** When this machine can join the pool: the first round, after its test kit, or later. */
+  /** When this machine can join the pool: the first round, or later. */
   joining: Joining;
 };
 
 /**
- * Apple Silicon Macs with 24 GB or more join the first round. Smaller Macs run
- * the test kit first, and Ubuntu and Windows NVIDIA PCs run the test kit now
- * and join once their runtime packs ship.
+ * Apple Silicon Macs join the first round. Ubuntu and Windows NVIDIA PCs run
+ * the test kit now and join once their runtime packs ship.
  */
-export type Joining = "first_round" | "after_test_kit" | "later";
+export type Joining = "first_round" | "later";
 
 export function eligibility(platform: Platform | "", memoryGb: number | null): Eligibility {
   if (platform === "mac_apple_silicon" || platform === "ubuntu_nvidia" || platform === "windows") {
     const backend = platform === "mac_apple_silicon" ? "metal" : "cuda";
-    const joining: Joining =
-      platform !== "mac_apple_silicon"
-        ? "later"
-        : memoryGb != null && memoryGb >= MAC_FIRST_ROUND_GIB
-          ? "first_round"
-          : "after_test_kit";
+    const joining: Joining = platform === "mac_apple_silicon" ? "first_round" : "later";
     if (memoryGb == null || !Number.isFinite(memoryGb) || memoryGb <= 0) {
       return { status: "unknown", hostableShards: 0, backend, joining };
     }
@@ -89,8 +81,6 @@ export function eligibilityText(e: Eligibility): string {
       switch (e.joining) {
         case "first_round":
           return `Your Mac can join the first round and host ${fit}.`;
-        case "after_test_kit":
-          return `Your Mac can run the test kit now. If it shows the Mac fits, it can host ${fit}.`;
         default:
           return `Your machine can run the test kit now. Joining comes later; then it can host ${fit}. Supported: NVIDIA RTX 20, 30 and 40 series and data-centre GPUs.`;
       }
